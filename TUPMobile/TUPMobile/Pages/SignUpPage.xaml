@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TUPMobile.Pages.SignUp"
+             x:Class="TUPMobile.Pages.SignUpPage"
              xmlns:artina="clr-namespace:UXDivers.Artina.Shared;assembly=UXDivers.Artina.Shared"
 	xmlns:commonViews="clr-namespace:TUPMobile.Views;assembly=TUPMobile"
 	BackgroundImage="signup_bg.png"
+             NavigationPage.HasNavigationBar="False"
 	Title="Sign Up">
   <ScrollView>
 
@@ -127,12 +128,17 @@
         <Button
 					Style="{DynamicResource PrimaryActionButtonStyle}"
 					VerticalOptions="End"
-					Text="Sign Up!" />
+					Text="Sign Up!"
+           Clicked="OnRegClicked"
+        
+          />
 
         <Button
 					Style="{DynamicResource TransparentButtonStyle}"
 					VerticalOptions="End"
-					Text="Already a user? Login now" />
+					Text="Already a user? Login now"
+          Clicked="OnLoginClicked"
+          />
 
       </StackLayout>
 

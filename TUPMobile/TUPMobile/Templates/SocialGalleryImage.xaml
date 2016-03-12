@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TUPMobile.Templates.SocialGalleryImage"
+             xmlns:artina="clr-namespace:UXDivers.Artina.Shared;assembly=UXDivers.Artina.Shared"
+             x:Name="Root">
+    <ContentView.Content>
+        <Grid 
+              HeightRequest="100"
+              BackgroundColor="Black"
+              Padding="0">
+            <Image
+                Aspect="AspectFill"
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand"
+                Source="{Binding Source={x:Reference Root}, Path=Image}" />
+            <Grid
+                VerticalOptions="End"
+                HeightRequest="20"
+                ColumnSpacing="0"
+                BackgroundColor="{StaticResource TranslucidBlack}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label
+                    Grid.Column="0"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center"
+                    VerticalOptions="End"
+                    HorizontalOptions="Start"
+                    FontSize="14"
+                    TextColor="White"
+                    Text="{Binding Source={x:Reference Root}, Path=UserName}" />
+
+
+                <Label
+                    Grid.Column="1"
+                    HorizontalTextAlignment="End"
+                    VerticalTextAlignment="Center"
+                    VerticalOptions="End"
+                    HorizontalOptions="End"
+                    Text="&#xf004; "
+                    FontSize="14"
+                    TextColor="Red"
+                    FontFamily="{x:Static artina:FontAwesome.FontName}" />
+                <Label
+                    Grid.Column="2"
+                    HorizontalTextAlignment="End"
+                    VerticalTextAlignment="Center"
+                    VerticalOptions="End"
+                    HorizontalOptions="End"
+                    FontSize="14"
+                    TextColor="White"
+                    Text="{Binding Source={x:Reference Root}, Path=Likes}" />
+            </Grid>
+        </Grid>
+    </ContentView.Content>
+
+</ContentView>

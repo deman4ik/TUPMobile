@@ -8,7 +8,8 @@ namespace TUPMobile
         public App()
         {
             InitializeComponent();
-            MainPage = new PasswordRecovery();
+           
+            MainPage = new NavigationPage(new LoginPage());
         }
 
         protected override void OnStart()

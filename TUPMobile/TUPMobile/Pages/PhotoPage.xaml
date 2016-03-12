@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TUPMobile.Pages.PhotoPage"
+             xmlns:artina="clr-namespace:UXDivers.Artina.Shared;assembly=UXDivers.Artina.Shared"
+             xmlns:templates="clr-namespace:TUPMobile.Templates;assembly=TUPMobile"
+             Title="Send Photo"
+             NavigationPage.HasNavigationBar="False">
+  <!--MAIN CONTEINER GRID-->
+  <Grid VerticalOptions="Fill">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <!--PRODUCT IMAGE-->
+    <Image
+			Grid.Row="0"
+      HeightRequest="300"
+			Source="{Binding .}"
+			Aspect="AspectFill" >
+    </Image>
+    <ScrollView Orientation="Horizontal" Grid.Row="1">
+      <artina:GridOptionsView
+                   Padding="4,0"
+                   ColumnSpacing="4"
+                   RowSpacing="0"
+                   VerticalOptions="Fill"
+                   HeightRequest="100"
+                   ColumnCount="6"
+                   RowCount="1"
+                   x:Name="FilterList"
+                   >
+
+        <artina:GridOptionsView.ItemTemplate>
+          <DataTemplate>
+            <templates:FilterImage Image="{Binding .}"/>
+          </DataTemplate>
+        </artina:GridOptionsView.ItemTemplate>
+      </artina:GridOptionsView>
+    </ScrollView>
+    <templates:SocialHeaderStyleTemplate Grid.Row="2"
+                                 Text="Moscow, Russia"
+                                 IconText="&#xf124; "/>
+    <StackLayout
+				HorizontalOptions="Fill"
+				VerticalOptions="EndAndExpand"
+				Padding="20"
+				Grid.Row="3" >
+
+      <Button
+        x:Name ="SendBtn"
+        Style="{DynamicResource PrimaryActionButtonStyle}"
+        VerticalOptions="End"
+        Text="Send"
+        Clicked="OnSendClicked"
+          />
+    </StackLayout>
+  </Grid>
+</ContentPage>

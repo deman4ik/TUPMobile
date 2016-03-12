@@ -2,8 +2,8 @@
 <resources>
 	<!-- Artina Exported Colors -->
 
-	<color name="AccentColor">#FFDA125F</color>
+	<color name="AccentColor">#3F51B5</color>
 
-	<color name="InverseTextColor">#FFFFFFFF</color>
+	<color name="InverseTextColor">#FFFFFF</color>
 
 </resources>

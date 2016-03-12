@@ -51,3 +51,4 @@ using Xamarin.Forms;
 [assembly: ExportRenderer(typeof (ViewCell), typeof (UXDivers.Artina.Shared.ArtinaViewCellRenderer))]
 [assembly: ExportRenderer(typeof (EntryCell), typeof (UXDivers.Artina.Shared.ArtinaEntryCellRenderer))]
 [assembly: ExportRenderer(typeof (SearchBar), typeof (UXDivers.Artina.Shared.ArtinaSearchBarRenderer))]
+[assembly: ExportRenderer(typeof(Label), typeof(TUPMobile.Droid.Renderers.CustomFontLabelRenderer))]

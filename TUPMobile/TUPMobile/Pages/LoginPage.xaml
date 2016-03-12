@@ -1,16 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TUPMobile.Pages.PasswordRecovery"
+             x:Class="TUPMobile.Pages.LoginPage"
              xmlns:artina="clr-namespace:UXDivers.Artina.Shared;assembly=UXDivers.Artina.Shared"
-              xmlns:commonViews="clr-namespace:TUPMobile.Views;assembly=TUPMobile"
+             xmlns:commonViews="clr-namespace:TUPMobile.Views;assembly=TUPMobile"
             BackgroundColor="White"
 	BackgroundImage="signup_bg.png"
-             Title="Password Recovery"
-             >
+             NavigationPage.HasNavigationBar="False"
+             Title="Login">
   <ScrollView>
-
-    <!---MAIN CONTAINER-->
+    <!-- MAIN CONTAINER -->
     <Grid
 			ColumnSpacing="0"
 			RowSpacing="0"
@@ -28,13 +27,15 @@
 				Grid.Row="0"
 			/>
 
-    
 
       <!---FIELDS CONTAINER-->
       <Grid
 				Padding="40, 0"
+				ColumnSpacing="0"
+				RowSpacing="0"
 				VerticalOptions="CenterAndExpand"
-				Grid.Row="1">
+				Grid.Row="1"
+				HeightRequest="160">
 
         <StackLayout
 					Grid.Row="0"
@@ -42,42 +43,47 @@
           <!---EMAIL FIELD-->
           <Entry
 						Placeholder="E-mail"
-						Style="{DynamicResource ArtinaLoginEntryStyle}">
-
-            <Entry.Behaviors>
-              <artina:EmailValidatorBehavior x:Name="emailValidator"/>
-            </Entry.Behaviors>
-          </Entry>
+						Style="{DynamicResource ArtinaLoginEntryStyle}" />
 
           <Label
 						HorizontalOptions="Start"
 						Text=" Please enter a valid e-mail " IsVisible="false"
-						Style="{DynamicResource ValidationEntryErrorStyle}">
+						Style="{DynamicResource ValidationEntryErrorStyle}"
+						/>
 
-            <Label.Triggers>
-              <DataTrigger TargetType="Label"
-								Binding="{Binding Source={x:Reference emailValidator}, Path=IsValid}"
-								Value="false">
-                <Setter Property="IsVisible" Value="true" />
-              </DataTrigger>
-            </Label.Triggers>
-          </Label>
         </StackLayout>
-      </Grid>
 
+        <!---PASSWORD FIELD-->
+        <Entry
+					Grid.Row="2"
+					Placeholder="Password"
+					IsPassword="true"
+					Style="{DynamicResource ArtinaLoginEntryStyle}"
+					VerticalOptions="StartAndExpand" />
+
+      </Grid>
 
 
       <!-- FOOTER -->
       <StackLayout
 				HorizontalOptions="Fill"
-				VerticalOptions="EndAndExpand"
-				Padding="20"
+				VerticalOptions="End"
+				Padding="20, 0"
 				Grid.Row="2" >
 
-        <Button
+        <Button 
+          x:Name="LoginBtn"
 					Style="{DynamicResource PrimaryActionButtonStyle}"
 					VerticalOptions="End"
-					Text="Send" />
+					Text="Login"
+          Clicked="OnLoginClicked"
+          />
+        <Button
+          x:Name="RegBtn"
+					Style="{DynamicResource TransparentButtonStyle}"
+					VerticalOptions="End"
+					Text="No account? Sign up!" 
+           Clicked="OnRegClicked"/>
       </StackLayout>
 
     </Grid>
