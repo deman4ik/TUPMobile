@@ -23,5 +23,16 @@ namespace TUPMobile.Pages
         {
             await Navigation.PushAsync(new SignUpPage());
         }
+
+        async void OnInstaBtnClicked(object sender, EventArgs args)
+        {
+            await Navigation.PushAsync(new SocialLoginPage("instagram"));
+        }
+
+        async void OnFacebookBtnClicked(object sender, EventArgs args)
+        {
+            await Navigation.PushAsync(new SocialLoginPage("facebook"));
+        }
+        
     }
 }

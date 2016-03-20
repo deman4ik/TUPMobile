@@ -1,91 +1,87 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage x:Class="TUPMobile.Pages.LoginPage"
+             xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TUPMobile.Pages.LoginPage"
              xmlns:artina="clr-namespace:UXDivers.Artina.Shared;assembly=UXDivers.Artina.Shared"
              xmlns:commonViews="clr-namespace:TUPMobile.Views;assembly=TUPMobile"
-            BackgroundColor="White"
-	BackgroundImage="signup_bg.png"
-             NavigationPage.HasNavigationBar="False"
-             Title="Login">
-  <ScrollView>
-    <!-- MAIN CONTAINER -->
-    <Grid
-			ColumnSpacing="0"
-			RowSpacing="0"
-			HorizontalOptions="Fill"
-			VerticalOptions="FillAndExpand" >
+             Title="Login"
+             BackgroundColor="White"
+             BackgroundImage="signup_bg.png"
+             NavigationPage.HasNavigationBar="False">
+    <ScrollView>
+        <!--  MAIN CONTAINER  -->
+        <Grid ColumnSpacing="0"
+              HorizontalOptions="Fill"
+              RowSpacing="0"
+              VerticalOptions="FillAndExpand">
 
-      <Grid.RowDefinitions>
-        <RowDefinition Height="100" />
-        <RowDefinition Height="*" />
-        <RowDefinition Height="100" />
-      </Grid.RowDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-      <!-- LOGO -->
-      <commonViews:BrandBlock
-				Grid.Row="0"
-			/>
+            <!--  LOGO  -->
+            <commonViews:BrandBlock Grid.Row="0" />
 
 
-      <!---FIELDS CONTAINER-->
-      <Grid
-				Padding="40, 0"
-				ColumnSpacing="0"
-				RowSpacing="0"
-				VerticalOptions="CenterAndExpand"
-				Grid.Row="1"
-				HeightRequest="160">
+            <!--  -FIELDS CONTAINER  -->
+            <Grid Grid.Row="1"
+                  ColumnSpacing="0"
+                  HeightRequest="160"
+                  Padding="40, 0"
+                  RowSpacing="0"
+                  VerticalOptions="CenterAndExpand">
 
-        <StackLayout
-					Grid.Row="0"
-					VerticalOptions="StartAndExpand" >
-          <!---EMAIL FIELD-->
-          <Entry
-						Placeholder="E-mail"
-						Style="{DynamicResource ArtinaLoginEntryStyle}" />
+                <StackLayout Grid.Row="0" VerticalOptions="StartAndExpand">
+                    <!--  -EMAIL FIELD  -->
+                    <Entry Placeholder="E-mail" Style="{DynamicResource ArtinaLoginEntryStyle}" />
 
-          <Label
-						HorizontalOptions="Start"
-						Text=" Please enter a valid e-mail " IsVisible="false"
-						Style="{DynamicResource ValidationEntryErrorStyle}"
-						/>
+                    <Label HorizontalOptions="Start"
+                           IsVisible="false"
+                           Style="{DynamicResource ValidationEntryErrorStyle}"
+                           Text=" Please enter a valid e-mail " />
 
-        </StackLayout>
+                </StackLayout>
 
-        <!---PASSWORD FIELD-->
-        <Entry
-					Grid.Row="2"
-					Placeholder="Password"
-					IsPassword="true"
-					Style="{DynamicResource ArtinaLoginEntryStyle}"
-					VerticalOptions="StartAndExpand" />
+                <!--  -PASSWORD FIELD  -->
+                <Entry Grid.Row="2"
+                       IsPassword="true"
+                       Placeholder="Password"
+                       Style="{DynamicResource ArtinaLoginEntryStyle}"
+                       VerticalOptions="StartAndExpand" />
 
-      </Grid>
+            </Grid>
 
 
-      <!-- FOOTER -->
-      <StackLayout
-				HorizontalOptions="Fill"
-				VerticalOptions="End"
-				Padding="20, 0"
-				Grid.Row="2" >
+            <!--  FOOTER  -->
+            <StackLayout Grid.Row="2"
+                         HorizontalOptions="Fill"
+                         Padding="20, 0"
+                         VerticalOptions="End">
 
-        <Button 
-          x:Name="LoginBtn"
-					Style="{DynamicResource PrimaryActionButtonStyle}"
-					VerticalOptions="End"
-					Text="Login"
-          Clicked="OnLoginClicked"
-          />
-        <Button
-          x:Name="RegBtn"
-					Style="{DynamicResource TransparentButtonStyle}"
-					VerticalOptions="End"
-					Text="No account? Sign up!" 
-           Clicked="OnRegClicked"/>
-      </StackLayout>
+                <Button x:Name="LoginBtn"
+                        Clicked="OnLoginClicked"
+                        Style="{DynamicResource PrimaryActionButtonStyle}"
+                        Text="Login"
+                        VerticalOptions="End" />
+                <Button x:Name="RegBtn"
+                        Clicked="OnRegClicked"
+                        Style="{DynamicResource TransparentButtonStyle}"
+                        Text="No account? Sign up!"
+                        VerticalOptions="End" />
+                <Button x:Name="InstagramBtn"
+                        Clicked="OnInstaBtnClicked"
+                        Style="{DynamicResource InstagramButtonStyle}"
+                        Text="Sign in with Instagram"
+                        VerticalOptions="End" />
+                <Button x:Name="FacebookBtn"
+                        Clicked="OnFacebookBtnClicked"
+                        Style="{DynamicResource FacebookButtonStyle}"
+                        Text="Sign in with Facebook"
+                        VerticalOptions="End" />
+            </StackLayout>
 
-    </Grid>
-  </ScrollView>
+        </Grid>
+    </ScrollView>
 </ContentPage>

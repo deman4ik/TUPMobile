@@ -55,6 +55,9 @@
     <Compile Include="ExportedColors.cs" />
     <Compile Include="Helpers\NavigationService.cs" />
     <Compile Include="Model\GalleryItem.cs" />
+    <Compile Include="Pages\SocialLoginPage.xaml.cs">
+      <DependentUpon>SocialLoginPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
@@ -217,6 +220,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Templates\ArticleItemTemplate.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\SocialLoginPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
