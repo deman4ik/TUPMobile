@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using TUPMobile.Services;
 using Xamarin.Forms;
 
 namespace TUPMobile.Pages
@@ -12,11 +14,16 @@ namespace TUPMobile.Pages
 
         async void OnLoginClicked(object sender, EventArgs args)
         {
-            await LoginBtn.ScaleTo(1.25, 300, Easing.SinInOut);
-            LoginBtn.Text = "OK";
-            LoginBtn.BackgroundColor = Color.FromHex("#00E676");
-            await LoginBtn.ScaleTo(1, 200, Easing.SinInOut);
-            await Navigation.PushAsync(new MainPage());
+            //await LoginBtn.ScaleTo(1.25, 300, Easing.SinInOut);
+            //LoginBtn.Text = "OK";
+            //LoginBtn.BackgroundColor = Color.FromHex("#00E676");
+            //await LoginBtn.ScaleTo(1, 200, Easing.SinInOut);
+           // await Navigation.PushAsync(new MainPage());
+           Debug.WriteLine("##### OnLoginClicked");
+            var client = DataClient.Instance;
+            Debug.WriteLine("##### Client GetValue");
+            await client.SynchronizePostsAsync();
+            Debug.WriteLine($"##### RESULT:");
         }
 
         async void OnRegClicked(object sender, EventArgs args)

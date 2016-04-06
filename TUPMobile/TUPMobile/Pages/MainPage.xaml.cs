@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using TUPMobile.Model;
-using TUPMobile.Services;
 using Xamarin.Forms;
 
 namespace TUPMobile.Pages
@@ -11,14 +10,6 @@ namespace TUPMobile.Pages
     public partial class MainPage : ContentPage
     {
         public List<string> SocialImageGalleryItems;
-        /// <summary>
-		/// The picture chooser.
-		/// </summary>
-		private IMediaPicker _mediaPicker;
-        /// <summary>
-		/// The _scheduler.
-		/// </summary>
-		private readonly TaskScheduler _scheduler = TaskScheduler.FromCurrentSynchronizationContext();
 
         public static BindableProperty ImageProperty =
             BindableProperty.Create("Image", typeof(ImageSource),
@@ -98,41 +89,7 @@ namespace TUPMobile.Pages
         private async void OnCameraTapped(Object sender, EventArgs e)
 
         {
-            await AnimateItem(MakePhoto, 1000);
-            
-            if (_mediaPicker != null)
-            {
-                return;
-            }
-
-
-            _mediaPicker = DependencyService.Get<IMediaPicker>();
-
-             await _mediaPicker.TakePhotoAsync(
-                 new CameraMediaStorageOptions { DefaultCamera = CameraDevice.Front, MaxPixelDimension = 400 }
-                 ).ContinueWith(t =>
-            {
-                if (t.IsFaulted)
-                {
-
-                    Debug.WriteLine(t.Exception);
-                }
-                else if (t.IsCanceled)
-                {
-                    Debug.WriteLine("Canceled");
-                }
-                else
-                {
-                    var mediaFile = t.Result;
-
-                    Image = ImageSource.FromStream(() => mediaFile.Source);
-                    Debug.WriteLine("OK");
-                    
-
-                }
-
-
-            }, _scheduler);
+          
             if (Image != null)
             {
                 await Navigation.PushAsync(new PhotoPage(Image));
