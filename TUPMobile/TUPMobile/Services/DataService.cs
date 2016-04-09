@@ -10,20 +10,20 @@ using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
 using Microsoft.WindowsAzure.MobileServices.Sync;
 using Newtonsoft.Json.Linq;
 using tupapi.Shared.DataObjects;
-using TUPMobile.Model;
+
 
 namespace TUPMobile.Services
 {
-    public class DataClient
+    public class DataService
     {
-        private static DataClient _instance;
-        public static DataClient Instance => _instance ?? (_instance = new DataClient());
+        private static DataService _instance;
+        public static DataService Instance => _instance ?? (_instance = new DataService());
 
         private MobileServiceClient _client;
 
         IMobileServiceSyncTable<User> userTable;
-         IMobileServiceSyncTable<PostTable> postTable;
-        private DataClient()
+         IMobileServiceSyncTable<Post> postTable;
+        private DataService()
         {
             _client = AzureMobileAppClient.Instance.GetClient();
             
@@ -37,8 +37,8 @@ namespace TUPMobile.Services
                 return;
             }
             var store = new MobileServiceSQLiteStore("store.db");
-           // store.DefineTable<User>();
-            store.DefineTable<PostTable>();
+            store.DefineTable<User>();
+            store.DefineTable<Post>();
             try
             {
                 await _client.SyncContext.InitializeAsync(store);
@@ -48,11 +48,12 @@ namespace TUPMobile.Services
                 Debug.WriteLine(@"Failed to initialize sync context: {0}", ex.Message);
             }
 
-           // this.userTable = _client.GetSyncTable<User>();
-            this.postTable = _client.GetSyncTable<PostTable>();
+             this.userTable = _client.GetSyncTable<User>();
+            this.postTable = _client.GetSyncTable<Post>();
  Debug.WriteLine("#########################################");
             Debug.WriteLine($"{postTable.TableName}");
             Debug.WriteLine("#########################################");
+          
         }
 
         #region Seed
@@ -79,10 +80,28 @@ namespace TUPMobile.Services
             try
             {
                 await postTable.PullAsync("syncPosts", postTable.CreateQuery());
-                IEnumerable<PostTable> posts = await postTable.Where(p => p.UserId == "u1").ToEnumerableAsync();
+                IEnumerable<Post> posts = await postTable.Where(p => p.UserId == "u1").ToEnumerableAsync();
                 foreach (var post in posts)
                 {
                     Debug.WriteLine(post.Id);
+                }
+                var req = new StandartAuthRequest
+                {
+                    Name = "user1",
+                    Password = "user1pwd"
+                };
+                var result = await _client.InvokeApiAsync("login", JToken.FromObject(req), HttpMethod.Post, null);
+                LoginResult loginResult = result.ToObject<LoginResult>();
+                Debug.WriteLine($"##### LOGIN RESULT {loginResult.AuthenticationToken}");
+                _client.CurrentUser = new MobileServiceUser(loginResult.User.Id)
+                {
+                    MobileServiceAuthenticationToken = loginResult.AuthenticationToken
+                };
+                await userTable.PullAsync("syncUsers", userTable.CreateQuery());
+                IEnumerable<User> user = await userTable.ToEnumerableAsync();
+                foreach (var u in user)
+                {
+                    Debug.WriteLine(u.Email);
                 }
             }
             catch (Exception ex)
@@ -123,20 +142,20 @@ namespace TUPMobile.Services
                 var result = await _client.InvokeApiAsync("login", JToken.FromObject(req), HttpMethod.Post, null);
                 LoginResult loginResult = result.ToObject<LoginResult>();
                 Debug.WriteLine($"##### LOGIN RESULT {loginResult.AuthenticationToken}");
-                //_client.CurrentUser = new MobileServiceUser("STANDART:"+loginResult.User.Id)
-                //{
-                //    MobileServiceAuthenticationToken = loginResult.AuthenticationToken
-                //};
-               //IEnumerable<User> user =  await userTable.ToEnumerableAsync();
-               // foreach (var u in user)
-               // {
-               //       Debug.WriteLine(u.Email);
-               // }
-                IEnumerable<PostTable> posts = await postTable.Where(p => p.UserId == loginResult.User.Id).ToEnumerableAsync();
-                foreach (var post in posts)
+                _client.CurrentUser = new MobileServiceUser("STANDART:" + loginResult.User.Id)
                 {
-                    Debug.WriteLine(post.Id);
+                    MobileServiceAuthenticationToken = loginResult.AuthenticationToken
+                };
+                IEnumerable<User> user = await userTable.ToEnumerableAsync();
+                foreach (var u in user)
+                {
+                    Debug.WriteLine(u.Email);
                 }
+                //IEnumerable<PostTable> posts = await postTable.Where(p => p.UserId == loginResult.User.Id).ToEnumerableAsync();
+                //foreach (var post in posts)
+                //{
+                //    Debug.WriteLine(post.Id);
+                //}
                 return true;
             }
             catch (Exception ex)

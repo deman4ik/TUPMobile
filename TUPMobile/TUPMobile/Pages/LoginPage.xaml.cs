@@ -20,7 +20,7 @@ namespace TUPMobile.Pages
             //await LoginBtn.ScaleTo(1, 200, Easing.SinInOut);
            // await Navigation.PushAsync(new MainPage());
            Debug.WriteLine("##### OnLoginClicked");
-            var client = DataClient.Instance;
+            var client = DataService.Instance;
             Debug.WriteLine("##### Client GetValue");
             await client.SynchronizePostsAsync();
             Debug.WriteLine($"##### RESULT:");
