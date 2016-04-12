@@ -16,6 +16,7 @@ namespace TUPMobile.Reducers
             return new ApplicationState
             {
                 CurrentUser = CurrentUserReducers.ReduceCurrentUser(state.CurrentUser, action),
+                LoginPageState = LoginPageReducers.ReduceLoginPageState(state.LoginPageState, action),
                 TopPosts = state.TopPosts,
                 UserPosts = state.UserPosts,
                 VotePosts = state.VotePosts

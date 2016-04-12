@@ -66,6 +66,9 @@
     </Compile>
     <Compile Include="Localization\TranslateExtension.cs" />
     <Compile Include="Model\GalleryItem.cs" />
+    <Compile Include="Pages\CameraPage.xaml.cs">
+      <DependentUpon>CameraPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\SocialLoginPage.xaml.cs">
       <DependentUpon>SocialLoginPage.xaml</DependentUpon>
     </Compile>
@@ -92,6 +95,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reducers\CurrentUserReducers.cs" />
+    <Compile Include="Reducers\LoginPageReducers.cs" />
     <Compile Include="Reducers\Reducers.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Services\AzureMobileAppClient.cs" />
@@ -314,7 +318,12 @@
       <Name>tupapi.Shared</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\CameraPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.0.0.6482\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.0.0.6482\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

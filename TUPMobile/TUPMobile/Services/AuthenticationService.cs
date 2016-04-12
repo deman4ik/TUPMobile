@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using tupapi.Shared.DataObjects;
+using TUPMobile.States;
 
 namespace TUPMobile.Services
 {

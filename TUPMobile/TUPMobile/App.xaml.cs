@@ -17,8 +17,9 @@ namespace TUPMobile
             InitializeComponent();
             CurrentApp = this;
             TextResources.Culture = DependencyService.Get<ILocalize>().GetCurrentCultureInfo();
-            _NavPage = new NavigationPage(new LoginPage());
-            MainPage = _NavPage;
+            // _NavPage = new NavigationPage(new LoginPage());
+            _NavPage = new NavigationPage(new CameraPage());
+             MainPage = _NavPage;
         }
 
         public static void SaveToken(string token)

@@ -15,6 +15,7 @@ namespace TUPMobile.States
             NameError = null;
            PasswordError = null;
        }
+
         public bool IsLoggingIn { get; set; }
        public bool SuccessLogin { get; set; }
        public string NameError { get; set; }
