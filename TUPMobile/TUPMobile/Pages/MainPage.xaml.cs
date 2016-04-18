@@ -90,10 +90,7 @@ namespace TUPMobile.Pages
 
         {
           
-            if (Image != null)
-            {
-                await Navigation.PushAsync(new PhotoPage(Image));
-            }
+          
         }
 
         private async void OnThumbTapped(Object sender, EventArgs e)

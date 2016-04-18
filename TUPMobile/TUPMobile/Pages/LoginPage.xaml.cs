@@ -21,9 +21,10 @@ namespace TUPMobile.Pages
            // await Navigation.PushAsync(new MainPage());
            Debug.WriteLine("##### OnLoginClicked");
             var client = DataService.Instance;
-            Debug.WriteLine("##### Client GetValue");
-            await client.SynchronizePostsAsync();
-            Debug.WriteLine($"##### RESULT:");
+            await client.Login();
+            var result = await client.MakePost();
+            
+
         }
 
         async void OnRegClicked(object sender, EventArgs args)

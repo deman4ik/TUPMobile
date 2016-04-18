@@ -21,25 +21,7 @@
 			Source="{Binding .}"
 			Aspect="AspectFill" >
     </Image>
-    <ScrollView Orientation="Horizontal" Grid.Row="1">
-      <artina:GridOptionsView
-                   Padding="4,0"
-                   ColumnSpacing="4"
-                   RowSpacing="0"
-                   VerticalOptions="Fill"
-                   HeightRequest="100"
-                   ColumnCount="6"
-                   RowCount="1"
-                   x:Name="FilterList"
-                   >
 
-        <artina:GridOptionsView.ItemTemplate>
-          <DataTemplate>
-            <templates:FilterImage Image="{Binding .}"/>
-          </DataTemplate>
-        </artina:GridOptionsView.ItemTemplate>
-      </artina:GridOptionsView>
-    </ScrollView>
     <templates:SocialHeaderStyleTemplate Grid.Row="2"
                                  Text="Moscow, Russia"
                                  IconText="&#xf124; "/>

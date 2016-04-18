@@ -213,6 +213,7 @@
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="UXDivers.Artina.Player.Common">
       <HintPath>..\..\lib\UXDivers.Artina.Player.Common.dll</HintPath>
     </Reference>

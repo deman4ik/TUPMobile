@@ -11,7 +11,6 @@ using Microsoft.WindowsAzure.MobileServices.Sync;
 using Newtonsoft.Json.Linq;
 using tupapi.Shared.DataObjects;
 
-
 namespace TUPMobile.Services
 {
     public class DataService
@@ -139,18 +138,18 @@ namespace TUPMobile.Services
                     Name = "user1",
                     Password = "user1pwd"
                 };
-                var result = await _client.InvokeApiAsync("login", JToken.FromObject(req), HttpMethod.Post, null);
+                var result = await _client.InvokeApiAsync("Login", JToken.FromObject(req), HttpMethod.Post, null);
                 LoginResult loginResult = result.ToObject<LoginResult>();
                 Debug.WriteLine($"##### LOGIN RESULT {loginResult.AuthenticationToken}");
                 _client.CurrentUser = new MobileServiceUser("STANDART:" + loginResult.User.Id)
                 {
                     MobileServiceAuthenticationToken = loginResult.AuthenticationToken
                 };
-                IEnumerable<User> user = await userTable.ToEnumerableAsync();
-                foreach (var u in user)
-                {
-                    Debug.WriteLine(u.Email);
-                }
+                //IEnumerable<User> user = await userTable.ToEnumerableAsync();
+                //foreach (var u in user)
+                //{
+                //    Debug.WriteLine(u.Email);
+                //}
                 //IEnumerable<PostTable> posts = await postTable.Where(p => p.UserId == loginResult.User.Id).ToEnumerableAsync();
                 //foreach (var post in posts)
                 //{
@@ -165,6 +164,29 @@ namespace TUPMobile.Services
                 if (ex.InnerException != null)
                     Debug.WriteLine($"###### InnerException Exception:{ex.InnerException}");
                 return false;
+            }
+        }
+
+        public async Task<PostResponse> MakePost()
+        {
+            try
+            {
+                Post newPost = new Post
+                {
+                    Description = "Cool pic"
+                };
+                var result = await _client.InvokeApiAsync("PostApi", JToken.FromObject(newPost), HttpMethod.Post, null);
+                PostResponse response = result.ToObject<PostResponse>();
+                Debug.WriteLine(response.Id);
+                Debug.WriteLine(response.Sas);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"###### MakePost Exception:{ex.Message}");
+                if (ex.InnerException != null)
+                    Debug.WriteLine($"###### InnerException Exception:{ex.InnerException}");
+                return null;
             }
         }
 

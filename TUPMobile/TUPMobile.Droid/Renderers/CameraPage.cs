@@ -201,12 +201,26 @@ namespace TUPMobile.Droid.Renderers
         private async void TakePhotoButtonTapped(object sender, EventArgs e)
         {
 
-            camera.AutoFocus(this);
-            
-            //camera.StopPreview();
+            //camera.AutoFocus(this);
+
+            camera.StopPreview();
+            var image = textureView.Bitmap;
+            using (var imageStream = new MemoryStream())
+            {
+                await image.CompressAsync(Bitmap.CompressFormat.Jpeg, 50, imageStream);
+                image.Recycle();
+                imageBytes = imageStream.ToArray();
+            }
+
+            var navigationPage = new NavigationPage(new PhotoPage(imageBytes))
+            {
+            };
+
+            camera.StartPreview();
+            await App.Current.MainPage.Navigation.PushModalAsync(navigationPage, false);
 
 
-           
+
         }
 
         public async void OnAutoFocus(bool success, Camera camera)
@@ -221,8 +235,8 @@ namespace TUPMobile.Droid.Renderers
                     image.Recycle();
                     imageBytes = imageStream.ToArray();
                 }
-                ImageSource source = ImageSource.FromStream(() => new MemoryStream(imageBytes));
-                var navigationPage = new NavigationPage(new PhotoPage(source))
+               
+                var navigationPage = new NavigationPage(new PhotoPage(imageBytes))
                 {
                 };
 
