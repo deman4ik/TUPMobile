@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -14,7 +13,8 @@ using TUPMobile.Droid.Localization;
 using TUPMobile.Localization;
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(Localize))]
+[assembly: Dependency(typeof (Localize))]
+
 namespace TUPMobile.Droid.Localization
 {
     public class Localize : ILocalize

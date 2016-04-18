@@ -6,10 +6,10 @@
              xmlns:artina="clr-namespace:UXDivers.Artina.Shared;assembly=UXDivers.Artina.Shared"
              x:Name="Root">
     <ContentView.Content>
-        <Grid 
-              HeightRequest="100"
-              BackgroundColor="Black"
-              Padding="0">
+        <Grid
+            HeightRequest="100"
+            BackgroundColor="Black"
+            Padding="0">
             <Image
                 Aspect="AspectFill"
                 VerticalOptions="FillAndExpand"

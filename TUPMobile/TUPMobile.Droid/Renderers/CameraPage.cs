@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.Graphics;
@@ -18,7 +17,8 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Camera = Android.Hardware.Camera;
 
-[assembly: ExportRenderer(typeof(TUPMobile.Pages.CameraPage), typeof(TUPMobile.Droid.Renderers.CameraPage))]
+[assembly: ExportRenderer(typeof (TUPMobile.Pages.CameraPage), typeof (TUPMobile.Droid.Renderers.CameraPage))]
+
 namespace TUPMobile.Droid.Renderers
 {
     /*
@@ -27,7 +27,8 @@ namespace TUPMobile.Droid.Renderers
 	 */
 
 
-    public class CameraPage : PageRenderer, TextureView.ISurfaceTextureListener, Android.Hardware.Camera.IAutoFocusCallback
+    public class CameraPage : PageRenderer, TextureView.ISurfaceTextureListener,
+        Android.Hardware.Camera.IAutoFocusCallback
     {
         global::Android.Hardware.Camera camera;
         global::Android.Widget.Button takePhotoButton;
@@ -45,7 +46,6 @@ namespace TUPMobile.Droid.Renderers
 
         public CameraPage()
         {
-
         }
 
         protected override void OnElementChanged(ElementChangedEventArgs<Page> e)
@@ -78,7 +78,7 @@ namespace TUPMobile.Droid.Renderers
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-               // Xamarin.Insights.Report(ex);
+                // Xamarin.Insights.Report(ex);
             }
         }
 
@@ -95,7 +95,7 @@ namespace TUPMobile.Droid.Renderers
 
         public void OnSurfaceTextureAvailable(SurfaceTexture surface, int width, int height)
         {
-            camera = global::Android.Hardware.Camera.Open((int)cameraType);
+            camera = global::Android.Hardware.Camera.Open((int) cameraType);
             textureView.LayoutParameters = new FrameLayout.LayoutParams(width, height);
             surfaceTexture = surface;
 
@@ -118,7 +118,6 @@ namespace TUPMobile.Droid.Renderers
 
         public void OnSurfaceTextureUpdated(SurfaceTexture surface)
         {
-
         }
 
         private void PrepareAndStartCamera()
@@ -147,7 +146,7 @@ namespace TUPMobile.Droid.Renderers
 
                 camera.StopPreview();
                 camera.Release();
-                camera = global::Android.Hardware.Camera.Open((int)cameraType);
+                camera = global::Android.Hardware.Camera.Open((int) cameraType);
                 camera.SetPreviewTexture(surfaceTexture);
                 PrepareAndStartCamera();
             }
@@ -157,7 +156,7 @@ namespace TUPMobile.Droid.Renderers
 
                 camera.StopPreview();
                 camera.Release();
-                camera = global::Android.Hardware.Camera.Open((int)cameraType);
+                camera = global::Android.Hardware.Camera.Open((int) cameraType);
                 camera.SetPreviewTexture(surfaceTexture);
                 PrepareAndStartCamera();
             }
@@ -175,7 +174,7 @@ namespace TUPMobile.Droid.Renderers
 
                     camera.StopPreview();
                     camera.Release();
-                    camera = global::Android.Hardware.Camera.Open((int)cameraType);
+                    camera = global::Android.Hardware.Camera.Open((int) cameraType);
                     var parameters = camera.GetParameters();
                     parameters.FlashMode = global::Android.Hardware.Camera.Parameters.FlashModeTorch;
                     camera.SetParameters(parameters);
@@ -189,7 +188,7 @@ namespace TUPMobile.Droid.Renderers
                 camera.StopPreview();
                 camera.Release();
 
-                camera = global::Android.Hardware.Camera.Open((int)cameraType);
+                camera = global::Android.Hardware.Camera.Open((int) cameraType);
                 var parameters = camera.GetParameters();
                 parameters.FlashMode = global::Android.Hardware.Camera.Parameters.FlashModeOff;
                 camera.SetParameters(parameters);
@@ -200,7 +199,6 @@ namespace TUPMobile.Droid.Renderers
 
         private async void TakePhotoButtonTapped(object sender, EventArgs e)
         {
-
             //camera.AutoFocus(this);
 
             camera.StopPreview();
@@ -218,9 +216,6 @@ namespace TUPMobile.Droid.Renderers
 
             camera.StartPreview();
             await App.Current.MainPage.Navigation.PushModalAsync(navigationPage, false);
-
-
-
         }
 
         public async void OnAutoFocus(bool success, Camera camera)
@@ -235,7 +230,7 @@ namespace TUPMobile.Droid.Renderers
                     image.Recycle();
                     imageBytes = imageStream.ToArray();
                 }
-               
+
                 var navigationPage = new NavigationPage(new PhotoPage(imageBytes))
                 {
                 };

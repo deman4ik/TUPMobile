@@ -46,11 +46,12 @@ namespace TUPMobile.Droid.Renderers
             if (this.Provider == "instagram")
             {
                 clientId = "10869a1116f54e6ca457121951b6d712"; // your OAuth2 client id
-              //  clientSecret = "1e7bdbd677634e32bc50c0ea705f6fe3";
+                //  clientSecret = "1e7bdbd677634e32bc50c0ea705f6fe3";
                 scope = "basic"; // the scopes for the particular API you're accessing, delimited by "+" symbols
                 authorizeUrl = new Uri("https://api.instagram.com/oauth/authorize/"); // the auth URL for the service
-                redirectUrl = new Uri("http://tupapi.azurewebsites.net/api/SocialLogin");// the redirect URL for the service
-              //  accessTokenUrl = new Uri("https://api.instagram.com/oauth/access_token");
+                redirectUrl = new Uri("http://tupapi.azurewebsites.net/api/SocialLogin");
+                    // the redirect URL for the service
+                //  accessTokenUrl = new Uri("https://api.instagram.com/oauth/access_token");
             }
             if (this.Provider == "facebook")
             {
@@ -66,7 +67,7 @@ namespace TUPMobile.Droid.Renderers
                 scope: scope, // the scopes for the particular API you're accessing, delimited by "+" symbols
                 authorizeUrl: authorizeUrl, // the auth URL for the service
                 redirectUrl: redirectUrl, // the redirect URL for the service
-                 accessTokenUrl: accessTokenUrl
+                accessTokenUrl: accessTokenUrl
                 );
 
             auth.Completed += (sender, eventArgs) =>

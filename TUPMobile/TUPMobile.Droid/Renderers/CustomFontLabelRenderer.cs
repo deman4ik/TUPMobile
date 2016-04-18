@@ -1,5 +1,3 @@
-
-
 using System;
 using UXDivers.Artina.Shared;
 using Xamarin.Forms;
@@ -8,9 +6,12 @@ namespace TUPMobile.Droid.Renderers
 {
     public class CustomFontLabelRenderer : ArtinaCustomFontLabelRenderer
     {
-        private static readonly string[] CustomFontFamily = new[] { "FontAwesome" };
-        private static readonly Tuple<FontAttributes, string>[][] CustomFontFamilyData = new[] {
-            new [] {
+        private static readonly string[] CustomFontFamily = new[] {"FontAwesome"};
+
+        private static readonly Tuple<FontAttributes, string>[][] CustomFontFamilyData = new[]
+        {
+            new[]
+            {
                 new Tuple<FontAttributes, string>(FontAttributes.None, "fontawesome-webfont.ttf"),
                 new Tuple<FontAttributes, string>(FontAttributes.Bold, "fontawesome-webfont.ttf"),
                 new Tuple<FontAttributes, string>(FontAttributes.Italic, "fontawesome-webfont.ttf"),

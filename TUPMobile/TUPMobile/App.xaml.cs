@@ -12,6 +12,7 @@ namespace TUPMobile
     {
         public static Application CurrentApp { get; private set; }
         static NavigationPage _NavPage;
+
         public App()
         {
             InitializeComponent();
@@ -19,7 +20,7 @@ namespace TUPMobile
             TextResources.Culture = DependencyService.Get<ILocalize>().GetCurrentCultureInfo();
             // _NavPage = new NavigationPage(new LoginPage());
             _NavPage = new NavigationPage(new CameraPage());
-             MainPage = _NavPage;
+            MainPage = _NavPage;
         }
 
         public static void SaveToken(string token)
@@ -30,24 +31,12 @@ namespace TUPMobile
 
         public static Action SuccessfulLoginAction
         {
-            get
-            {
-                return new Action(() => {
-                                            _NavPage.PushAsync(new MainPage());
-
-                });
-            }
+            get { return new Action(() => { _NavPage.PushAsync(new MainPage()); }); }
         }
 
         public static Action FailLoginAction
         {
-            get
-            {
-                return new Action(() => {
-                    _NavPage.PopAsync();
-
-                });
-            }
+            get { return new Action(() => { _NavPage.PopAsync(); }); }
         }
 
         public static
@@ -72,6 +61,7 @@ namespace TUPMobile
                 TextResources.NetworkConnection_Alert_Message,
                 TextResources.NetworkConnection_Alert_Confirm);
         }
+
         protected override void OnStart()
         {
             // Handle when your app starts

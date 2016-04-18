@@ -11,6 +11,7 @@ namespace TUPMobile.Pages
     public partial class VotePage : ContentPage
     {
         private bool _animate;
+
         public VotePage()
         {
             InitializeComponent();
@@ -19,7 +20,6 @@ namespace TUPMobile.Pages
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
 
 
             _animate = true;
@@ -43,20 +43,19 @@ namespace TUPMobile.Pages
                     uiElement.LayoutTo(new Rectangle(new Point(0, 0), new Size(uiElement.Width, uiElement.Height))),
                     uiElement.FadeTo(.9, duration, Easing.SinInOut),
                     uiElement.ScaleTo(1.15, duration, Easing.SinInOut)
-                );
+                    );
             }
         }
 
         private async void OnThumbTapped(Object sender, EventArgs e)
 
         {
-            await thumb.ScaleTo(1.25, 1000 / 3, Easing.SinInOut);
-            
+            await thumb.ScaleTo(1.25, 1000/3, Easing.SinInOut);
+
             BackIcon.TextColor = Color.FromHex("#00E676");
-            await thumb.ScaleTo(0.75, 1000 / 3, Easing.SinInOut);
-            await thumb.ScaleTo(1, 1000 / 3, Easing.SinInOut);
+            await thumb.ScaleTo(0.75, 1000/3, Easing.SinInOut);
+            await thumb.ScaleTo(1, 1000/3, Easing.SinInOut);
             await Navigation.PopAsync();
         }
-
     }
 }

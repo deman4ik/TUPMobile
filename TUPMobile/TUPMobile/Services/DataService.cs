@@ -21,11 +21,12 @@ namespace TUPMobile.Services
         private MobileServiceClient _client;
 
         IMobileServiceSyncTable<User> userTable;
-         IMobileServiceSyncTable<Post> postTable;
+        IMobileServiceSyncTable<Post> postTable;
+
         private DataService()
         {
             _client = AzureMobileAppClient.Instance.GetClient();
-            
+
             Debug.WriteLine("##### DataClient AzureMobileAppClient.Instance.GetClient");
         }
 
@@ -47,15 +48,15 @@ namespace TUPMobile.Services
                 Debug.WriteLine(@"Failed to initialize sync context: {0}", ex.Message);
             }
 
-             this.userTable = _client.GetSyncTable<User>();
+            this.userTable = _client.GetSyncTable<User>();
             this.postTable = _client.GetSyncTable<Post>();
- Debug.WriteLine("#########################################");
+            Debug.WriteLine("#########################################");
             Debug.WriteLine($"{postTable.TableName}");
             Debug.WriteLine("#########################################");
-          
         }
 
         #region Seed
+
         public bool LocalDBExists => _client.SyncContext.IsInitialized;
 
         bool _isSeeded;
@@ -63,7 +64,6 @@ namespace TUPMobile.Services
 
         public async Task SeedLocalDataAsync()
         {
-
             await SynchronizePostsAsync();
             _isSeeded = true;
         }
@@ -108,24 +108,20 @@ namespace TUPMobile.Services
                 Debug.WriteLine(ex);
                 await postTable.PurgeAsync();
             }
-
-
-
         }
+
         public async Task<JToken> GetValue()
         {
             try
             {
                 return await _client.InvokeApiAsync("values", HttpMethod.Get, null);
-               // Debug.WriteLine(response);
+                // Debug.WriteLine(response);
             }
             catch (Exception ex)
             {
-                
                 Debug.WriteLine($"###### InvokeAPI Exception:{ex.Message}");
                 return null;
             }
-          
         }
 
 
@@ -159,7 +155,6 @@ namespace TUPMobile.Services
             }
             catch (Exception ex)
             {
-
                 Debug.WriteLine($"###### LOGIN Exception:{ex.Message}");
                 if (ex.InnerException != null)
                     Debug.WriteLine($"###### InnerException Exception:{ex.InnerException}");
@@ -189,6 +184,5 @@ namespace TUPMobile.Services
                 return null;
             }
         }
-
     }
 }

@@ -1,9 +1,10 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <resources>
-	<!-- Artina Exported Colors -->
+  <!-- Artina Exported Colors -->
 
-	<color name="AccentColor">#3F51B5</color>
+  <color name="AccentColor">#3F51B5</color>
 
-	<color name="InverseTextColor">#FFFFFF</color>
+  <color name="InverseTextColor">#FFFFFF</color>
 
 </resources>

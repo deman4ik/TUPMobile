@@ -10,7 +10,7 @@ namespace TUPMobile.Droid
         Theme = "@style/AppTheme",
         Icon = "@android:color/transparent",
         MainLauncher = false,
-         ScreenOrientation = ScreenOrientation.Portrait,
+        ScreenOrientation = ScreenOrientation.Portrait,
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : Xamarin.Forms.Platform.Android.FormsApplicationActivity
     {
@@ -25,8 +25,8 @@ namespace TUPMobile.Droid
 			Uncomment to remove StatusBar in Android
 			*/
             Window.AddFlags(WindowManagerFlags.Fullscreen);
-			Window.ClearFlags(WindowManagerFlags.ForceNotFullscreen);
-			
+            Window.ClearFlags(WindowManagerFlags.ForceNotFullscreen);
+
 
 #if GORILLA
             LoadApplication(UXDivers.Artina.Player.Droid.Player.CreateApplication(ApplicationContext,

@@ -12,16 +12,17 @@ namespace TUPMobile.Pages
         public List<string> SocialImageGalleryItems;
 
         public static BindableProperty ImageProperty =
-            BindableProperty.Create("Image", typeof(ImageSource),
-                typeof(MainPage),
+            BindableProperty.Create("Image", typeof (ImageSource),
+                typeof (MainPage),
                 null, BindingMode.OneWay
                 );
 
         public ImageSource Image
         {
-            get { return (ImageSource)GetValue(ImageProperty); }
+            get { return (ImageSource) GetValue(ImageProperty); }
             set { SetValue(ImageProperty, value); }
         }
+
         private bool _animate;
 
         public MainPage()
@@ -89,8 +90,6 @@ namespace TUPMobile.Pages
         private async void OnCameraTapped(Object sender, EventArgs e)
 
         {
-          
-          
         }
 
         private async void OnThumbTapped(Object sender, EventArgs e)
@@ -108,12 +107,9 @@ namespace TUPMobile.Pages
 
         private async Task AnimateItem(View uiElement, uint duration)
         {
-
-                await uiElement.ScaleTo(1.25, duration/3, Easing.SinInOut);
+            await uiElement.ScaleTo(1.25, duration/3, Easing.SinInOut);
             await uiElement.ScaleTo(0.75, duration/3, Easing.SinInOut);
             await uiElement.ScaleTo(1, duration/3, Easing.SinInOut);
         }
-
-        
     }
 }

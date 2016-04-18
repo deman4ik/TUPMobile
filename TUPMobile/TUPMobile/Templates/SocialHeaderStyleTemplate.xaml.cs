@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 
 namespace TUPMobile.Templates
@@ -16,19 +15,20 @@ namespace TUPMobile.Templates
         }
 
         public static BindableProperty TextProperty =
-            BindableProperty.Create("Header", typeof(string),
-                typeof(SocialHeaderStyleTemplate),
+            BindableProperty.Create("Header", typeof (string),
+                typeof (SocialHeaderStyleTemplate),
                 string.Empty,
                 defaultBindingMode: BindingMode.OneWay,
-                propertyChanging: (bindable, oldValue, newValue) => {
-                    var ctrl = (SocialHeaderStyleTemplate)bindable;
-                    ctrl.Text = (string)newValue;
+                propertyChanging: (bindable, oldValue, newValue) =>
+                {
+                    var ctrl = (SocialHeaderStyleTemplate) bindable;
+                    ctrl.Text = (string) newValue;
                 }
-            );
+                );
 
         public string Text
         {
-            get { return (string)GetValue(TextProperty); }
+            get { return (string) GetValue(TextProperty); }
             set
             {
                 SetValue(TextProperty, value);
@@ -39,19 +39,20 @@ namespace TUPMobile.Templates
         /* ICON */
 
         public static BindableProperty IconTextProperty =
-            BindableProperty.Create("IconText", typeof(string),
-                typeof(SocialHeaderStyleTemplate),
+            BindableProperty.Create("IconText", typeof (string),
+                typeof (SocialHeaderStyleTemplate),
                 string.Empty,
                 defaultBindingMode: BindingMode.OneWay,
-                propertyChanging: (bindable, oldValue, newValue) => {
-                    var ctrl = (SocialHeaderStyleTemplate)bindable;
-                    ctrl.IconText = (string)newValue;
+                propertyChanging: (bindable, oldValue, newValue) =>
+                {
+                    var ctrl = (SocialHeaderStyleTemplate) bindable;
+                    ctrl.IconText = (string) newValue;
                 }
-            );
+                );
 
         public string IconText
         {
-            get { return (string)GetValue(IconTextProperty); }
+            get { return (string) GetValue(IconTextProperty); }
             set
             {
                 SetValue(IconTextProperty, value);

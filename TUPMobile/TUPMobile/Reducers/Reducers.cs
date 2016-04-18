@@ -22,7 +22,5 @@ namespace TUPMobile.Reducers
                 VotePosts = state.VotePosts
             };
         }
-
-       
     }
 }

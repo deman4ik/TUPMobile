@@ -10,7 +10,7 @@ namespace TUPMobile.Actions
 {
     public class LoginAction : IAction
     {
-       public StandartAuthRequest AuthRequest { get; set; }
+        public StandartAuthRequest AuthRequest { get; set; }
     }
 
     public class LoginResultAction : IAction

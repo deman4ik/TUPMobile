@@ -15,12 +15,11 @@ namespace TUPMobile.Reducers
         {
             if (action is LoginAction)
             {
-                return LoginReducer(preLoginPageState, (LoginAction)action);
+                return LoginReducer(preLoginPageState, (LoginAction) action);
             }
             if (action is LoginResultAction)
             {
-                return LoginResultReducer(preLoginPageState, (LoginResultAction)action);
-
+                return LoginResultReducer(preLoginPageState, (LoginResultAction) action);
             }
             return preLoginPageState;
         }

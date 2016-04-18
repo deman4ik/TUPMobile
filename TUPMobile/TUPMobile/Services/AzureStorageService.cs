@@ -36,7 +36,6 @@ namespace TUPMobile.Services
                 Debug.WriteLine(ex);
                 return false;
             }
-            
         }
     }
 }

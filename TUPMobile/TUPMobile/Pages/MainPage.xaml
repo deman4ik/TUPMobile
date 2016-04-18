@@ -5,10 +5,10 @@
              x:Class="TUPMobile.Pages.MainPage"
              xmlns:artina="clr-namespace:UXDivers.Artina.Shared;assembly=UXDivers.Artina.Shared"
              xmlns:templates="clr-namespace:TUPMobile.Templates;assembly=TUPMobile"
-              xmlns:commonViews="clr-namespace:TUPMobile.Views;assembly=TUPMobile"
+             xmlns:commonViews="clr-namespace:TUPMobile.Views;assembly=TUPMobile"
              BackgroundColor="White"
-             
-  NavigationPage.HasNavigationBar="False">
+
+             NavigationPage.HasNavigationBar="False">
     <ScrollView>
         <Grid Padding="0" RowSpacing="8">
             <Grid.RowDefinitions>
@@ -16,47 +16,45 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-          <StackLayout 	Grid.Row="0" BackgroundColor="{ StaticResource AccentColor }" HorizontalOptions="Fill">
-            <commonViews:BrandBlock
-			
-			/>
-          </StackLayout>
+            <StackLayout Grid.Row="0" BackgroundColor="{ StaticResource AccentColor }" HorizontalOptions="Fill">
+                <commonViews:BrandBlock />
+            </StackLayout>
             <Grid Grid.Row="1">
-              <StackLayout Padding="0">
-                <templates:SocialHeaderStyleTemplate
-                              Text="TOP PHOTOS"
-                              IconText="&#xf06d; "/>
-                <!-- SOCIAL IMAGE GALLERY GRID -->
-                <artina:GridOptionsView
-                    Padding="8,0"
-                    ColumnSpacing="8"
-                    RowSpacing="8"
-                    VerticalOptions="Fill"
-                    HeightRequest="250"
-                    ColumnCount="3"
-                    RowCount="3"
-                    ItemsSource="{Binding .}">
+                <StackLayout Padding="0">
+                    <templates:SocialHeaderStyleTemplate
+                        Text="TOP PHOTOS"
+                        IconText="&#xf06d; " />
+                    <!-- SOCIAL IMAGE GALLERY GRID -->
+                    <artina:GridOptionsView
+                        Padding="8,0"
+                        ColumnSpacing="8"
+                        RowSpacing="8"
+                        VerticalOptions="Fill"
+                        HeightRequest="250"
+                        ColumnCount="3"
+                        RowCount="3"
+                        ItemsSource="{Binding .}">
 
-                  <artina:GridOptionsView.ItemTemplate>
-                    <DataTemplate>
-                      <templates:SocialGalleryImage Image="{Binding Image}" UserName="{Binding UserName}" Likes="{Binding Likes}"/>
-                    </DataTemplate>
-                  </artina:GridOptionsView.ItemTemplate>
-                </artina:GridOptionsView>
-              </StackLayout>
-              <Grid.GestureRecognizers>
-                <TapGestureRecognizer Tapped="OnTopTapped" />
-              </Grid.GestureRecognizers>
+                        <artina:GridOptionsView.ItemTemplate>
+                            <DataTemplate>
+                                <templates:SocialGalleryImage Image="{Binding Image}" UserName="{Binding UserName}"
+                                                              Likes="{Binding Likes}" />
+                            </DataTemplate>
+                        </artina:GridOptionsView.ItemTemplate>
+                    </artina:GridOptionsView>
+                </StackLayout>
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnTopTapped" />
+                </Grid.GestureRecognizers>
             </Grid>
 
-            <Grid Grid.Row="2" 
-                  ColumnSpacing="30"
-                          >
-              <Grid.ColumnDefinitions>
-                <ColumnDefinition  Width="2*" />
-                <ColumnDefinition  Width="2*" />
-              </Grid.ColumnDefinitions>
-                <Grid VerticalOptions="Center"  HorizontalOptions="End" Grid.Column="0" x:Name="MakePhoto">
+            <Grid Grid.Row="2"
+                  ColumnSpacing="30">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <Grid VerticalOptions="Center" HorizontalOptions="End" Grid.Column="0" x:Name="MakePhoto">
 
                     <Label
                         Text="&#xf111;"
@@ -76,35 +74,35 @@
                         VerticalTextAlignment="Center"
                         Opacity="1"
                         TextColor="White" />
-                <Grid.GestureRecognizers>
-                  <TapGestureRecognizer Tapped="OnCameraTapped" />
-                </Grid.GestureRecognizers>
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnCameraTapped" />
+                    </Grid.GestureRecognizers>
                 </Grid>
 
-              <Grid VerticalOptions="Center"  HorizontalOptions="Start" Grid.Column="1" x:Name="ThumbUp">
+                <Grid VerticalOptions="Center" HorizontalOptions="Start" Grid.Column="1" x:Name="ThumbUp">
 
-                <Label
-                    Text="&#xf111;"
-                    IsVisible="{Binding ShowBackgroundColor}"
-                    Style="{StaticResource FontIcon}"
-                    HorizontalTextAlignment="Center"
-                    VerticalTextAlignment="Center"
-                    Opacity="1"
-                    FontSize="120"
-                    TextColor="{ StaticResource AccentColor }" />
+                    <Label
+                        Text="&#xf111;"
+                        IsVisible="{Binding ShowBackgroundColor}"
+                        Style="{StaticResource FontIcon}"
+                        HorizontalTextAlignment="Center"
+                        VerticalTextAlignment="Center"
+                        Opacity="1"
+                        FontSize="120"
+                        TextColor="{ StaticResource AccentColor }" />
 
-                <Label
-                    Text="&#xf087;"
-                    FontSize="50"
-                    Style="{StaticResource FontIcon}"
-                    HorizontalTextAlignment="Center"
-                    VerticalTextAlignment="Center"
-                    Opacity="1"
-                    TextColor="White" />
-                <Grid.GestureRecognizers>
-                  <TapGestureRecognizer Tapped="OnThumbTapped" />
-                </Grid.GestureRecognizers>
-              </Grid>
+                    <Label
+                        Text="&#xf087;"
+                        FontSize="50"
+                        Style="{StaticResource FontIcon}"
+                        HorizontalTextAlignment="Center"
+                        VerticalTextAlignment="Center"
+                        Opacity="1"
+                        TextColor="White" />
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnThumbTapped" />
+                    </Grid.GestureRecognizers>
+                </Grid>
             </Grid>
         </Grid>
     </ScrollView>

@@ -18,13 +18,11 @@ namespace TUPMobile.Pages
             //LoginBtn.Text = "OK";
             //LoginBtn.BackgroundColor = Color.FromHex("#00E676");
             //await LoginBtn.ScaleTo(1, 200, Easing.SinInOut);
-           // await Navigation.PushAsync(new MainPage());
-           Debug.WriteLine("##### OnLoginClicked");
+            // await Navigation.PushAsync(new MainPage());
+            Debug.WriteLine("##### OnLoginClicked");
             var client = DataService.Instance;
             await client.Login();
             var result = await client.MakePost();
-            
-
         }
 
         async void OnRegClicked(object sender, EventArgs args)
@@ -41,6 +39,5 @@ namespace TUPMobile.Pages
         {
             await Navigation.PushAsync(new SocialLoginPage("facebook"));
         }
-        
     }
 }

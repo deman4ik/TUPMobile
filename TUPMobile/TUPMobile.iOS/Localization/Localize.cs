@@ -7,7 +7,8 @@ using TUPMobile.iOS.Localization;
 using TUPMobile.Localization;
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(Localize))]
+[assembly: Dependency(typeof (Localize))]
+
 namespace TUPMobile.iOS.Localization
 {
     public class Localize : ILocalize

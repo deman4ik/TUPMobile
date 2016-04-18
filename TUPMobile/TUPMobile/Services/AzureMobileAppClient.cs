@@ -24,10 +24,8 @@ namespace TUPMobile.Services
             }
             catch (Exception ex)
             {
-                
                 Debug.WriteLine($"##### MobileServiceClient Exception {ex.Message}");
             }
-           
         }
 
         public MobileServiceClient GetClient()

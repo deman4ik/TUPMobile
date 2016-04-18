@@ -20,18 +20,17 @@ namespace TUPMobile.Actions
                 if (authRequest == null)
                     return;
 
-                    dispatch(new LoginAction
-                    {
-                        AuthRequest = authRequest
-                    });
+                dispatch(new LoginAction
+                {
+                    AuthRequest = authRequest
+                });
 
-                    var loginResult = await AuthenticationService.Instance.Login(authRequest);
+                var loginResult = await AuthenticationService.Instance.Login(authRequest);
 
-                    dispatch(new LoginResultAction
-                    {
-                        LoginResult = loginResult
-                    });
-                
+                dispatch(new LoginResultAction
+                {
+                    LoginResult = loginResult
+                });
             };
         }
     }

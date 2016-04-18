@@ -14,8 +14,7 @@ namespace TUPMobile.States
         public CurrentUser CurrentUser { get; set; }
         public ImmutableArray<Post> VotePosts { get; set; }
         public ImmutableArray<Post> UserPosts { get; set; }
-        public ImmutableArray<Post> TopPosts { get; set; } 
+        public ImmutableArray<Post> TopPosts { get; set; }
         public LoginPageState LoginPageState { get; set; }
-        
     }
 }

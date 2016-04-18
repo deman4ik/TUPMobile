@@ -1,148 +1,142 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TUPMobile.Pages.SignUpPage"
              xmlns:artina="clr-namespace:UXDivers.Artina.Shared;assembly=UXDivers.Artina.Shared"
-	xmlns:commonViews="clr-namespace:TUPMobile.Views;assembly=TUPMobile"
-	BackgroundImage="signup_bg.png"
+             xmlns:commonViews="clr-namespace:TUPMobile.Views;assembly=TUPMobile"
+             BackgroundImage="signup_bg.png"
              NavigationPage.HasNavigationBar="False"
-	Title="Sign Up">
-  <ScrollView>
+             Title="Sign Up">
+    <ScrollView>
 
-    <!-- MAIN CONTAINER -->
-    <Grid
-			ColumnSpacing="0"
-			RowSpacing="0"
-			HorizontalOptions="Fill"
-			VerticalOptions="FillAndExpand" >
+        <!-- MAIN CONTAINER -->
+        <Grid
+            ColumnSpacing="0"
+            RowSpacing="0"
+            HorizontalOptions="Fill"
+            VerticalOptions="FillAndExpand">
 
-      <Grid.RowDefinitions>
-        <RowDefinition Height="100" />
-        <RowDefinition Height="*" />
-        <RowDefinition Height="100" />
-      </Grid.RowDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="100" />
+            </Grid.RowDefinitions>
 
-      <!-- LOGO -->
-      <commonViews:BrandBlock
-				Grid.Row="0"/>
+            <!-- LOGO -->
+            <commonViews:BrandBlock
+                Grid.Row="0" />
 
-      <!---FIELDS CONTAINER-->
-      <Grid
-				Padding="40, 0"
-				VerticalOptions="CenterAndExpand"
-				HeightRequest="260"
-				Grid.Row="1">
-        <Grid.RowDefinitions>
-          <RowDefinition Height="*" />
-          <RowDefinition Height="*" />
-          <RowDefinition Height="*" />
-          <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <StackLayout
-          Grid.Row="0"
-          VerticalOptions="Start">
-          <!---EMAIL FIELD-->
-          <Entry
-            Placeholder="E-mail"
-            Style="{DynamicResource ArtinaLoginEntryStyle}"
-							>
+            <!---FIELDS CONTAINER-->
+            <Grid
+                Padding="40, 0"
+                VerticalOptions="CenterAndExpand"
+                HeightRequest="260"
+                Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <StackLayout
+                    Grid.Row="0"
+                    VerticalOptions="Start">
+                    <!---EMAIL FIELD-->
+                    <Entry
+                        Placeholder="E-mail"
+                        Style="{DynamicResource ArtinaLoginEntryStyle}">
 
-            <Entry.Behaviors>
-              <artina:EmailValidatorBehavior x:Name="emailValidator" />
-            </Entry.Behaviors>
-          </Entry>
+                        <Entry.Behaviors>
+                            <artina:EmailValidatorBehavior x:Name="emailValidator" />
+                        </Entry.Behaviors>
+                    </Entry>
 
-          <Label
-            Text=" Please enter a valid e-mail " IsVisible="false"
-            Style="{DynamicResource ValidationEntryErrorStyle}"
-							>
+                    <Label
+                        Text=" Please enter a valid e-mail " IsVisible="false"
+                        Style="{DynamicResource ValidationEntryErrorStyle}">
 
-            <Label.Triggers>
-              <DataTrigger TargetType="Label"
-                Binding="{Binding Source={x:Reference emailValidator}, Path=IsValid}"
-                Value="false">
-                <Setter Property="IsVisible" Value="true" />
-              </DataTrigger>
-            </Label.Triggers>
-          </Label>
-        </StackLayout>
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label"
+                                         Binding="{Binding Source={x:Reference emailValidator}, Path=IsValid}"
+                                         Value="false">
+                                <Setter Property="IsVisible" Value="true" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                </StackLayout>
 
-        <!---USERNAME FIELD-->
-        <Entry
-          Grid.Row="1"
-          Placeholder="Username"
-          Style="{DynamicResource ArtinaLoginEntryStyle}"
-          VerticalOptions="StartAndExpand" />
+                <!---USERNAME FIELD-->
+                <Entry
+                    Grid.Row="1"
+                    Placeholder="Username"
+                    Style="{DynamicResource ArtinaLoginEntryStyle}"
+                    VerticalOptions="StartAndExpand" />
 
 
-        <!---PASSWORD FIELD-->
-        <Entry x:Name="passwordEntry"
-          Grid.Row="2"
-          Placeholder="Password"
-          IsPassword="true"
-          Style="{DynamicResource ArtinaLoginEntryStyle}"
-          VerticalOptions="StartAndExpand" />
+                <!---PASSWORD FIELD-->
+                <Entry x:Name="passwordEntry"
+                       Grid.Row="2"
+                       Placeholder="Password"
+                       IsPassword="true"
+                       Style="{DynamicResource ArtinaLoginEntryStyle}"
+                       VerticalOptions="StartAndExpand" />
 
-        <StackLayout
-          Grid.Row="3"
-          VerticalOptions="StartAndExpand" >
+                <StackLayout
+                    Grid.Row="3"
+                    VerticalOptions="StartAndExpand">
 
-          <!---PASSWORD REPEAT FIELD-->
-          <Entry
-            Placeholder="Repeat Password"
-            IsPassword="true"
-            Style="{DynamicResource ArtinaLoginEntryStyle}"
-							>
-            <Entry.Behaviors>
-              <artina:TextMatchValidatorBehavior x:Name="passwordValidator"
-                TextToMatch="{Binding Source={x:Reference passwordEntry}, Path=Text}"/>
-            </Entry.Behaviors>
-          </Entry>
+                    <!---PASSWORD REPEAT FIELD-->
+                    <Entry
+                        Placeholder="Repeat Password"
+                        IsPassword="true"
+                        Style="{DynamicResource ArtinaLoginEntryStyle}">
+                        <Entry.Behaviors>
+                            <artina:TextMatchValidatorBehavior x:Name="passwordValidator"
+                                                               TextToMatch="{Binding Source={x:Reference passwordEntry}, Path=Text}" />
+                        </Entry.Behaviors>
+                    </Entry>
 
-          <Label
-            Text=" Passwords do not match " IsVisible="false"
-            Style="{DynamicResource ValidationEntryErrorStyle}"
-							>
+                    <Label
+                        Text=" Passwords do not match " IsVisible="false"
+                        Style="{DynamicResource ValidationEntryErrorStyle}">
 
-            <Label.Triggers>
-              <DataTrigger
-                TargetType="Label"
-                Binding="{Binding Source={x:Reference passwordValidator}, Path=IsValid}"
-                Value="false">
-                <Setter Property="IsVisible" Value="true" />
-              </DataTrigger>
-            </Label.Triggers>
+                        <Label.Triggers>
+                            <DataTrigger
+                                TargetType="Label"
+                                Binding="{Binding Source={x:Reference passwordValidator}, Path=IsValid}"
+                                Value="false">
+                                <Setter Property="IsVisible" Value="true" />
+                            </DataTrigger>
+                        </Label.Triggers>
 
-          </Label>
-        </StackLayout>
-      </Grid>
+                    </Label>
+                </StackLayout>
+            </Grid>
 
-      <!-- FOOTER -->
-      <StackLayout
-				x:Name="loginStack"
-				HorizontalOptions="Fill"
-				VerticalOptions="End"
-				Padding="20, 0"
-				Grid.Row="2" >
+            <!-- FOOTER -->
+            <StackLayout
+                x:Name="loginStack"
+                HorizontalOptions="Fill"
+                VerticalOptions="End"
+                Padding="20, 0"
+                Grid.Row="2">
 
-        <Button
-					Style="{DynamicResource PrimaryActionButtonStyle}"
-					VerticalOptions="End"
-					Text="Sign Up!"
-           Clicked="OnRegClicked"
-        
-          />
+                <Button
+                    Style="{DynamicResource PrimaryActionButtonStyle}"
+                    VerticalOptions="End"
+                    Text="Sign Up!"
+                    Clicked="OnRegClicked" />
 
-        <Button
-					Style="{DynamicResource TransparentButtonStyle}"
-					VerticalOptions="End"
-					Text="Already a user? Login now"
-          Clicked="OnLoginClicked"
-          />
+                <Button
+                    Style="{DynamicResource TransparentButtonStyle}"
+                    VerticalOptions="End"
+                    Text="Already a user? Login now"
+                    Clicked="OnLoginClicked" />
 
-      </StackLayout>
+            </StackLayout>
 
-    </Grid>
+        </Grid>
 
-  </ScrollView>
+    </ScrollView>
 </ContentPage>
