@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Plugin.Connectivity;
+using Redux;
+using tupapi.Shared.DataObjects;
 using TUPMobile.Localization;
 using TUPMobile.Pages;
+using TUPMobile.States;
 using Xamarin.Forms;
 
 namespace TUPMobile
@@ -12,14 +16,26 @@ namespace TUPMobile
     {
         public static Application CurrentApp { get; private set; }
         static NavigationPage _NavPage;
-
+        public static IStore<ApplicationState> Store { get; private set; }
         public App()
         {
             InitializeComponent();
             CurrentApp = this;
             TextResources.Culture = DependencyService.Get<ILocalize>().GetCurrentCultureInfo();
-            // _NavPage = new NavigationPage(new LoginPage());
-            _NavPage = new NavigationPage(new CameraPage());
+
+            var initialState = new ApplicationState
+            {
+                CurrentUser = new CurrentUser(),
+                LoginPageState = new LoginPageState(),
+                TopPosts = new ImmutableArray<Post>(),
+                UserPosts = new ImmutableArray<Post>(),
+                VotePosts = new ImmutableArray<Post>()
+            };
+
+            Store = new Store<ApplicationState>(Reducers.Reducers.ReduceApplication, initialState);
+
+        _NavPage = new NavigationPage(new LoginPage());
+            //_NavPage = new NavigationPage(new CameraPage());
             MainPage = _NavPage;
         }
 

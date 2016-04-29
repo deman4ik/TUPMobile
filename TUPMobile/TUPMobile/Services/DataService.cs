@@ -10,6 +10,8 @@ using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
 using Microsoft.WindowsAzure.MobileServices.Sync;
 using Newtonsoft.Json.Linq;
 using tupapi.Shared.DataObjects;
+using tupapi.Shared.Enums;
+using TUPMobile.States;
 
 namespace TUPMobile.Services
 {
@@ -50,9 +52,7 @@ namespace TUPMobile.Services
 
             this.userTable = _client.GetSyncTable<User>();
             this.postTable = _client.GetSyncTable<Post>();
-            Debug.WriteLine("#########################################");
-            Debug.WriteLine($"{postTable.TableName}");
-            Debug.WriteLine("#########################################");
+
         }
 
         #region Seed
@@ -125,22 +125,34 @@ namespace TUPMobile.Services
         }
 
 
-        public async Task<bool> Login()
+        public async Task<LoginResult> Login(StandartAuthRequest req)
         {
             try
             {
-                var req = new StandartAuthRequest
-                {
-                    Name = "user1",
-                    Password = "user1pwd"
-                };
                 var result = await _client.InvokeApiAsync("Login", JToken.FromObject(req), HttpMethod.Post, null);
-                LoginResult loginResult = result.ToObject<LoginResult>();
-                Debug.WriteLine($"##### LOGIN RESULT {loginResult.AuthenticationToken}");
-                _client.CurrentUser = new MobileServiceUser("STANDART:" + loginResult.User.Id)
+                BaseResponse baseResponse = result.ToObject<BaseResponse>();
+                if (baseResponse.ApiResult == ApiResult.Ok)
                 {
-                    MobileServiceAuthenticationToken = loginResult.AuthenticationToken
-                };
+                    LoginResult loginResult = result.ToObject<LoginResult>();
+                    Debug.WriteLine($"##### LOGIN RESULT {loginResult.AuthenticationToken}");
+                    return loginResult;
+                }
+                else
+                {
+                    Debug.WriteLine($"##### LOGIN ERROR {baseResponse.ErrorType} {baseResponse.Message}");
+                    return null;
+                }
+                    
+
+               
+                
+               
+
+
+                //_client.CurrentUser = new MobileServiceUser("STANDART:" + loginResult.User.Id)
+                //{
+                //    MobileServiceAuthenticationToken = loginResult.AuthenticationToken
+                //};
                 //IEnumerable<User> user = await userTable.ToEnumerableAsync();
                 //foreach (var u in user)
                 //{
@@ -151,14 +163,14 @@ namespace TUPMobile.Services
                 //{
                 //    Debug.WriteLine(post.Id);
                 //}
-                return true;
+               
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"###### LOGIN Exception:{ex.Message}");
                 if (ex.InnerException != null)
                     Debug.WriteLine($"###### InnerException Exception:{ex.InnerException}");
-                return false;
+                return null;
             }
         }
 

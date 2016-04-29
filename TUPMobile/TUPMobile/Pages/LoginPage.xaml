@@ -5,6 +5,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:artina="clr-namespace:UXDivers.Artina.Shared;assembly=UXDivers.Artina.Shared"
              xmlns:commonViews="clr-namespace:TUPMobile.Views;assembly=TUPMobile"
+             xmlns:i18n="clr-namespace:TUPMobile.Localization;assembly=TUPMobile"
              Title="Login"
              BackgroundColor="White"
              BackgroundImage="signup_bg.png"
@@ -33,25 +34,34 @@
                   Padding="40, 0"
                   RowSpacing="0"
                   VerticalOptions="CenterAndExpand">
-
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
                 <StackLayout Grid.Row="0" VerticalOptions="StartAndExpand">
                     <!--  -EMAIL FIELD  -->
-                    <Entry Placeholder="E-mail" Style="{DynamicResource ArtinaLoginEntryStyle}" />
+                    <Entry x:Name="EmailEntry" Placeholder="{i18n:Translate UsernameOrEmail}" Style="{DynamicResource ArtinaLoginEntryStyle}" />
 
-                    <Label HorizontalOptions="Start"
+                    <Label x:Name="EmailLabel" HorizontalOptions="Start"
                            IsVisible="false"
                            Style="{DynamicResource ValidationEntryErrorStyle}"
-                           Text=" Please enter a valid e-mail " />
+                           Text=""
+                            />
 
                 </StackLayout>
+                <StackLayout Grid.Row="1" VerticalOptions="StartAndExpand">
+                    <!--  -PASSWORD FIELD  -->
+                    <Entry x:Name="PasswordEntry"
+                           IsPassword="true"
+                           Placeholder="{i18n:Translate Password}"
+                           Style="{DynamicResource ArtinaLoginEntryStyle}"
+                           VerticalOptions="StartAndExpand" />
+                    <Label x:Name="PassworLabel" HorizontalOptions="Start"
+                           IsVisible="false"
+                           Style="{DynamicResource ValidationEntryErrorStyle}"
+                           Text="" />
 
-                <!--  -PASSWORD FIELD  -->
-                <Entry Grid.Row="2"
-                       IsPassword="true"
-                       Placeholder="Password"
-                       Style="{DynamicResource ArtinaLoginEntryStyle}"
-                       VerticalOptions="StartAndExpand" />
-
+                </StackLayout>
             </Grid>
 
 
@@ -62,7 +72,8 @@
                          VerticalOptions="End">
 
                 <Button x:Name="LoginBtn"
-                        Clicked="OnLoginClicked"
+                        Command="{Binding LoginCommand}"
+                       
                         Style="{DynamicResource PrimaryActionButtonStyle}"
                         Text="Login"
                         VerticalOptions="End" />

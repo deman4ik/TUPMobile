@@ -11,7 +11,7 @@ namespace TUPMobile.Reducers
 {
     public static class Reducers
     {
-        public static ApplicationState ReduceApplicationState(ApplicationState state, IAction action)
+        public static ApplicationState ReduceApplication(ApplicationState state, IAction action)
         {
             return new ApplicationState
             {

@@ -5,6 +5,7 @@
              x:Class="TUPMobile.Pages.SignUpPage"
              xmlns:artina="clr-namespace:UXDivers.Artina.Shared;assembly=UXDivers.Artina.Shared"
              xmlns:commonViews="clr-namespace:TUPMobile.Views;assembly=TUPMobile"
+             xmlns:i18n="clr-namespace:TUPMobile.Localization;assembly=TUPMobile"
              BackgroundImage="signup_bg.png"
              NavigationPage.HasNavigationBar="False"
              Title="Sign Up">
@@ -44,7 +45,7 @@
                     VerticalOptions="Start">
                     <!---EMAIL FIELD-->
                     <Entry
-                        Placeholder="E-mail"
+                        Placeholder="{i18n:Translate Email}"
                         Style="{DynamicResource ArtinaLoginEntryStyle}">
 
                         <Entry.Behaviors>

@@ -7,7 +7,7 @@ using Redux;
 
 namespace TUPMobile.Utils
 {
-    public delegate Task AsyncActionsCreator<TState>(Dispatcher dispatcher, Func<TState> getState);
+    public delegate Task AsyncActionsCreator<in TState>(Dispatcher dispatcher, Func<TState> getState);
 
     public static class StoreExtensions
     {

@@ -13,11 +13,15 @@ namespace TUPMobile.Services
         private static AuthenticationService _instance;
         public static AuthenticationService Instance => _instance ?? (_instance = new AuthenticationService());
 
-        public Task<LoginResult> Login(StandartAuthRequest authRequest)
+        public async Task<CurrentUser> Login(StandartAuthRequest authRequest)
         {
-            //TODO: Implement Login Call
-
-            return new Task<LoginResult>(null, null);
+            var loginResult = await DataService.Instance.Login(authRequest);
+          
+            CurrentUser user = new CurrentUser
+            {
+             IsAuthenticated = true
+            };
+            return user;
         }
     }
 }
