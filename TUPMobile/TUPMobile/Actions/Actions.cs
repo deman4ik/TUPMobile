@@ -15,6 +15,6 @@ namespace TUPMobile.Actions
 
     public class LoginResultAction : IAction
     {
-        public LoginResult LoginResult { get; set; }
+        public Response<LoginResult> LoginResult { get; set; }
     }
 }

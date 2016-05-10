@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.MobileServices;
 using Redux;
+using tupapi.Shared.DataObjects;
 using TUPMobile.Actions;
 using TUPMobile.States;
 
@@ -29,7 +30,12 @@ namespace TUPMobile.Reducers
         {
             return new CurrentUser()
             {
-                AuthRequest = action.AuthRequest
+                User = new User
+                {
+                    Name = action.AuthRequest.Name,
+                    Email = action.AuthRequest.Email,
+                    
+                }
             };
         }
 
@@ -37,13 +43,12 @@ namespace TUPMobile.Reducers
         {
             return new CurrentUser
             {
-                AuthRequest = null,
                 IsAuthenticated = true,
-                MobileServiceUser = new MobileServiceUser(action.LoginResult.User.Id)
+                MobileServiceUser = new MobileServiceUser(action.LoginResult.Data.User.Id)
                 {
-                    MobileServiceAuthenticationToken = action.LoginResult.AuthenticationToken
+                    MobileServiceAuthenticationToken = action.LoginResult.Data.AuthenticationToken
                 },
-                User = action.LoginResult.User
+                User = action.LoginResult.Data.User
             };
         }
     }

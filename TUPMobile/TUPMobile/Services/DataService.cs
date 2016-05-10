@@ -125,28 +125,26 @@ namespace TUPMobile.Services
         }
 
 
-        public async Task<LoginResult> Login(StandartAuthRequest req)
+        public async Task<Response<LoginResult>> Login(StandartAuthRequest req)
         {
             try
             {
                 var result = await _client.InvokeApiAsync("Login", JToken.FromObject(req), HttpMethod.Post, null);
-                BaseResponse baseResponse = result.ToObject<BaseResponse>();
-                if (baseResponse.ApiResult == ApiResult.Ok)
+                var response = result.ToObject<Response<LoginResult>>();
+                if (response.ApiResult == ApiResult.Ok)
                 {
-                    LoginResult loginResult = result.ToObject<LoginResult>();
-                    Debug.WriteLine($"##### LOGIN RESULT {loginResult.AuthenticationToken}");
-                    return loginResult;
+                    
+                    Debug.WriteLine($"##### LOGIN RESULT {response.Data.AuthenticationToken}"); 
                 }
                 else
                 {
-                    Debug.WriteLine($"##### LOGIN ERROR {baseResponse.ErrorType} {baseResponse.Message}");
-                    return null;
+                    Debug.WriteLine($"##### LOGIN ERROR {response.Error.ErrorType} {response.Error.Message}");  
                 }
-                    
 
-               
-                
-               
+                return response;
+
+
+
 
 
                 //_client.CurrentUser = new MobileServiceUser("STANDART:" + loginResult.User.Id)
@@ -163,7 +161,7 @@ namespace TUPMobile.Services
                 //{
                 //    Debug.WriteLine(post.Id);
                 //}
-               
+
             }
             catch (Exception ex)
             {

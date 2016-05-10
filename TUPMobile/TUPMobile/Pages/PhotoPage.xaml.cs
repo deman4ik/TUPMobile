@@ -25,10 +25,12 @@ namespace TUPMobile.Pages
 
         async void OnSendClicked(object sender, EventArgs args)
         {
-            var client = DataService.Instance;
-            await client.Login();
-            var result = await client.MakePost();
-            var res = await AzureStorageService.Instance.UploadPhoto(result.Sas, result.Id, _image);
+            //var client = DataService.Instance;
+            //await client.Login();
+            //var result = await client.MakePost();
+            //var res = await AzureStorageService.Instance.UploadPhoto(result.Sas, result.Id, _image);
+
+
             //await SendBtn.ScaleTo(1.25, 1000 / 3, Easing.SinInOut);
             //SendBtn.Text = "Sending...";
             //SendBtn.BackgroundColor = Color.FromHex("#64FFDA");

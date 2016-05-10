@@ -25,7 +25,7 @@ namespace TUPMobile.Actions
                     AuthRequest = authRequest
                 });
 
-                var loginResult = await AuthenticationService.Instance.Login(authRequest);
+                var loginResult = await DataService.Instance.Login(authRequest);
 
                 dispatch(new LoginResultAction
                 {
