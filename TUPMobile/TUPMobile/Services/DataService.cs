@@ -165,7 +165,7 @@ namespace TUPMobile.Services
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"###### LOGIN Exception:{ex.Message}");
+                Debug.WriteLine($"###### LOGIN Exception:{ex}");
                 if (ex.InnerException != null)
                     Debug.WriteLine($"###### InnerException Exception:{ex.InnerException}");
                 return null;

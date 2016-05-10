@@ -42,8 +42,8 @@
                     <!--  -EMAIL FIELD  -->
                     <Entry x:Name="EmailEntry" Placeholder="{i18n:Translate UsernameOrEmail}" Style="{DynamicResource ArtinaLoginEntryStyle}" />
 
-                    <Label x:Name="EmailLabel" HorizontalOptions="Start"
-                           IsVisible="false"
+                    <Label x:Name="EmailLabel" HorizontalOptions="Fill"
+                           IsVisible="False"
                            Style="{DynamicResource ValidationEntryErrorStyle}"
                            Text=""
                             />
@@ -56,8 +56,8 @@
                            Placeholder="{i18n:Translate Password}"
                            Style="{DynamicResource ArtinaLoginEntryStyle}"
                            VerticalOptions="StartAndExpand" />
-                    <Label x:Name="PassworLabel" HorizontalOptions="Start"
-                           IsVisible="false"
+                    <Label x:Name="PassworLabel" HorizontalOptions="Fill"
+                           IsVisible="False"
                            Style="{DynamicResource ValidationEntryErrorStyle}"
                            Text="" />
 
@@ -72,16 +72,12 @@
                          VerticalOptions="End">
 
                 <Button x:Name="LoginBtn"
-                        Command="{Binding LoginCommand}"
+                        Clicked="OnLoginBtnClicked"
                        
                         Style="{DynamicResource PrimaryActionButtonStyle}"
                         Text="Login"
                         VerticalOptions="End" />
-                <Button x:Name="RegBtn"
-                        Clicked="OnRegClicked"
-                        Style="{DynamicResource TransparentButtonStyle}"
-                        Text="No account? Sign up!"
-                        VerticalOptions="End" />
+                
                 <Button x:Name="InstagramBtn"
                         Clicked="OnInstaBtnClicked"
                         Style="{DynamicResource InstagramButtonStyle}"
@@ -91,6 +87,11 @@
                         Clicked="OnFacebookBtnClicked"
                         Style="{DynamicResource FacebookButtonStyle}"
                         Text="Sign in with Facebook"
+                        VerticalOptions="End" />
+              <Button x:Name="RegBtn"
+                        Clicked="OnRegClicked"
+                        Style="{DynamicResource TransparentButtonStyle}"
+                        Text="No account? Sign up!"
                         VerticalOptions="End" />
             </StackLayout>
 

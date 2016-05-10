@@ -120,6 +120,21 @@
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
+  <data name="EmailInvalid" xml:space="preserve">
+    <value>Email is invalid</value>
+  </data>
+  <data name="EmailWrong" xml:space="preserve">
+    <value>No such user with this Email</value>
+  </data>
+  <data name="LoggingIn" xml:space="preserve">
+    <value>Logging in...</value>
+  </data>
+  <data name="NameInvalid" xml:space="preserve">
+    <value>Username is invalid</value>
+  </data>
+  <data name="NameWrong" xml:space="preserve">
+    <value>No such user with this Name</value>
+  </data>
   <data name="NetworkConnection_Alert_Confirm" xml:space="preserve">
     <value>OK</value>
   </data>
@@ -131,6 +146,15 @@
   </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
+  </data>
+  <data name="PasswordInvalid" xml:space="preserve">
+    <value>Password is Invalid</value>
+  </data>
+  <data name="PasswordLength" xml:space="preserve">
+    <value>Password is too short must be more then 8 symbols</value>
+  </data>
+  <data name="PasswordWrong" xml:space="preserve">
+    <value>Your Password is Wrong</value>
   </data>
   <data name="Username" xml:space="preserve">
     <value>Username</value>

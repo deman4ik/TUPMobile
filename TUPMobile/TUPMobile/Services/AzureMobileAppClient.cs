@@ -19,7 +19,7 @@ namespace TUPMobile.Services
         {
             try
             {
-                _client = new MobileServiceClient(Constants.ApplicationUrl);
+                _client = new MobileServiceClient(AppConstants.ApplicationUrl);
                 Debug.WriteLine("##### AzureMobileAppClient  new MobileServiceClient");
             }
             catch (Exception ex)

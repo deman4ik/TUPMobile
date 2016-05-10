@@ -14,12 +14,13 @@ namespace TUPMobile.States
             SuccessLogin = false;
             NameError = null;
             PasswordError = null;
+            ServerError = null;
         }
 
         public bool IsLoggingIn { get; set; }
         public bool SuccessLogin { get; set; }
         public string NameError { get; set; }
         public string PasswordError { get; set; }
-        public string Error { get; set; }
+        public string ServerError { get; set; }
     }
 }

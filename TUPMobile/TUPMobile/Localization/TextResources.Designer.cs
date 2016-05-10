@@ -71,6 +71,51 @@ namespace TUPMobile.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email is invalid.
+        /// </summary>
+        internal static string EmailInvalid {
+            get {
+                return ResourceManager.GetString("EmailInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No such user with this Email.
+        /// </summary>
+        internal static string EmailWrong {
+            get {
+                return ResourceManager.GetString("EmailWrong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logging in....
+        /// </summary>
+        internal static string LoggingIn {
+            get {
+                return ResourceManager.GetString("LoggingIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username is invalid.
+        /// </summary>
+        internal static string NameInvalid {
+            get {
+                return ResourceManager.GetString("NameInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No such user with this Name.
+        /// </summary>
+        internal static string NameWrong {
+            get {
+                return ResourceManager.GetString("NameWrong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to OK.
         /// </summary>
         internal static string NetworkConnection_Alert_Confirm {
@@ -103,6 +148,33 @@ namespace TUPMobile.Localization {
         internal static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password is Invalid.
+        /// </summary>
+        internal static string PasswordInvalid {
+            get {
+                return ResourceManager.GetString("PasswordInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password is too short must be more then 8 symbols.
+        /// </summary>
+        internal static string PasswordLength {
+            get {
+                return ResourceManager.GetString("PasswordLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your Password is Wrong.
+        /// </summary>
+        internal static string PasswordWrong {
+            get {
+                return ResourceManager.GetString("PasswordWrong", resourceCulture);
             }
         }
         

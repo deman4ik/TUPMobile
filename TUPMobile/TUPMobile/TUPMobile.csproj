@@ -55,7 +55,7 @@
       <DependentUpon>Colors.tt</DependentUpon>
     </Compile>
     <Compile Include="ExportedColors.cs" />
-    <Compile Include="Helpers\Constants.cs" />
+    <Compile Include="Helpers\AppConstants.cs" />
     <Compile Include="Helpers\NavigationService.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Localization\ILocalize.cs" />
@@ -97,10 +97,10 @@
     <Compile Include="Reducers\CurrentUserReducers.cs" />
     <Compile Include="Reducers\LoginPageReducers.cs" />
     <Compile Include="Reducers\Reducers.cs" />
-    <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Services\AzureMobileAppClient.cs" />
     <Compile Include="Services\AzureStorageService.cs" />
     <Compile Include="Services\DataService.cs" />
+    <Compile Include="Services\ValidationService.cs" />
     <Compile Include="States\ApplicationState.cs" />
     <Compile Include="States\CurrentUser.cs" />
     <Compile Include="States\LoginPageState.cs" />

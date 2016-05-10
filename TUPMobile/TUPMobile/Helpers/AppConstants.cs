@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TUPMobile.Helpers
 {
-    public class Constants
+    public class AppConstants
     {
         public static readonly string ApplicationUrl = "https://tupapi.azurewebsites.net";
         public static readonly string ApplicationMobileService = "";
