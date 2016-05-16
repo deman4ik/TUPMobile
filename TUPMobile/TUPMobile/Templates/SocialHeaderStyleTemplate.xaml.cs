@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace TUPMobile.Templates
 {
@@ -17,8 +12,7 @@ namespace TUPMobile.Templates
         public static BindableProperty TextProperty =
             BindableProperty.Create("Header", typeof (string),
                 typeof (SocialHeaderStyleTemplate),
-                string.Empty,
-                defaultBindingMode: BindingMode.OneWay,
+                string.Empty, BindingMode.OneWay,
                 propertyChanging: (bindable, oldValue, newValue) =>
                 {
                     var ctrl = (SocialHeaderStyleTemplate) bindable;
@@ -41,8 +35,7 @@ namespace TUPMobile.Templates
         public static BindableProperty IconTextProperty =
             BindableProperty.Create("IconText", typeof (string),
                 typeof (SocialHeaderStyleTemplate),
-                string.Empty,
-                defaultBindingMode: BindingMode.OneWay,
+                string.Empty, BindingMode.OneWay,
                 propertyChanging: (bindable, oldValue, newValue) =>
                 {
                     var ctrl = (SocialHeaderStyleTemplate) bindable;
@@ -56,7 +49,7 @@ namespace TUPMobile.Templates
             set
             {
                 SetValue(IconTextProperty, value);
-                HeaderIcon.Text = (value);
+                HeaderIcon.Text = value;
             }
         }
     }

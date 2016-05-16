@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Reflection;
 using System.Resources;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,8 +10,8 @@ namespace TUPMobile.Localization
     [ContentProperty("Text")]
     public class TranslateExtension : IMarkupExtension
     {
-        readonly CultureInfo ci;
-        const string ResourceId = "TUPMobile.Localization.TextResources";
+        private readonly CultureInfo ci;
+        private const string ResourceId = "TUPMobile.Localization.TextResources";
 
         public TranslateExtension()
         {

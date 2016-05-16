@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.ServiceModel.Dispatcher;
-using System.Text;
-using System.Threading.Tasks;
-using tupapi.Shared.DataObjects;
+﻿using tupapi.Shared.DataObjects;
 using TUPMobile.Services;
 using TUPMobile.States;
 using TUPMobile.Utils;

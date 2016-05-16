@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TUPMobile.Services;
 using Xamarin.Forms;
 
 namespace TUPMobile.Pages
@@ -23,7 +18,7 @@ namespace TUPMobile.Pages
         }
 
 
-        async void OnSendClicked(object sender, EventArgs args)
+        private async void OnSendClicked(object sender, EventArgs args)
         {
             //var client = DataService.Instance;
             //await client.Login();

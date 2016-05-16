@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Redux;
-using TUPMobile.Actions;
 using TUPMobile.States;
 
 namespace TUPMobile.Reducers
@@ -13,7 +8,7 @@ namespace TUPMobile.Reducers
     {
         public static ApplicationState ReduceApplication(ApplicationState state, IAction action)
         {
-            return new ApplicationState
+            ApplicationState newState = new ApplicationState
             {
                 CurrentUser = CurrentUserReducers.ReduceCurrentUser(state.CurrentUser, action),
                 LoginPageState = LoginPageReducers.ReduceLoginPageState(state.LoginPageState, action),
@@ -21,6 +16,10 @@ namespace TUPMobile.Reducers
                 UserPosts = state.UserPosts,
                 VotePosts = state.VotePosts
             };
+            Debug.WriteLine("####### STATE:");
+            Debug.WriteLine("## ACTION: " + action);
+            Debug.WriteLine("# " + newState);
+            return newState;
         }
     }
 }

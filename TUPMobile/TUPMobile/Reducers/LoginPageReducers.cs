@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Redux;
+﻿using Redux;
 using tupapi.Shared.Enums;
+using tupapi.Shared.Helpers;
 using TUPMobile.Actions;
 using TUPMobile.Localization;
 using TUPMobile.States;
@@ -19,6 +15,10 @@ namespace TUPMobile.Reducers
             {
                 return LoginReducer(preLoginPageState, (LoginAction) action);
             }
+            if (action is LoginValidationAction)
+            {
+                return LoginValidationReducer(preLoginPageState, (LoginValidationAction) action);
+            }
             if (action is LoginResultAction)
             {
                 return LoginResultReducer(preLoginPageState, (LoginResultAction) action);
@@ -30,8 +30,48 @@ namespace TUPMobile.Reducers
         {
             return new LoginPageState
             {
-                IsLoggingIn = true,
+                IsLoggingIn = true
             };
+        }
+
+
+        public static LoginPageState LoginValidationReducer(LoginPageState preLoginPageState,
+            LoginValidationAction action)
+        {
+            if (action.ValidateName)
+            {
+                if (string.IsNullOrWhiteSpace(action.Name))
+                    preLoginPageState.NameError = TextResources.UsernameOrEmailNull;
+                else
+                {
+                    if (action.Name.Contains("@"))
+                    {
+                        preLoginPageState.NameError = CheckHelper.IsEmailValid(action.Name)
+                            ? string.Empty
+                            : TextResources.EmailInvalid;
+                    }
+                    //TODO: Else Check username with RegExp
+                }
+                ;
+            }
+
+
+            if (action.ValidatePassword)
+            {
+                if (string.IsNullOrWhiteSpace(action.Password))
+                    preLoginPageState.PasswordError = TextResources.PasswordNull;
+                else
+                {
+                    preLoginPageState.PasswordError = !CheckHelper.IsPasswordValid(action.Password)
+                        ? TextResources.PasswordInvalid
+                        : string.Empty;
+                }
+            }
+
+
+            preLoginPageState.IsLoginAllowed = string.IsNullOrWhiteSpace(preLoginPageState.NameError) &&
+                                               string.IsNullOrWhiteSpace(preLoginPageState.PasswordError);
+            return preLoginPageState;
         }
 
         public static LoginPageState LoginResultReducer(LoginPageState preLoginPageState, LoginResultAction action)
@@ -41,6 +81,15 @@ namespace TUPMobile.Reducers
                 return new LoginPageState
                 {
                     SuccessLogin = true
+                };
+            }
+
+            if (action.LoginResult.ApiResult == ApiResult.Unknown)
+            {
+                return new LoginPageState
+                {
+                    SuccessLogin = false,
+                    ServerError = TextResources.ServerException
                 };
             }
             switch (action.LoginResult.Error.ErrorType)
@@ -58,13 +107,13 @@ namespace TUPMobile.Reducers
                 case ErrorType.PasswordWrong:
                     return new LoginPageState
                     {
-                        NameError = TextResources.PasswordWrong
+                        PasswordError = TextResources.PasswordWrong
                     };
             }
 
             return new LoginPageState
             {
-                ServerError  = action.LoginResult.Error.Message
+                ServerError = action.LoginResult.Error.Message
             };
         }
     }

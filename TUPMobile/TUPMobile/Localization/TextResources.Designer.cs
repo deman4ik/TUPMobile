@@ -170,11 +170,29 @@ namespace TUPMobile.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please enter your Password.
+        /// </summary>
+        internal static string PasswordNull {
+            get {
+                return ResourceManager.GetString("PasswordNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Your Password is Wrong.
         /// </summary>
         internal static string PasswordWrong {
             get {
                 return ResourceManager.GetString("PasswordWrong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t connect to server.
+        /// </summary>
+        internal static string ServerException {
+            get {
+                return ResourceManager.GetString("ServerException", resourceCulture);
             }
         }
         
@@ -193,6 +211,15 @@ namespace TUPMobile.Localization {
         internal static string UsernameOrEmail {
             get {
                 return ResourceManager.GetString("UsernameOrEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter your Username or Email.
+        /// </summary>
+        internal static string UsernameOrEmailNull {
+            get {
+                return ResourceManager.GetString("UsernameOrEmailNull", resourceCulture);
             }
         }
     }

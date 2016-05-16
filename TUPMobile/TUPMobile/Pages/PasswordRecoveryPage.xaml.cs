@@ -10,7 +10,7 @@ namespace TUPMobile.Pages
             InitializeComponent();
         }
 
-        async void OnSendClicked(object sender, EventArgs args)
+        private async void OnSendClicked(object sender, EventArgs args)
         {
             await Navigation.PushAsync(new MainPage());
         }

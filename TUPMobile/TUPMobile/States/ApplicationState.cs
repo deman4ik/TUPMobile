@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
+﻿using System.Collections.Immutable;
 using System.Text;
-using System.Threading.Tasks;
-using Microsoft.WindowsAzure.MobileServices;
 using tupapi.Shared.DataObjects;
 
 namespace TUPMobile.States
@@ -16,5 +11,14 @@ namespace TUPMobile.States
         public ImmutableArray<Post> UserPosts { get; set; }
         public ImmutableArray<Post> TopPosts { get; set; }
         public LoginPageState LoginPageState { get; set; }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            // sb.AppendLine("# Current User: "+  CurrentUser.ToString());
+            sb.AppendLine("# LoginPageState: ");
+            sb.AppendLine(LoginPageState.ToString());
+            return sb.ToString();
+        }
     }
 }

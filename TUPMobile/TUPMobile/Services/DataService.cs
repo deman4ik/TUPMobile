@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.MobileServices;
 using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
@@ -11,7 +9,6 @@ using Microsoft.WindowsAzure.MobileServices.Sync;
 using Newtonsoft.Json.Linq;
 using tupapi.Shared.DataObjects;
 using tupapi.Shared.Enums;
-using TUPMobile.States;
 
 namespace TUPMobile.Services
 {
@@ -20,10 +17,10 @@ namespace TUPMobile.Services
         private static DataService _instance;
         public static DataService Instance => _instance ?? (_instance = new DataService());
 
-        private MobileServiceClient _client;
+        private readonly MobileServiceClient _client;
 
-        IMobileServiceSyncTable<User> userTable;
-        IMobileServiceSyncTable<Post> postTable;
+        private IMobileServiceSyncTable<User> userTable;
+        private IMobileServiceSyncTable<Post> postTable;
 
         private DataService()
         {
@@ -50,16 +47,15 @@ namespace TUPMobile.Services
                 Debug.WriteLine(@"Failed to initialize sync context: {0}", ex.Message);
             }
 
-            this.userTable = _client.GetSyncTable<User>();
-            this.postTable = _client.GetSyncTable<Post>();
-
+            userTable = _client.GetSyncTable<User>();
+            postTable = _client.GetSyncTable<Post>();
         }
 
         #region Seed
 
         public bool LocalDBExists => _client.SyncContext.IsInitialized;
 
-        bool _isSeeded;
+        private bool _isSeeded;
         public bool IsSeeded => _isSeeded;
 
         public async Task SeedLocalDataAsync()
@@ -133,18 +129,14 @@ namespace TUPMobile.Services
                 var response = result.ToObject<Response<LoginResult>>();
                 if (response.ApiResult == ApiResult.Ok)
                 {
-                    
-                    Debug.WriteLine($"##### LOGIN RESULT {response.Data.AuthenticationToken}"); 
+                    Debug.WriteLine($"##### LOGIN RESULT {response.Data.AuthenticationToken}");
                 }
                 else
                 {
-                    Debug.WriteLine($"##### LOGIN ERROR {response.Error.ErrorType} {response.Error.Message}");  
+                    Debug.WriteLine($"##### LOGIN ERROR {response.Error.ErrorType} {response.Error.Message}");
                 }
 
                 return response;
-
-
-
 
 
                 //_client.CurrentUser = new MobileServiceUser("STANDART:" + loginResult.User.Id)
@@ -161,14 +153,13 @@ namespace TUPMobile.Services
                 //{
                 //    Debug.WriteLine(post.Id);
                 //}
-
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"###### LOGIN Exception:{ex}");
                 if (ex.InnerException != null)
                     Debug.WriteLine($"###### InnerException Exception:{ex.InnerException}");
-                return null;
+                return new Response<LoginResult>(ApiResult.Unknown, null);
             }
         }
 

@@ -6,16 +6,16 @@ namespace TUPMobile.Droid.Renderers
 {
     public class CustomFontLabelRenderer : ArtinaCustomFontLabelRenderer
     {
-        private static readonly string[] CustomFontFamily = new[] {"FontAwesome"};
+        private static readonly string[] CustomFontFamily = {"FontAwesome"};
 
-        private static readonly Tuple<FontAttributes, string>[][] CustomFontFamilyData = new[]
+        private static readonly Tuple<FontAttributes, string>[][] CustomFontFamilyData =
         {
             new[]
             {
                 new Tuple<FontAttributes, string>(FontAttributes.None, "fontawesome-webfont.ttf"),
                 new Tuple<FontAttributes, string>(FontAttributes.Bold, "fontawesome-webfont.ttf"),
-                new Tuple<FontAttributes, string>(FontAttributes.Italic, "fontawesome-webfont.ttf"),
-            },
+                new Tuple<FontAttributes, string>(FontAttributes.Italic, "fontawesome-webfont.ttf")
+            }
         };
 
         protected override bool CheckIfCustomFont(string fontFamily, FontAttributes attributes, out string fontFileName)

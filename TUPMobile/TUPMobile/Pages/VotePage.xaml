@@ -4,10 +4,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TUPMobile.Pages.VotePage"
              xmlns:artina="clr-namespace:UXDivers.Artina.Shared;assembly=UXDivers.Artina.Shared"
+             xmlns:templates="clr-namespace:TUPMobile.Templates;assembly=TUPMobile"
              NavigationPage.HasNavigationBar="False"
              BackgroundColor="Black">
-    <AbsoluteLayout Padding="0">
-        <!-- MAIN IMAGE -->
+
+    <StackLayout>
+        <CarouselView ItemsSource="{Binding Items}" Position="{Binding Position, Mode=TwoWay}" x:Name="Carousel">
+            <CarouselView.ItemTemplate>
+                <DataTemplate>
+                    <templates:ArticleItemTemplate />
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+        <Button Text="NEXT" Clicked="Button_OnClicked" />
+    </StackLayout>
+    <!--<AbsoluteLayout Padding="0">
+        --><!-- MAIN IMAGE --><!--
         <Image
             x:Name="img"
             Source="ratedphoto.png"
@@ -56,7 +68,7 @@
 
         </Grid>
 
-    </AbsoluteLayout>
+    </AbsoluteLayout>-->
 
 
 </ContentPage>

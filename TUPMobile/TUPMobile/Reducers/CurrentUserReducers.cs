@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.WindowsAzure.MobileServices;
+﻿using Microsoft.WindowsAzure.MobileServices;
 using Redux;
 using tupapi.Shared.DataObjects;
 using tupapi.Shared.Enums;
@@ -29,13 +24,12 @@ namespace TUPMobile.Reducers
 
         public static CurrentUser LoginReducer(CurrentUser preCurrentUser, LoginAction action)
         {
-            return new CurrentUser()
+            return new CurrentUser
             {
                 User = new User
                 {
                     Name = action.AuthRequest.Name,
-                    Email = action.AuthRequest.Email,
-                    
+                    Email = action.AuthRequest.Email
                 }
             };
         }
@@ -43,15 +37,15 @@ namespace TUPMobile.Reducers
         public static CurrentUser LoginResultReducer(CurrentUser preCurrentUser, LoginResultAction action)
         {
             if (action.LoginResult.ApiResult == ApiResult.Ok)
-            return new CurrentUser
-            {
-                IsAuthenticated = true,
-                MobileServiceUser = new MobileServiceUser(action.LoginResult.Data.User.Id)
+                return new CurrentUser
                 {
-                    MobileServiceAuthenticationToken = action.LoginResult.Data.AuthenticationToken
-                },
-                User = action.LoginResult.Data.User
-            };
+                    IsAuthenticated = true,
+                    MobileServiceUser = new MobileServiceUser(action.LoginResult.Data.User.Id)
+                    {
+                        MobileServiceAuthenticationToken = action.LoginResult.Data.AuthenticationToken
+                    },
+                    User = action.LoginResult.Data.User
+                };
             return preCurrentUser;
         }
     }

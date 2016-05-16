@@ -5,6 +5,11 @@
              xmlns:artina="clr-namespace:UXDivers.Artina.Shared;assembly=UXDivers.Artina.Shared"
              x:Class="TUPMobile.Templates.ArticleItemTemplate">
     <Grid BackgroundColor="Black">
+        <Grid.GestureRecognizers>
+            <TapGestureRecognizer
+                Tapped="OnTapGestureRecognizerTapped"
+                NumberOfTapsRequired="1" />
+        </Grid.GestureRecognizers>
         <Image
             Source="{Binding Image}"
             Aspect="AspectFill"

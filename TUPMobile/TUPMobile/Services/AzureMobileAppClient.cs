@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.WindowsAzure.MobileServices;
 using TUPMobile.Helpers;
 
@@ -13,7 +9,7 @@ namespace TUPMobile.Services
     {
         private static AzureMobileAppClient _instance;
         public static AzureMobileAppClient Instance => _instance ?? (_instance = new AzureMobileAppClient());
-        readonly MobileServiceClient _client;
+        private readonly MobileServiceClient _client;
 
         private AzureMobileAppClient()
         {

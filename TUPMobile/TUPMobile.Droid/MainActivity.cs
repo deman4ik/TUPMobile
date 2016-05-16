@@ -28,12 +28,8 @@ namespace TUPMobile.Droid
             Window.ClearFlags(WindowManagerFlags.ForceNotFullscreen);
 
 
-#if GORILLA
-            LoadApplication(UXDivers.Artina.Player.Droid.Player.CreateApplication(ApplicationContext,
-                new UXDivers.Artina.Player.Config("Good Gorilla")));
-#else
             LoadApplication(new App());
-#endif
+
 
 #pragma warning disable 618
             // Hiding ActionBar Icon on Android versions using Material Design

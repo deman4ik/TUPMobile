@@ -10,13 +10,16 @@ using TUPMobile.Pages;
 using TUPMobile.States;
 using Xamarin.Forms;
 
+//[assembly: XamlCompilation(XamlCompilationOptions.Compile)]
+
 namespace TUPMobile
 {
     public partial class App : Application
     {
         public static Application CurrentApp { get; private set; }
-        static NavigationPage _NavPage;
+        private static NavigationPage _NavPage;
         public static IStore<ApplicationState> Store { get; private set; }
+
         public App()
         {
             InitializeComponent();
@@ -34,8 +37,8 @@ namespace TUPMobile
 
             Store = new Store<ApplicationState>(Reducers.Reducers.ReduceApplication, initialState);
 
-        _NavPage = new NavigationPage(new LoginPage());
-            //_NavPage = new NavigationPage(new CameraPage());
+            _NavPage = new NavigationPage(new LoginPage());
+            // _NavPage = new NavigationPage(new VotePage());
             MainPage = _NavPage;
         }
 
@@ -47,12 +50,12 @@ namespace TUPMobile
 
         public static Action SuccessfulLoginAction
         {
-            get { return new Action(() => { _NavPage.PushAsync(new MainPage()); }); }
+            get { return () => { _NavPage.PushAsync(new MainPage()); }; }
         }
 
         public static Action FailLoginAction
         {
-            get { return new Action(() => { _NavPage.PopAsync(); }); }
+            get { return () => { _NavPage.PopAsync(); }; }
         }
 
         public static
@@ -70,7 +73,7 @@ namespace TUPMobile
             }
         }
 
-        static async Task ShowNetworkConnectionAlert()
+        private static async Task ShowNetworkConnectionAlert()
         {
             await CurrentApp.MainPage.DisplayAlert(
                 TextResources.NetworkConnection_Alert_Title,
