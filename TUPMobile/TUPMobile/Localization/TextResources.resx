@@ -162,6 +162,9 @@
   <data name="ServerException" xml:space="preserve">
     <value>Can't connect to server</value>
   </data>
+  <data name="Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
   <data name="Username" xml:space="preserve">
     <value>Username</value>
   </data>

@@ -40,10 +40,10 @@
                 </Grid.RowDefinitions>
                 <StackLayout Grid.Row="0" VerticalOptions="StartAndExpand">
                     <!--  -EMAIL FIELD  -->
-                    <Entry x:Name="EmailEntry" Placeholder="{i18n:Translate UsernameOrEmail}"
-                           Style="{DynamicResource ArtinaLoginEntryStyle}" Completed="EmailEntry_OnCompleted" />
+                    <Entry x:Name="NameOrEmailEntry" Placeholder="{i18n:Translate UsernameOrEmail}"
+                           Style="{DynamicResource ArtinaLoginEntryStyle}" Completed="NameOrEmailEntry_OnCompleted" />
 
-                    <Label x:Name="EmailLabel" HorizontalOptions="Fill"
+                    <Label x:Name="NameOrEmailLabel" HorizontalOptions="Fill"
                            IsVisible="False"
                            Style="{DynamicResource ValidationEntryErrorStyle}"
                            Text="" />
@@ -70,7 +70,11 @@
                          HorizontalOptions="Fill"
                          Padding="20, 0"
                          VerticalOptions="End">
-
+              
+              <Label x:Name="ServerErrorLabel" HorizontalOptions="Fill"
+                                         IsVisible="False"
+                                         Style="{DynamicResource ValidationEntryErrorStyle}"
+                                         Text="" />
                 <Button x:Name="LoginBtn"
                         Clicked="OnLoginBtnClicked"
 

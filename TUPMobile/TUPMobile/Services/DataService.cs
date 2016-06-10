@@ -19,8 +19,9 @@ namespace TUPMobile.Services
 
         private readonly MobileServiceClient _client;
 
-        private IMobileServiceSyncTable<User> userTable;
-        private IMobileServiceSyncTable<Post> postTable;
+        private IMobileServiceSyncTable<User> _userTable;
+        private IMobileServiceSyncTable<Post> _postTable;
+        private IMobileServiceSyncTable<TopPost> _topPostTable; 
 
         private DataService()
         {
@@ -38,6 +39,7 @@ namespace TUPMobile.Services
             var store = new MobileServiceSQLiteStore("store.db");
             store.DefineTable<User>();
             store.DefineTable<Post>();
+            store.DefineTable<TopPost>();
             try
             {
                 await _client.SyncContext.InitializeAsync(store);
@@ -47,8 +49,9 @@ namespace TUPMobile.Services
                 Debug.WriteLine(@"Failed to initialize sync context: {0}", ex.Message);
             }
 
-            userTable = _client.GetSyncTable<User>();
-            postTable = _client.GetSyncTable<Post>();
+            _userTable = _client.GetSyncTable<User>();
+            _postTable = _client.GetSyncTable<Post>();
+            _topPostTable = _client.GetSyncTable<TopPost>();
         }
 
         #region Seed
@@ -74,35 +77,45 @@ namespace TUPMobile.Services
             }
             try
             {
-                await postTable.PullAsync("syncPosts", postTable.CreateQuery());
-                IEnumerable<Post> posts = await postTable.Where(p => p.UserId == "u1").ToEnumerableAsync();
+                await _postTable.PullAsync("syncPosts", _postTable.CreateQuery());
+                IEnumerable<Post> posts = await _postTable.Where(p => p.UserId == "u1").ToEnumerableAsync();
                 foreach (var post in posts)
                 {
                     Debug.WriteLine(post.Id);
                 }
-                var req = new StandartAuthRequest
-                {
-                    Name = "user1",
-                    Password = "user1pwd"
-                };
-                var result = await _client.InvokeApiAsync("login", JToken.FromObject(req), HttpMethod.Post, null);
-                LoginResult loginResult = result.ToObject<LoginResult>();
-                Debug.WriteLine($"##### LOGIN RESULT {loginResult.AuthenticationToken}");
-                _client.CurrentUser = new MobileServiceUser(loginResult.User.Id)
-                {
-                    MobileServiceAuthenticationToken = loginResult.AuthenticationToken
-                };
-                await userTable.PullAsync("syncUsers", userTable.CreateQuery());
-                IEnumerable<User> user = await userTable.ToEnumerableAsync();
-                foreach (var u in user)
-                {
-                    Debug.WriteLine(u.Email);
-                }
+                
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
-                await postTable.PurgeAsync();
+                await _postTable.PurgeAsync();
+            }
+        }
+
+        public async Task SynchronizeTopPostsAsync()
+        {
+            if (!LocalDBExists)
+            {
+                await Init();
+            }
+            try
+            {
+                
+                    await _topPostTable.PullAsync("MainPage", _topPostTable.CreateQuery());
+                    IList<TopPost> posts = await _topPostTable.Where(p => p.UserId == "u1").ToListAsync();
+                    foreach (var post in posts)
+                    {
+                        Debug.WriteLine(post.ToString());
+                    }
+               
+                
+              
+               
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                await _topPostTable.PurgeAsync();
             }
         }
 
@@ -120,39 +133,34 @@ namespace TUPMobile.Services
             }
         }
 
-
         public async Task<Response<LoginResult>> Login(StandartAuthRequest req)
         {
             try
             {
-                var result = await _client.InvokeApiAsync("Login", JToken.FromObject(req), HttpMethod.Post, null);
-                var response = result.ToObject<Response<LoginResult>>();
-                if (response.ApiResult == ApiResult.Ok)
-                {
-                    Debug.WriteLine($"##### LOGIN RESULT {response.Data.AuthenticationToken}");
-                }
-                else
-                {
-                    Debug.WriteLine($"##### LOGIN ERROR {response.Error.ErrorType} {response.Error.Message}");
-                }
+                Response<LoginResult> response;
+                var startReq = DateTime.Now;
+                Debug.WriteLine($"### Started LOGIN REQUEST {startReq}");
+                    var result = await _client.InvokeApiAsync("Login", JToken.FromObject(req), HttpMethod.Post, null);
+                var endReq = DateTime.Now;
+                Debug.WriteLine($"### GET LOGIN RESULT {endReq}");
+                TimeSpan reqTime = endReq - startReq;
+                Debug.WriteLine($"{ reqTime.Seconds} seconds");
+                response = result.ToObject<Response<LoginResult>>();
+#region DEBUG_LOGIN
+                    if (response.ApiResult == ApiResult.Ok)
+                    {
+                        Debug.WriteLine($"##### LOGIN RESULT {response.Data.AuthenticationToken}");
+                    }
+                    else
+                    {
+                        Debug.WriteLine($"##### LOGIN ERROR {response.Error.ErrorType} {response.Error.Message}");
+                    }
+#endregion
+                
+               
 
                 return response;
 
-
-                //_client.CurrentUser = new MobileServiceUser("STANDART:" + loginResult.User.Id)
-                //{
-                //    MobileServiceAuthenticationToken = loginResult.AuthenticationToken
-                //};
-                //IEnumerable<User> user = await userTable.ToEnumerableAsync();
-                //foreach (var u in user)
-                //{
-                //    Debug.WriteLine(u.Email);
-                //}
-                //IEnumerable<PostTable> posts = await postTable.Where(p => p.UserId == loginResult.User.Id).ToEnumerableAsync();
-                //foreach (var post in posts)
-                //{
-                //    Debug.WriteLine(post.Id);
-                //}
             }
             catch (Exception ex)
             {

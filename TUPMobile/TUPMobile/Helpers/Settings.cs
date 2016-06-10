@@ -22,12 +22,20 @@ namespace TUPMobile.Helpers
         private const string SettingsKey = "settings_key";
         private static readonly string SettingsDefault = string.Empty;
 
+        private const string StateKey = "state_key";
+        private static readonly string StateDefault = string.Empty;
         #endregion
 
         public static string GeneralSettings
         {
             get { return AppSettings.GetValueOrDefault(SettingsKey, SettingsDefault); }
             set { AppSettings.AddOrUpdateValue(SettingsKey, value); }
+        }
+
+        public static string State
+        {
+            get { return AppSettings.GetValueOrDefault(StateKey, StateDefault); }
+            set { AppSettings.AddOrUpdateValue(StateKey, value); }
         }
     }
 }

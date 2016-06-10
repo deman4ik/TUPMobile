@@ -5,10 +5,39 @@
              x:Class="TUPMobile.Pages.VotePage"
              xmlns:artina="clr-namespace:UXDivers.Artina.Shared;assembly=UXDivers.Artina.Shared"
              xmlns:templates="clr-namespace:TUPMobile.Templates;assembly=TUPMobile"
-             NavigationPage.HasNavigationBar="False"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             	xmlns:mr="clr-namespace:MR.Gestures;assembly=MR.Gestures"
+             NavigationPage.HasNavigationBar="True"
              BackgroundColor="Black">
+  
+ 
+    
+    <mr:AbsoluteLayout  HorizontalOptions="Fill" VerticalOptions="Fill" Panning="AbsoluteLayout_OnPanning" Panned="AbsoluteLayout_OnPanned" BackgroundColor="White">
+      
+      <Frame HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="Aqua">
+      
+        <ffimageloading:CachedImage
+           HorizontalOptions="Fill"
+           VerticalOptions="Fill"
+           DownsampleToViewSize="true"
+           Source = "{Binding NextItem.Url}">
+        </ffimageloading:CachedImage>
+      </Frame>
+      <Frame x:Name="CurrentImage" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="Blue">
+       
+       
+       <ffimageloading:CachedImage
+                    HorizontalOptions="Fill"
+           VerticalOptions="Fill"
+                    DownsampleToViewSize="true"
+                    Source = "{Binding CurrentItem.Url}">
+                
 
-    <StackLayout>
+        </ffimageloading:CachedImage>
+      </Frame>
+    </mr:AbsoluteLayout>
+
+    <!--<StackLayout>
         <CarouselView ItemsSource="{Binding Items}" Position="{Binding Position, Mode=TwoWay}" x:Name="Carousel">
             <CarouselView.ItemTemplate>
                 <DataTemplate>
@@ -17,7 +46,7 @@
             </CarouselView.ItemTemplate>
         </CarouselView>
         <Button Text="NEXT" Clicked="Button_OnClicked" />
-    </StackLayout>
+    </StackLayout>-->
     <!--<AbsoluteLayout Padding="0">
         --><!-- MAIN IMAGE --><!--
         <Image

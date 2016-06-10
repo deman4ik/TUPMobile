@@ -23,8 +23,8 @@ namespace TUPMobile.Templates
                 }
             }
 
-            CarouselView carousel = (CarouselView) current;
-            carousel.Position = carousel.Position + 1;
+            //CarouselView carousel = (CarouselView) current;
+            //carousel.Position = carousel.Position + 1;
         }
 
         protected override void OnBindingContextChanged()

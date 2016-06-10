@@ -7,75 +7,94 @@ using TUPMobile.States;
 
 namespace TUPMobile.Reducers
 {
-    public static class LoginPageReducers
+    public static class LoginPageReducers 
     {
-        public static LoginPageState ReduceLoginPageState(LoginPageState preLoginPageState, IAction action)
+        public static LoginPageState ReduceLoginPageState(LoginPageState state, IAction action)
         {
+            if (action is NotConnectedAction)
+            {
+                return NotConnected(state, (NotConnectedAction) action);
+            }
             if (action is LoginAction)
             {
-                return LoginReducer(preLoginPageState, (LoginAction) action);
+                return LoginReducer(state, (LoginAction) action);
             }
             if (action is LoginValidationAction)
             {
-                return LoginValidationReducer(preLoginPageState, (LoginValidationAction) action);
+                return LoginValidationReducer(state, (LoginValidationAction) action);
             }
             if (action is LoginResultAction)
             {
-                return LoginResultReducer(preLoginPageState, (LoginResultAction) action);
+                return LoginResultReducer(state, (LoginResultAction) action);
             }
-            return preLoginPageState;
+            return state;
         }
 
-        public static LoginPageState LoginReducer(LoginPageState preLoginPageState, LoginAction action)
+        public static LoginPageState NotConnected(LoginPageState state, NotConnectedAction action)
+        {
+            state.ShowNotConnected = true;
+            return state;
+        }
+
+        public static LoginPageState LoginReducer(LoginPageState state, LoginAction action)
         {
             return new LoginPageState
             {
+                NameOrEmail = action.NameOrEmail,
+                Password = action.Password,
+                NameOrEmailError = string.Empty,
+                PasswordError = string.Empty,
+                ServerError = string.Empty,
+                ShowNotConnected = false,
                 IsLoggingIn = true
             };
         }
 
 
-        public static LoginPageState LoginValidationReducer(LoginPageState preLoginPageState,
+        public static LoginPageState LoginValidationReducer(LoginPageState state,
             LoginValidationAction action)
         {
             if (action.ValidateName)
             {
-                if (string.IsNullOrWhiteSpace(action.Name))
-                    preLoginPageState.NameError = TextResources.UsernameOrEmailNull;
+                if (string.IsNullOrWhiteSpace(action.NameOrEmail))
+                    state.NameOrEmailError = TextResources.UsernameOrEmailNull;
                 else
                 {
-                    if (action.Name.Contains("@"))
+                    if (action.NameOrEmail.Contains("@"))
                     {
-                        preLoginPageState.NameError = CheckHelper.IsEmailValid(action.Name)
+                        state.NameOrEmail = CheckHelper.IsEmailValid(action.NameOrEmail)
                             ? string.Empty
                             : TextResources.EmailInvalid;
                     }
                     //TODO: Else Check username with RegExp
                 }
-                ;
             }
 
 
             if (action.ValidatePassword)
             {
                 if (string.IsNullOrWhiteSpace(action.Password))
-                    preLoginPageState.PasswordError = TextResources.PasswordNull;
+                    state.PasswordError = TextResources.PasswordNull;
                 else
                 {
-                    preLoginPageState.PasswordError = !CheckHelper.IsPasswordValid(action.Password)
+                    state.PasswordError = !CheckHelper.IsPasswordValid(action.Password)
                         ? TextResources.PasswordInvalid
                         : string.Empty;
                 }
             }
 
 
-            preLoginPageState.IsLoginAllowed = string.IsNullOrWhiteSpace(preLoginPageState.NameError) &&
-                                               string.IsNullOrWhiteSpace(preLoginPageState.PasswordError);
-            return preLoginPageState;
+            state.IsLoginAllowed = string.IsNullOrWhiteSpace(state.NameOrEmailError) &&
+                                               string.IsNullOrWhiteSpace(state.PasswordError);
+            state.NameOrEmail = action.NameOrEmail;
+            state.Password = action.Password;
+            return state;
         }
 
-        public static LoginPageState LoginResultReducer(LoginPageState preLoginPageState, LoginResultAction action)
+        public static LoginPageState LoginResultReducer(LoginPageState state, LoginResultAction action)
         {
+            state.IsLoggingIn = false;
+
             if (action.LoginResult.ApiResult == ApiResult.Ok)
             {
                 return new LoginPageState
@@ -86,35 +105,22 @@ namespace TUPMobile.Reducers
 
             if (action.LoginResult.ApiResult == ApiResult.Unknown)
             {
-                return new LoginPageState
-                {
-                    SuccessLogin = false,
-                    ServerError = TextResources.ServerException
-                };
+                state.ServerError = TextResources.ServerException;
+                
+                return state;
             }
             switch (action.LoginResult.Error.ErrorType)
             {
                 case ErrorType.EmailWrong:
-                    return new LoginPageState
-                    {
-                        NameError = TextResources.EmailWrong
-                    };
                 case ErrorType.NameWrong:
-                    return new LoginPageState
-                    {
-                        NameError = TextResources.NameWrong
-                    };
+                    state.NameOrEmailError = TextResources.EmailWrong;
+                    return state;
                 case ErrorType.PasswordWrong:
-                    return new LoginPageState
-                    {
-                        PasswordError = TextResources.PasswordWrong
-                    };
+                    state.PasswordError = TextResources.PasswordWrong;
+                    return state;
             }
-
-            return new LoginPageState
-            {
-                ServerError = action.LoginResult.Error.Message
-            };
+            state.ServerError = action.LoginResult.Error.Message;
+            return state;
         }
     }
 }

@@ -1,24 +1,31 @@
 ﻿using System;
 using System.IO;
+using Plugin.Media.Abstractions;
 using Xamarin.Forms;
 
 namespace TUPMobile.Pages
 {
     public partial class PhotoPage : ContentPage
     {
-        private byte[] _image;
+        private MediaFile _image;
 
-        public PhotoPage(byte[] image)
+        public PhotoPage(MediaFile image)
         {
             InitializeComponent();
-
-            BindingContext = ImageSource.FromStream(() => new MemoryStream(image));
-            ;
+            
+           // BindingContext = ImageSource.FromStream(() => new MemoryStream(image));
+           BindingContext = ImageSource.FromStream(() =>
+           {
+               var stream = image.GetStream();
+               image.Dispose();
+               return stream;
+           });
+            
             _image = image;
         }
 
 
-        private async void OnSendClicked(object sender, EventArgs args)
+        private  void OnSendClicked(object sender, EventArgs args)
         {
             //var client = DataService.Instance;
             //await client.Login();

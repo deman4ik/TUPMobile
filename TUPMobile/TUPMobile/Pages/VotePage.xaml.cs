@@ -1,76 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using TUPMobile.Model;
+using System.Diagnostics;
+using MR.Gestures;
+using tupapi.Shared.DataObjects;
 using TUPMobile.States;
 using Xamarin.Forms;
+using ContentPage = Xamarin.Forms.ContentPage;
 
 namespace TUPMobile.Pages
 {
     // [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class VotePage : ContentPage
     {
-        private bool _animate;
-        private VotePageState State { get; set; }
-
+       // private bool _animate;
+      //  double x, y;
         public VotePage()
         {
             InitializeComponent();
-            State = new VotePageState
+            App.Store.Subscribe((ApplicationState state) =>
             {
-                Position = 1,
-                Items = new List<GalleryItem>
-                {
-                    new GalleryItem
-                    {
-                        Image = "article_image_0.jpg",
-                        UserName = "Andrew",
-                        Likes = "1450"
-                    },
-                    new GalleryItem
-                    {
-                        Image = "article_image_1.jpg",
-                        UserName = "Daniel",
-                        Likes = "1289"
-                    },
-                    new GalleryItem
-                    {
-                        Image = "article_image_2.jpg",
-                        UserName = "Mary",
-                        Likes = "1167"
-                    },
-                    new GalleryItem
-                    {
-                        Image = "article_image_3.jpg",
-                        UserName = "Ariel",
-                        Likes = "983"
-                    },
-                    new GalleryItem
-                    {
-                        Image = "article_image_4.jpg",
-                        UserName = "Falcom",
-                        Likes = "856"
-                    },
-                    new GalleryItem
-                    {
-                        Image = "article_image_5.jpg",
-                        UserName = "Petr",
-                        Likes = "814"
-                    }
-                }
-            };
-            BindingContext = State;
+                BindingContext = state.VotePageState;
+            });
+
         }
 
-        /// <summary>
-        ///     Called when the Position changes
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CarouselView_PositionSelected(object sender, SelectedPositionChangedEventArgs e)
-        {
-            // Why its an object I don't know, but it comes through as an int.
-            var position = Convert.ToInt32(e.SelectedPosition);
-        }
+
 
         protected override void OnAppearing()
         {
@@ -112,10 +66,18 @@ namespace TUPMobile.Pages
         //    await thumb.ScaleTo(1, 1000/3, Easing.SinInOut);
         //    await Navigation.PopAsync();
         //}
-        private void Button_OnClicked(object sender, EventArgs e)
+
+       
+
+        private void AbsoluteLayout_OnPanning(object sender, PanEventArgs e)
         {
-            State.Position = State.Position + 1;
-            Carousel.Position = Carousel.Position + 1;
+            CurrentImage.TranslationX += e.DeltaDistance.X;
+            CurrentImage.TranslationY += e.DeltaDistance.Y;
+        }
+
+        private void AbsoluteLayout_OnPanned(object sender, PanEventArgs e)
+        {
+            Debug.WriteLine("X: " + CurrentImage.X + " Y: " + CurrentImage.Y);
         }
     }
 }

@@ -1,94 +1,55 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
-using TUPMobile.Model;
+using Plugin.Media;
+using TUPMobile.States;
 using Xamarin.Forms;
 
 namespace TUPMobile.Pages
 {
     public partial class MainPage : ContentPage
     {
-        public List<string> SocialImageGalleryItems;
-
-        public static BindableProperty ImageProperty =
-            BindableProperty.Create("Image", typeof (ImageSource),
-                typeof (MainPage),
-                null, BindingMode.OneWay
-                );
-
-        public ImageSource Image
-        {
-            get { return (ImageSource) GetValue(ImageProperty); }
-            set { SetValue(ImageProperty, value); }
-        }
-
-        private bool _animate;
-
+        //private bool _animate;
+        private string userId;
         public MainPage()
         {
+            Debug.WriteLine("#### MAINPAGE Constr ####");
             InitializeComponent();
-            BindingContext = new List<GalleryItem>
+            App.Store.Subscribe((ApplicationState state) =>
             {
-                new GalleryItem
-                {
-                    Image = "social_album_1.jpg",
-                    UserName = "Andrew",
-                    Likes = "1450"
-                },
-                new GalleryItem
-                {
-                    Image = "social_album_2.jpg",
-                    UserName = "Daniel",
-                    Likes = "1289"
-                },
-                new GalleryItem
-                {
-                    Image = "social_album_3.jpg",
-                    UserName = "Mary",
-                    Likes = "1167"
-                },
-                new GalleryItem
-                {
-                    Image = "social_album_4.jpg",
-                    UserName = "Ariel",
-                    Likes = "983"
-                },
-                new GalleryItem
-                {
-                    Image = "social_album_5.jpg",
-                    UserName = "Falcom",
-                    Likes = "856"
-                },
-                new GalleryItem
-                {
-                    Image = "social_album_6.jpg",
-                    UserName = "Petr",
-                    Likes = "814"
-                },
-                new GalleryItem
-                {
-                    Image = "social_album_7.jpg",
-                    UserName = "Kate",
-                    Likes = "791"
-                },
-                new GalleryItem
-                {
-                    Image = "social_album_8.jpg",
-                    UserName = "Mike",
-                    Likes = "750"
-                },
-                new GalleryItem
-                {
-                    Image = "social_album_9.jpg",
-                    UserName = "Tim",
-                    Likes = "623"
-                }
-            };
+                TopPostList.ItemsSource = state.MainPageState.TopPosts;
+                userId = state.CurrentUser.User.Id;
+            });
         }
 
         private async void OnCameraTapped(Object sender, EventArgs e)
-
         {
+            await CrossMedia.Current.Initialize();
+
+            if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+            {
+                await DisplayAlert("No Camera", ":( No camera available.", "OK");
+                return;
+            }
+            Debug.WriteLine("#### TAKING PIC!");
+            var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
+            {
+                Directory = "TUP",
+                SaveToAlbum = true,
+                 Name = userId+DateTime.Now.ToFileTime()+".jpg"
+
+                
+            });
+            Debug.WriteLine("#### PHOTO TAKED!");
+            Debug.WriteLine(file.Path);
+            if (file == null)
+                return;
+            Debug.WriteLine("#### Show alert!");
+            await DisplayAlert("File Location", file.Path, "OK");
+            Debug.WriteLine("#### go to photopage!");
+            await Navigation.PushAsync(new PhotoPage(file));
+           
         }
 
         private async void OnThumbTapped(Object sender, EventArgs e)

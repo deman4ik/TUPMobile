@@ -3,13 +3,16 @@ using Android.Content.PM;
 using Android.Graphics.Drawables;
 using Android.OS;
 using Android.Views;
+using FFImageLoading.Forms.Droid;
+using Xamarin.Forms;
 
 namespace TUPMobile.Droid
 {
-    [Activity(Label = "TUP",
+    [Activity(Label = "GestureSample",
         Theme = "@style/AppTheme",
         Icon = "@android:color/transparent",
         MainLauncher = false,
+        WindowSoftInputMode = SoftInput.AdjustPan,
         ScreenOrientation = ScreenOrientation.Portrait,
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : Xamarin.Forms.Platform.Android.FormsApplicationActivity
@@ -20,14 +23,15 @@ namespace TUPMobile.Droid
 
             Xamarin.Forms.Forms.Init(this, bundle);
 
-            /*
+                                                
+                                                   /*
 
-			Uncomment to remove StatusBar in Android
-			*/
-            Window.AddFlags(WindowManagerFlags.Fullscreen);
-            Window.ClearFlags(WindowManagerFlags.ForceNotFullscreen);
-
-
+                                                   Uncomment to remove StatusBar in Android
+                                                   */
+            //Window.AddFlags(WindowManagerFlags.Fullscreen);
+            //Window.ClearFlags(WindowManagerFlags.ForceNotFullscreen);
+            MR.Gestures.Android.Settings.LicenseKey = "ALZ9-BPVU-XQ35-CEBG-5ZRR-URJQ-ED5U-TSY8-6THP-3GVU-JW8Z-RZGE-CQW6";
+            CachedImageRenderer.Init();
             LoadApplication(new App());
 
 
@@ -44,18 +48,6 @@ namespace TUPMobile.Droid
 #pragma warning restore 618
         }
 
-#if GORILLA
-        public override bool OnKeyUp(Keycode keyCode, KeyEvent e)
-        {
-            if (UXDivers.Artina.Player.Coordinator.Instance != null &&
-                keyCode == Keycode.F1)
-            {
-                UXDivers.Artina.Player.Coordinator.Instance.RequestStatusUpdate();
-                return true;
-            }
 
-            return base.OnKeyUp(keyCode, e);
-        }
-#endif
     }
 }

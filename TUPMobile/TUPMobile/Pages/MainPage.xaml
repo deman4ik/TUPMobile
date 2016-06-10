@@ -7,8 +7,8 @@
              xmlns:templates="clr-namespace:TUPMobile.Templates;assembly=TUPMobile"
              xmlns:commonViews="clr-namespace:TUPMobile.Views;assembly=TUPMobile"
              BackgroundColor="White"
-
-             NavigationPage.HasNavigationBar="False">
+              Title="TUP"
+             NavigationPage.HasNavigationBar="True">
     <ScrollView>
         <Grid Padding="0" RowSpacing="8">
             <Grid.RowDefinitions>
@@ -26,6 +26,7 @@
                         IconText="&#xf06d; " />
                     <!-- SOCIAL IMAGE GALLERY GRID -->
                     <artina:GridOptionsView
+                      x:Name="TopPostList"
                         Padding="8,0"
                         ColumnSpacing="8"
                         RowSpacing="8"
@@ -33,11 +34,11 @@
                         HeightRequest="250"
                         ColumnCount="3"
                         RowCount="3"
-                        ItemsSource="{Binding .}">
+                       >
 
                         <artina:GridOptionsView.ItemTemplate>
                             <DataTemplate>
-                                <templates:SocialGalleryImage Image="{Binding Image}" UserName="{Binding UserName}"
+                                <templates:SocialGalleryImage Image="{Binding PhotoUrl}" UserName="{Binding UserName}"
                                                               Likes="{Binding Likes}" />
                             </DataTemplate>
                         </artina:GridOptionsView.ItemTemplate>

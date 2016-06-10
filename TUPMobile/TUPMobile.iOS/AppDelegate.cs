@@ -1,11 +1,9 @@
-﻿using Foundation;
+﻿using FFImageLoading.Forms.Touch;
+using Foundation;
 using UIKit;
 using Xamarin.Forms;
 
-#if GORILLA
 
-[assembly: ExportRenderer(typeof (Page), typeof (ShakeDetectionRenderer))]
-#endif
 
 namespace TUPMobile.iOS
 {
@@ -25,12 +23,11 @@ namespace TUPMobile.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             Forms.Init();
+          
             Appearance.Configure();
-#if GORILLA
-            LoadApplication(UXDivers.Artina.Player.iOS.Player.CreateApplication(new Config("Good Gorilla")));
-#else
+            CachedImageRenderer.Init();
             LoadApplication(new App());
-#endif
+
 
 
             return base.FinishedLaunching(app, options);

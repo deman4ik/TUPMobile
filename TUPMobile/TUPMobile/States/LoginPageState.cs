@@ -2,24 +2,28 @@
 
 namespace TUPMobile.States
 {
-    public class LoginPageState
+    public class LoginPageState : BasePageState
     {
-        public LoginPageState()
+        public LoginPageState() 
         {
             IsLoginAllowed = false;
             IsLoggingIn = false;
             SuccessLogin = false;
-            NameError = string.Empty;
+            NameOrEmail = string.Empty;
+            NameOrEmailError = string.Empty;
+            Password = string.Empty;
             PasswordError = string.Empty;
-            ServerError = string.Empty;
         }
 
         public bool IsLoginAllowed { get; set; }
         public bool IsLoggingIn { get; set; }
         public bool SuccessLogin { get; set; }
-        public string NameError { get; set; }
+       
+        public string NameOrEmail { get; set; }
+        public string NameOrEmailError { get; set; }
+        public string Password { get; set; }
         public string PasswordError { get; set; }
-        public string ServerError { get; set; }
+        
 
         public override string ToString()
         {
@@ -30,12 +34,15 @@ namespace TUPMobile.States
             sb.AppendLine(IsLoggingIn.ToString());
             sb.AppendLine("# SuccessLogin:");
             sb.AppendLine(SuccessLogin.ToString());
+            sb.AppendLine("# Name:");
+            sb.AppendLine(NameOrEmail);
             sb.AppendLine("# NameError:");
-            sb.AppendLine(NameError);
+            sb.AppendLine(NameOrEmailError);
+            sb.AppendLine("# Password:");
+            sb.AppendLine(Password);
             sb.AppendLine("# PasswordError:");
             sb.AppendLine(PasswordError);
-            sb.AppendLine("# ServerError:");
-            sb.AppendLine(ServerError);
+            sb.AppendLine(base.ToString());
             return sb.ToString();
         }
     }
