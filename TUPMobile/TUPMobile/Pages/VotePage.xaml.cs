@@ -21,7 +21,7 @@ namespace TUPMobile.Pages
             {
                 BindingContext = state.VotePageState;
             });
-
+            
         }
 
 

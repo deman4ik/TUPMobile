@@ -199,7 +199,7 @@
 //                imageBytes = imageStream.ToArray();
 //            }
 
-//            var navigationPage = new NavigationPage(new PhotoPage(imageBytes));
+//            var navigationPage = new NavigationPage(new PhotoResultPage(imageBytes));
 
 //            camera.StartPreview();
 //            await App.Current.MainPage.Navigation.PushModalAsync(navigationPage, false);
@@ -218,7 +218,7 @@
 //                    imageBytes = imageStream.ToArray();
 //                }
 
-//                var navigationPage = new NavigationPage(new PhotoPage(imageBytes));
+//                var navigationPage = new NavigationPage(new PhotoResultPage(imageBytes));
 
 //                camera.StartPreview();
 //                await App.Current.MainPage.Navigation.PushModalAsync(navigationPage, false);

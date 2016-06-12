@@ -8,9 +8,9 @@ using Xamarin.Forms;
 
 namespace TUPMobile.Pages
 {
-    public partial class PhotoPage : ContentPage
+    public partial class UserPage : ContentPage
     {
-        public PhotoPage()
+        public UserPage()
         {
             InitializeComponent();
         }

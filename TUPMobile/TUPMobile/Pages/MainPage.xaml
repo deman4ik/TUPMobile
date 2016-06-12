@@ -8,7 +8,7 @@
              xmlns:commonViews="clr-namespace:TUPMobile.Views;assembly=TUPMobile"
              BackgroundColor="White"
               Title="TUP"
-             NavigationPage.HasNavigationBar="True">
+             NavigationPage.HasNavigationBar="False">
     <ScrollView>
         <Grid Padding="0" RowSpacing="8">
             <Grid.RowDefinitions>

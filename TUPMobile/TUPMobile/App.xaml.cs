@@ -36,8 +36,7 @@ namespace TUPMobile
             Store = new Store<ApplicationState>(Reducers.Reducers.ReduceApplication, savedState);
 
             // _NavPage = savedState.CurrentUser.IsAuthenticated ? new NavigationPage(new MainPage()) : new NavigationPage(new LoginPage());
-            _NavPage = new NavigationPage(new MainPage());
-            MainPage = _NavPage;
+            MainPage = new RootTabPage();
         }
 
         public static void SaveToken(string token)
