@@ -6,71 +6,71 @@
              xmlns:artina="clr-namespace:UXDivers.Artina.Shared;assembly=UXDivers.Artina.Shared"
              xmlns:templates="clr-namespace:TUPMobile.Templates;assembly=TUPMobile"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             	xmlns:mr="clr-namespace:MR.Gestures;assembly=MR.Gestures"
+             xmlns:mr="clr-namespace:MR.Gestures;assembly=MR.Gestures"
              NavigationPage.HasNavigationBar="False"
-             BackgroundColor="Black">
-  
- 
-    
-    <mr:AbsoluteLayout  HorizontalOptions="Fill" VerticalOptions="Fill" Panning="AbsoluteLayout_OnPanning" Panned="AbsoluteLayout_OnPanned" BackgroundColor="White">
-      
-      <Frame HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="Aqua">
-      
-        <ffimageloading:CachedImage
-           HorizontalOptions="Fill"
-           VerticalOptions="Fill"
-           DownsampleToViewSize="true"
-           Source = "{Binding NextItem.Url}">
-        </ffimageloading:CachedImage>
-      </Frame>
-      <Frame x:Name="CurrentImage" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="Blue">
-       
-       
-       <ffimageloading:CachedImage
-                    HorizontalOptions="Fill"
-           VerticalOptions="Fill"
-                    DownsampleToViewSize="true"
-                    Source = "{Binding CurrentItem.Url}">
-                
-
-        </ffimageloading:CachedImage>
-      </Frame>
-    </mr:AbsoluteLayout>
-
-    <!--<StackLayout>
-        <CarouselView ItemsSource="{Binding Items}" Position="{Binding Position, Mode=TwoWay}" x:Name="Carousel">
-            <CarouselView.ItemTemplate>
-                <DataTemplate>
-                    <templates:ArticleItemTemplate />
-                </DataTemplate>
-            </CarouselView.ItemTemplate>
-        </CarouselView>
-        <Button Text="NEXT" Clicked="Button_OnClicked" />
-    </StackLayout>-->
-    <!--<AbsoluteLayout Padding="0">
-        --><!-- MAIN IMAGE --><!--
-        <Image
-            x:Name="img"
-            Source="ratedphoto.png"
-            AnchorY="0"
-            Scale="1.2"
-            HorizontalOptions="StartAndExpand"
-            VerticalOptions="Start"
-            AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
-            AbsoluteLayout.LayoutFlags="All" />
-
-        <Grid RowSpacing="0"
-              AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
-              AbsoluteLayout.LayoutFlags="All">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+             BackgroundColor="White">
 
 
-            <Grid VerticalOptions="End" x:Name="thumb">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <mr:AbsoluteLayout Grid.Row="0" HorizontalOptions="Fill" VerticalOptions="Fill"
+                           Panning="AbsoluteLayout_OnPanning" Panned="AbsoluteLayout_OnPanned" BackgroundColor="White">
+
+            <Frame x:Name="NextImage" BackgroundColor="White" Padding="5" HasShadow="True"
+                   OutlineColor="{ StaticResource AccentColor }"
+                   AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
+                   AbsoluteLayout.LayoutFlags="All" Scale="0.9">
+
+                <ffimageloading:CachedImage
+                    x:Name="NextItemImage"
+                    Aspect="AspectFill"
+
+                    DownsampleWidth="500"
+                    DownsampleHeight="500"
+
+
+                    Source="{Binding NextItem.Url}" />
+            </Frame>
+            <AbsoluteLayout x:Name="CurrentImage"
+
+                            AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
+                            AbsoluteLayout.LayoutFlags="All">
+
+                <Frame AbsoluteLayout.LayoutBounds="0.5,0.5,1,1" BackgroundColor="White" HasShadow="True"
+                       OutlineColor="{ StaticResource AccentColor }"
+                       AbsoluteLayout.LayoutFlags="All" Padding="5">
+                    <ffimageloading:CachedImage
+                        x:Name="CurrentItemImage"
+                        Aspect="AspectFill"
+                        DownsampleWidth="500"
+                        DownsampleHeight="500"
+
+                        Source="{Binding CurrentItem.Url}" />
+                </Frame>
+                <Image x:Name="ThumbDownInd" Source="thumb_down.png" IsVisible="False" IsOpaque="True"
+                       AbsoluteLayout.LayoutBounds="0.5,0.1,-1,-1"
+                       AbsoluteLayout.LayoutFlags="PositionProportional" />
+
+                <Image x:Name="ThumbUpInd" Source="thumb_up.png" IsVisible="False" IsOpaque="True"
+                       AbsoluteLayout.LayoutBounds="0.5,0.9,-1,-1"
+                       AbsoluteLayout.LayoutFlags="PositionProportional" />
+            </AbsoluteLayout>
+
+
+        </mr:AbsoluteLayout>
+        <Grid Grid.Row="1"
+              ColumnSpacing="30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <Grid VerticalOptions="Center" HorizontalOptions="End" Grid.Column="0" x:Name="ThumbDown">
+
 
                 <Label
-                    x:Name="BackIcon"
                     Text="&#xf111;"
                     IsVisible="{Binding ShowBackgroundColor}"
                     Style="{StaticResource FontIcon}"
@@ -81,7 +81,31 @@
                     TextColor="{ StaticResource AccentColor }" />
 
                 <Label
-                    x:Name="ThIcon"
+                    Text="&#xf088;"
+                    FontSize="50"
+                    Style="{StaticResource FontIcon}"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center"
+                    Opacity="1"
+                    TextColor="White" />
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnThumbDownTapped" />
+                </Grid.GestureRecognizers>
+            </Grid>
+
+            <Grid VerticalOptions="Center" HorizontalOptions="Start" Grid.Column="1" x:Name="ThumbUp">
+
+                <Label
+                    Text="&#xf111;"
+                    IsVisible="{Binding ShowBackgroundColor}"
+                    Style="{StaticResource FontIcon}"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center"
+                    Opacity="1"
+                    FontSize="120"
+                    TextColor="{ StaticResource AccentColor }" />
+
+                <Label
                     Text="&#xf087;"
                     FontSize="50"
                     Style="{StaticResource FontIcon}"
@@ -90,14 +114,9 @@
                     Opacity="1"
                     TextColor="White" />
                 <Grid.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="OnThumbTapped" />
+                    <TapGestureRecognizer Tapped="OnThumbUpTapped" />
                 </Grid.GestureRecognizers>
             </Grid>
-
-
         </Grid>
-
-    </AbsoluteLayout>-->
-
-
+    </Grid>
 </ContentPage>

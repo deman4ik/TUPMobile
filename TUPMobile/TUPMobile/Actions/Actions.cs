@@ -5,15 +5,16 @@ using tupapi.Shared.Enums;
 
 namespace TUPMobile.Actions
 {
-
     public class NotConnectedAction : IAction
     {
         public string Error { get; set; }
     }
+
     public class LoginAction : IAction
     {
         public string NameOrEmail { get; set; }
         public string Password { get; set; }
+
         public override string ToString()
         {
             return "LoginAction";
@@ -36,6 +37,7 @@ namespace TUPMobile.Actions
     public class LoginResultAction : IAction
     {
         public Response<LoginResult> LoginResult { get; set; }
+
         public override string ToString()
         {
             return "LoginResultAction";
@@ -50,11 +52,10 @@ namespace TUPMobile.Actions
 
     public class MainPageLoading : IAction
     {
-        
     }
 
     public class MainPageLoaded : IAction
     {
-        public IList<TopPost> TopPosts { get; set; } 
+        public IList<TopPost> TopPosts { get; set; }
     }
 }

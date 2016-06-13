@@ -3,8 +3,6 @@ using Foundation;
 using UIKit;
 using Xamarin.Forms;
 
-
-
 namespace TUPMobile.iOS
 {
     // The UIApplicationDelegate for the application. This class is responsible for launching the 
@@ -23,11 +21,10 @@ namespace TUPMobile.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             Forms.Init();
-          
+
             Appearance.Configure();
             CachedImageRenderer.Init();
             LoadApplication(new App());
-
 
 
             return base.FinishedLaunching(app, options);

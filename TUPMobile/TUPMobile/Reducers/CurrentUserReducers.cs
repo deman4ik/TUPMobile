@@ -1,6 +1,5 @@
 ﻿using Microsoft.WindowsAzure.MobileServices;
 using Redux;
-using tupapi.Shared.DataObjects;
 using tupapi.Shared.Enums;
 using TUPMobile.Actions;
 using TUPMobile.States;

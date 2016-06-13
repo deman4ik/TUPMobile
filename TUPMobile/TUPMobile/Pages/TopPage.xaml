@@ -10,7 +10,7 @@
         CachingStrategy="RecycleElement"
         SeparatorVisibility="None"
         SeparatorColor="#CC000000"
-        
+
         RowHeight="240"
         HasUnevenRows="false">
         <ListView.ItemTemplate>

@@ -2,12 +2,10 @@
 using System.Text;
 using tupapi.Shared.DataObjects;
 
-
 namespace TUPMobile.States
 {
     public class VotePageState
     {
-        
         public List<VoteItem> Items { get; set; }
         public VoteItem CurrentItem { get; set; }
         public VoteItem NextItem { get; set; }

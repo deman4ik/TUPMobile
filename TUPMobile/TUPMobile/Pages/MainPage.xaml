@@ -7,7 +7,7 @@
              xmlns:templates="clr-namespace:TUPMobile.Templates;assembly=TUPMobile"
              xmlns:commonViews="clr-namespace:TUPMobile.Views;assembly=TUPMobile"
              BackgroundColor="White"
-              Title="TUP"
+             Title="TUP"
              NavigationPage.HasNavigationBar="False">
     <ScrollView>
         <Grid Padding="0" RowSpacing="8">
@@ -26,15 +26,14 @@
                         IconText="&#xf06d; " />
                     <!-- SOCIAL IMAGE GALLERY GRID -->
                     <artina:GridOptionsView
-                      x:Name="TopPostList"
+                        x:Name="TopPostList"
                         Padding="8,0"
                         ColumnSpacing="8"
                         RowSpacing="8"
                         VerticalOptions="Fill"
                         HeightRequest="250"
                         ColumnCount="3"
-                        RowCount="3"
-                       >
+                        RowCount="3">
 
                         <artina:GridOptionsView.ItemTemplate>
                             <DataTemplate>
@@ -43,6 +42,8 @@
                             </DataTemplate>
                         </artina:GridOptionsView.ItemTemplate>
                     </artina:GridOptionsView>
+
+
                 </StackLayout>
                 <Grid.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnTopTapped" />

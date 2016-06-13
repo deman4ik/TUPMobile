@@ -4,7 +4,7 @@ namespace TUPMobile.States
 {
     public class LoginPageState : BasePageState
     {
-        public LoginPageState() 
+        public LoginPageState()
         {
             IsLoginAllowed = false;
             IsLoggingIn = false;
@@ -18,12 +18,12 @@ namespace TUPMobile.States
         public bool IsLoginAllowed { get; set; }
         public bool IsLoggingIn { get; set; }
         public bool SuccessLogin { get; set; }
-       
+
         public string NameOrEmail { get; set; }
         public string NameOrEmailError { get; set; }
         public string Password { get; set; }
         public string PasswordError { get; set; }
-        
+
 
         public override string ToString()
         {

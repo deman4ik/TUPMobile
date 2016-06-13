@@ -21,10 +21,10 @@ namespace TUPMobile.Droid
         {
             base.OnCreate(bundle);
 
-            Xamarin.Forms.Forms.Init(this, bundle);
+            Forms.Init(this, bundle);
 
-                                                
-                                                   /*
+
+            /*
 
                                                    Uncomment to remove StatusBar in Android
                                                    */
@@ -47,7 +47,5 @@ namespace TUPMobile.Droid
             }
 #pragma warning restore 618
         }
-
-
     }
 }

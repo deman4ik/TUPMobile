@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Redux;
+﻿using Redux;
 using TUPMobile.Actions;
 using TUPMobile.States;
 
 namespace TUPMobile.Reducers
 {
-   public static class MainPageReducers
+    public static class MainPageReducers
     {
         public static MainPageState ReduceMainPageState(MainPageState state, IAction action)
         {
             if (action is NotConnectedAction)
             {
-                return NotConnected(state, (NotConnectedAction)action);
+                return NotConnected(state, (NotConnectedAction) action);
             }
             if (action is MainPageLoading)
             {
@@ -28,11 +23,11 @@ namespace TUPMobile.Reducers
             return state;
         }
 
-       public static MainPageState MainPageLoading(MainPageState state, MainPageLoading action)
-       {
-           state.IsLoading = true;
-           return state;
-       }
+        public static MainPageState MainPageLoading(MainPageState state, MainPageLoading action)
+        {
+            state.IsLoading = true;
+            return state;
+        }
 
         public static MainPageState MainPageLoaded(MainPageState state, MainPageLoaded action)
         {
@@ -41,6 +36,7 @@ namespace TUPMobile.Reducers
                 TopPosts = action.TopPosts
             };
         }
+
         public static MainPageState NotConnected(MainPageState state, NotConnectedAction action)
         {
             state.ShowNotConnected = true;

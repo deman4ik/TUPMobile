@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using Plugin.Media.Abstractions;
 using Xamarin.Forms;
 
@@ -12,20 +11,20 @@ namespace TUPMobile.Pages
         public PhotoResultPage(MediaFile image)
         {
             InitializeComponent();
-            
-           // BindingContext = ImageSource.FromStream(() => new MemoryStream(image));
-           BindingContext = ImageSource.FromStream(() =>
-           {
-               var stream = image.GetStream();
-               image.Dispose();
-               return stream;
-           });
-            
+
+            // BindingContext = ImageSource.FromStream(() => new MemoryStream(image));
+            BindingContext = ImageSource.FromStream(() =>
+            {
+                var stream = image.GetStream();
+                image.Dispose();
+                return stream;
+            });
+
             _image = image;
         }
 
 
-        private  void OnSendClicked(object sender, EventArgs args)
+        private void OnSendClicked(object sender, EventArgs args)
         {
             //var client = DataService.Instance;
             //await client.Login();

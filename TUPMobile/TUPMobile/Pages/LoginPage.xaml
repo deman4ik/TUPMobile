@@ -70,11 +70,11 @@
                          HorizontalOptions="Fill"
                          Padding="20, 0"
                          VerticalOptions="End">
-              
-              <Label x:Name="ServerErrorLabel" HorizontalOptions="Fill"
-                                         IsVisible="False"
-                                         Style="{DynamicResource ValidationEntryErrorStyle}"
-                                         Text="" />
+
+                <Label x:Name="ServerErrorLabel" HorizontalOptions="Fill"
+                       IsVisible="False"
+                       Style="{DynamicResource ValidationEntryErrorStyle}"
+                       Text="" />
                 <Button x:Name="LoginBtn"
                         Clicked="OnLoginBtnClicked"
 

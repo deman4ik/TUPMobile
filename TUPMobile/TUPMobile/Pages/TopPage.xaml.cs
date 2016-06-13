@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace TUPMobile.Pages
 {
@@ -8,7 +7,6 @@ namespace TUPMobile.Pages
         public TopPage()
         {
             InitializeComponent();
-           
         }
     }
 }

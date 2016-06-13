@@ -82,9 +82,8 @@
             <x:Double x:Key="MainMenuIconWidthRequest">22</x:Double>-->
 
 
-
             <!--  STATIC IMAGES  -->
-           <!--<FileImageSource x:Key="HamburguerIcon">hamburguer_icon.png</FileImageSource>
+            <!--<FileImageSource x:Key="HamburguerIcon">hamburguer_icon.png</FileImageSource>
             <FileImageSource x:Key="WelcomeBackgroundImage">welcome_bg.jpg</FileImageSource>-->
 
             <FileImageSource x:Key="BrandImage">logo.png</FileImageSource>

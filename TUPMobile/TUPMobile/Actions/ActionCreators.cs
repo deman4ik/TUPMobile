@@ -1,7 +1,4 @@
-﻿using System.Runtime.InteropServices;
-using Android.Content.Res;
-using tupapi.Shared.DataObjects;
-using TUPMobile.Helpers;
+﻿using tupapi.Shared.DataObjects;
 using TUPMobile.Services;
 using TUPMobile.States;
 using TUPMobile.Utils;
@@ -14,8 +11,6 @@ namespace TUPMobile.Actions
         {
             return async (dispatch, getState) =>
             {
-                
-
                 dispatch(new LoginAction
                 {
                     NameOrEmail = nameOrEmail,
@@ -25,7 +20,7 @@ namespace TUPMobile.Actions
                 if (App.IsConnected)
                 {
                     bool isEmail = nameOrEmail.Contains("@");
-                    StandartAuthRequest authRequest = new StandartAuthRequest()
+                    StandartAuthRequest authRequest = new StandartAuthRequest
                     {
                         Email = isEmail ? nameOrEmail : null,
                         Name = !isEmail ? nameOrEmail : null,

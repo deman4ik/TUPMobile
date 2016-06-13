@@ -5,40 +5,36 @@ namespace TUPMobile.Templates
     public partial class SocialGalleryImage : ContentView
     {
         public static BindableProperty ImageProperty =
-            BindableProperty.Create("Image", typeof(ImageSource),
-                typeof(SocialGalleryImage),
-                null,
-                defaultBindingMode: BindingMode.OneWay
-            );
+            BindableProperty.Create("Image", typeof (ImageSource),
+                typeof (SocialGalleryImage),
+                null, BindingMode.OneWay
+                );
 
         public ImageSource Image
         {
-            get { return (ImageSource)GetValue(ImageProperty); }
+            get { return (ImageSource) GetValue(ImageProperty); }
             set { SetValue(ImageProperty, value); }
         }
 
 
         public static BindableProperty UserNameProperty =
-            BindableProperty.Create("UserName", typeof(string),
-                typeof(SocialGalleryImage),
-                null,
-                defaultBindingMode: BindingMode.OneWay
-            );
+            BindableProperty.Create("UserName", typeof (string),
+                typeof (SocialGalleryImage),
+                null, BindingMode.OneWay
+                );
 
         public string UserName
         {
-            get { return (string)GetValue(UserNameProperty); }
+            get { return (string) GetValue(UserNameProperty); }
             set { SetValue(ImageProperty, value); }
         }
 
 
-
         public static BindableProperty LikesProperty =
-           BindableProperty.Create("Likes", typeof(string),
-               typeof(SocialGalleryImage),
-               null,
-               defaultBindingMode: BindingMode.OneWay
-           );
+            BindableProperty.Create("Likes", typeof (string),
+                typeof (SocialGalleryImage),
+                null, BindingMode.OneWay
+                );
 
         public string Likes
         {

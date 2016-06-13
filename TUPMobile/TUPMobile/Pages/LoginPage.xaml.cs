@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using tupapi.Shared.DataObjects;
 using TUPMobile.Actions;
 using TUPMobile.Localization;
 using TUPMobile.States;
@@ -23,11 +22,11 @@ namespace TUPMobile.Pages
                     Debug.WriteLine("#### GO TO MAINPAGE #####");
                     //LoginBtn.BackgroundColor = (Color) App.CurrentApp.Resources["OkColor"];
                     //LoginBtn.Text = TextResources.Success;
-                   this.Navigation.PushAsync(new MainPage());
-                    this.Navigation.RemovePage(this);
+                    Navigation.PushAsync(new MainPage());
+                    Navigation.RemovePage(this);
                     return;
                 }
-                
+
                 NameOrEmailEntry.Text = state.LoginPageState.NameOrEmail;
                 NameOrEmailLabel.Text = state.LoginPageState.NameOrEmailError;
                 NameOrEmailLabel.IsVisible = !string.IsNullOrWhiteSpace(state.LoginPageState.NameOrEmailError);
@@ -40,8 +39,8 @@ namespace TUPMobile.Pages
                 LoginBtn.Text = state.LoginPageState.IsLoggingIn ? TextResources.LoggingIn : "Login";
                 if (state.LoginPageState.ShowNotConnected)
                 {
-                  
-                    DisplayAlert(TextResources.NetworkConnection_Alert_Title, TextResources.NetworkConnection_Alert_Message, TextResources.NetworkConnection_Alert_Confirm);
+                    DisplayAlert(TextResources.NetworkConnection_Alert_Title,
+                        TextResources.NetworkConnection_Alert_Message, TextResources.NetworkConnection_Alert_Confirm);
                 }
             });
         }
@@ -52,7 +51,7 @@ namespace TUPMobile.Pages
             Debug.WriteLine("### Login Clicked");
             App.Store.Dispatch(ActionCreators.Login(NameOrEmailEntry.Text,
                 PasswordEntry.Text
-          ));
+                ));
         }
 
         private async void OnRegClicked(object sender, EventArgs args)

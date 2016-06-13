@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Plugin.Media;
@@ -12,6 +11,7 @@ namespace TUPMobile.Pages
     {
         //private bool _animate;
         private string userId;
+
         public MainPage()
         {
             Debug.WriteLine("#### MAINPAGE Constr ####");
@@ -37,9 +37,7 @@ namespace TUPMobile.Pages
             {
                 Directory = "TUP",
                 SaveToAlbum = true,
-                 Name = userId+DateTime.Now.ToFileTime()+".jpg"
-
-                
+                Name = userId + DateTime.Now.ToFileTime() + ".jpg"
             });
             Debug.WriteLine("#### PHOTO TAKED!");
             Debug.WriteLine(file.Path);
@@ -49,7 +47,6 @@ namespace TUPMobile.Pages
             await DisplayAlert("File Location", file.Path, "OK");
             Debug.WriteLine("#### go to photopage!");
             await Navigation.PushAsync(new PhotoResultPage(file));
-           
         }
 
         private async void OnThumbTapped(Object sender, EventArgs e)

@@ -7,7 +7,7 @@ using TUPMobile.States;
 
 namespace TUPMobile.Reducers
 {
-    public static class LoginPageReducers 
+    public static class LoginPageReducers
     {
         public static LoginPageState ReduceLoginPageState(LoginPageState state, IAction action)
         {
@@ -85,7 +85,7 @@ namespace TUPMobile.Reducers
 
 
             state.IsLoginAllowed = string.IsNullOrWhiteSpace(state.NameOrEmailError) &&
-                                               string.IsNullOrWhiteSpace(state.PasswordError);
+                                   string.IsNullOrWhiteSpace(state.PasswordError);
             state.NameOrEmail = action.NameOrEmail;
             state.Password = action.Password;
             return state;
@@ -106,7 +106,7 @@ namespace TUPMobile.Reducers
             if (action.LoginResult.ApiResult == ApiResult.Unknown)
             {
                 state.ServerError = TextResources.ServerException;
-                
+
                 return state;
             }
             switch (action.LoginResult.Error.ErrorType)

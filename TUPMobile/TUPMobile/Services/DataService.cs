@@ -21,7 +21,7 @@ namespace TUPMobile.Services
 
         private IMobileServiceSyncTable<User> _userTable;
         private IMobileServiceSyncTable<Post> _postTable;
-        private IMobileServiceSyncTable<TopPost> _topPostTable; 
+        private IMobileServiceSyncTable<TopPost> _topPostTable;
 
         private DataService()
         {
@@ -83,7 +83,6 @@ namespace TUPMobile.Services
                 {
                     Debug.WriteLine(post.Id);
                 }
-                
             }
             catch (Exception ex)
             {
@@ -100,17 +99,12 @@ namespace TUPMobile.Services
             }
             try
             {
-                
-                    await _topPostTable.PullAsync("MainPage", _topPostTable.CreateQuery());
-                    IList<TopPost> posts = await _topPostTable.Where(p => p.UserId == "u1").ToListAsync();
-                    foreach (var post in posts)
-                    {
-                        Debug.WriteLine(post.ToString());
-                    }
-               
-                
-              
-               
+                await _topPostTable.PullAsync("MainPage", _topPostTable.CreateQuery());
+                IList<TopPost> posts = await _topPostTable.Where(p => p.UserId == "u1").ToListAsync();
+                foreach (var post in posts)
+                {
+                    Debug.WriteLine(post.ToString());
+                }
             }
             catch (Exception ex)
             {
@@ -140,27 +134,27 @@ namespace TUPMobile.Services
                 Response<LoginResult> response;
                 var startReq = DateTime.Now;
                 Debug.WriteLine($"### Started LOGIN REQUEST {startReq}");
-                    var result = await _client.InvokeApiAsync("Login", JToken.FromObject(req), HttpMethod.Post, null);
+                var result = await _client.InvokeApiAsync("Login", JToken.FromObject(req), HttpMethod.Post, null);
                 var endReq = DateTime.Now;
                 Debug.WriteLine($"### GET LOGIN RESULT {endReq}");
                 TimeSpan reqTime = endReq - startReq;
-                Debug.WriteLine($"{ reqTime.Seconds} seconds");
+                Debug.WriteLine($"{reqTime.Seconds} seconds");
                 response = result.ToObject<Response<LoginResult>>();
-#region DEBUG_LOGIN
-                    if (response.ApiResult == ApiResult.Ok)
-                    {
-                        Debug.WriteLine($"##### LOGIN RESULT {response.Data.AuthenticationToken}");
-                    }
-                    else
-                    {
-                        Debug.WriteLine($"##### LOGIN ERROR {response.Error.ErrorType} {response.Error.Message}");
-                    }
-#endregion
-                
-               
+
+                #region DEBUG_LOGIN
+
+                if (response.ApiResult == ApiResult.Ok)
+                {
+                    Debug.WriteLine($"##### LOGIN RESULT {response.Data.AuthenticationToken}");
+                }
+                else
+                {
+                    Debug.WriteLine($"##### LOGIN ERROR {response.Error.ErrorType} {response.Error.Message}");
+                }
+
+                #endregion
 
                 return response;
-
             }
             catch (Exception ex)
             {

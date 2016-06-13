@@ -1,14 +1,15 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TUPMobile.Pages.PhotoPage"
              NavigationPage.HasNavigationBar="False">
-  <Grid  VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
-    <Grid.RowDefinitions>
-      <RowDefinition Height="*" />
-      <RowDefinition Height="*" />
-    </Grid.RowDefinitions>
-    <Label Text="Make new photo" Grid.Row="0"></Label>
-    <Label Text="Select you Instagram photo" Grid.Row="1"></Label>
-  </Grid>
+    <Grid VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Label Text="Make new photo" Grid.Row="0" />
+        <Label Text="Select you Instagram photo" Grid.Row="1" />
+    </Grid>
 </ContentPage>

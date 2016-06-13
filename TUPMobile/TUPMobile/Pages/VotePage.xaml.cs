@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using MR.Gestures;
-using tupapi.Shared.DataObjects;
 using TUPMobile.States;
 using Xamarin.Forms;
 using ContentPage = Xamarin.Forms.ContentPage;
@@ -12,24 +11,20 @@ namespace TUPMobile.Pages
     // [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class VotePage : ContentPage
     {
-       // private bool _animate;
-      //  double x, y;
+        // private bool _animate;
+        private double step;
+
         public VotePage()
         {
             InitializeComponent();
-            App.Store.Subscribe((ApplicationState state) =>
-            {
-                BindingContext = state.VotePageState;
-            });
-            
+            App.Store.Subscribe((ApplicationState state) => { BindingContext = state.VotePageState; });
         }
-
 
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
+            step = CurrentImage.Height/3;
 
             //_animate = true;
 
@@ -67,17 +62,107 @@ namespace TUPMobile.Pages
         //    await Navigation.PopAsync();
         //}
 
-       
 
         private void AbsoluteLayout_OnPanning(object sender, PanEventArgs e)
         {
+            double x, y;
+            double opacity = 0;
             CurrentImage.TranslationX += e.DeltaDistance.X;
             CurrentImage.TranslationY += e.DeltaDistance.Y;
+            x = CurrentImage.TranslationX;
+            y = CurrentImage.TranslationY;
+
+            if (y > 0)
+            {
+                //Dislike
+                ThumbDownInd.IsVisible = true;
+                opacity = y/step;
+                if (opacity > 1)
+                {
+                    opacity = 1;
+                }
+                ThumbDownInd.Opacity = opacity;
+            }
+            else
+            {
+                //Like
+                ThumbUpInd.IsVisible = true;
+                opacity = y/-step;
+                ThumbUpInd.Opacity = opacity;
+            }
         }
 
-        private void AbsoluteLayout_OnPanned(object sender, PanEventArgs e)
+        private async void AbsoluteLayout_OnPanned(object sender, PanEventArgs e)
         {
-            Debug.WriteLine("X: " + CurrentImage.X + " Y: " + CurrentImage.Y);
+            double x, y;
+            ImageSource source;
+            x = CurrentImage.TranslationX;
+            y = CurrentImage.TranslationY;
+            Debug.WriteLine("X: " + x + " Y: " + y);
+
+            if (y > step)
+            {
+                //Dislike
+                Debug.WriteLine("DOWN!!!!");
+                source = CurrentItemImage.Source;
+                await CurrentImage.TranslateTo(0, 600, 1000, Easing.CubicIn);
+
+                CurrentItemImage.Source = NextItemImage.Source;
+
+                ThumbDownInd.IsVisible = false;
+
+                await NextImage.ScaleTo(1, 1000, Easing.SinIn);
+                CurrentImage.TranslationX = 0;
+                CurrentImage.TranslationY = 0;
+
+                NextItemImage.Source = source;
+                NextImage.Scale = 0.9;
+            }
+            else
+            {
+                if (y < -step)
+                {
+                    //Like
+                    Debug.WriteLine("UP!!!!");
+                    source = CurrentItemImage.Source;
+                    await Task.WhenAll(CurrentImage.TranslateTo(0, -600, 1000, Easing.CubicOut));
+
+                    CurrentItemImage.Source = NextItemImage.Source;
+
+                    ThumbUpInd.IsVisible = false;
+
+                    await NextImage.ScaleTo(1, 1000, Easing.SinIn);
+                    CurrentImage.TranslationX = 0;
+                    CurrentImage.TranslationY = 0;
+
+                    NextItemImage.Source = source;
+                    NextImage.Scale = 0.9;
+                }
+                else
+                {
+                    //Return
+
+                    Debug.WriteLine("RETURN INITIAL");
+                    ThumbDownInd.IsVisible = false;
+                    ThumbUpInd.IsVisible = false;
+                    await CurrentImage.TranslateTo(0, 0, 1000, Easing.BounceOut);
+                }
+            }
+        }
+
+        private void OnThumbDownTapped(object sender, EventArgs e)
+        {
+            Debug.WriteLine("##### OnThumbDownTapped");
+            CurrentImage.TranslateTo(0, 0, 1000, Easing.BounceOut);
+            ThumbDownInd.IsVisible = false;
+            ThumbUpInd.IsVisible = false;
+            ThumbDownInd.Opacity = 0;
+            ThumbUpInd.Opacity = 0;
+        }
+
+        private void OnThumbUpTapped(object sender, EventArgs e)
+        {
+            Debug.WriteLine("##### OnThumbUpTapped");
         }
     }
 }

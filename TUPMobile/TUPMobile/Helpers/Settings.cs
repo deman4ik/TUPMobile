@@ -24,6 +24,7 @@ namespace TUPMobile.Helpers
 
         private const string StateKey = "state_key";
         private static readonly string StateDefault = string.Empty;
+
         #endregion
 
         public static string GeneralSettings
