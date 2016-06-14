@@ -3,10 +3,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TUPMobile.Pages.VotePage"
-             xmlns:artina="clr-namespace:UXDivers.Artina.Shared;assembly=UXDivers.Artina.Shared"
-             xmlns:templates="clr-namespace:TUPMobile.Templates;assembly=TUPMobile"
-             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             xmlns:mr="clr-namespace:MR.Gestures;assembly=MR.Gestures"
+             xmlns:views="clr-namespace:TUPMobile.Views;assembly=TUPMobile"
              NavigationPage.HasNavigationBar="False"
              BackgroundColor="White">
 
@@ -16,51 +13,9 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <mr:AbsoluteLayout Grid.Row="0" HorizontalOptions="Fill" VerticalOptions="Fill"
-                           Panning="AbsoluteLayout_OnPanning" Panned="AbsoluteLayout_OnPanned" BackgroundColor="White">
 
-            <Frame x:Name="NextImage" BackgroundColor="White" Padding="5" HasShadow="True"
-                   OutlineColor="{ StaticResource AccentColor }"
-                   AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
-                   AbsoluteLayout.LayoutFlags="All" Scale="0.9">
+        <views:SwipeCards Grid.Row="0" Source="{Binding Items}" />
 
-                <ffimageloading:CachedImage
-                    x:Name="NextItemImage"
-                    Aspect="AspectFill"
-
-                    DownsampleWidth="500"
-                    DownsampleHeight="500"
-
-
-                    Source="{Binding NextItem.Url}" />
-            </Frame>
-            <AbsoluteLayout x:Name="CurrentImage"
-
-                            AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
-                            AbsoluteLayout.LayoutFlags="All">
-
-                <Frame AbsoluteLayout.LayoutBounds="0.5,0.5,1,1" BackgroundColor="White" HasShadow="True"
-                       OutlineColor="{ StaticResource AccentColor }"
-                       AbsoluteLayout.LayoutFlags="All" Padding="5">
-                    <ffimageloading:CachedImage
-                        x:Name="CurrentItemImage"
-                        Aspect="AspectFill"
-                        DownsampleWidth="500"
-                        DownsampleHeight="500"
-
-                        Source="{Binding CurrentItem.Url}" />
-                </Frame>
-                <Image x:Name="ThumbDownInd" Source="thumb_down.png" IsVisible="False" IsOpaque="True"
-                       AbsoluteLayout.LayoutBounds="0.5,0.1,-1,-1"
-                       AbsoluteLayout.LayoutFlags="PositionProportional" />
-
-                <Image x:Name="ThumbUpInd" Source="thumb_up.png" IsVisible="False" IsOpaque="True"
-                       AbsoluteLayout.LayoutBounds="0.5,0.9,-1,-1"
-                       AbsoluteLayout.LayoutFlags="PositionProportional" />
-            </AbsoluteLayout>
-
-
-        </mr:AbsoluteLayout>
         <Grid Grid.Row="1"
               ColumnSpacing="30">
             <Grid.ColumnDefinitions>

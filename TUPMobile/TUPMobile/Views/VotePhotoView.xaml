@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="TUPMobile.Views.VotePhotoView">
+    <ContentView.Content>
+        <AbsoluteLayout x:Name="Item">
+
+            <Frame Padding="5" BackgroundColor="White" HasShadow="True"
+                   OutlineColor="{ StaticResource AccentColor }"
+                   AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
+                   AbsoluteLayout.LayoutFlags="All">
+                <forms:CachedImage
+                    x:Name="ItemImage"
+                    Aspect="AspectFill"
+                    DownsampleWidth="500"
+                    DownsampleHeight="500" />
+            </Frame>
+            <Image x:Name="DownInd" Source="thumb_down.png" IsVisible="False" IsOpaque="True"
+                   AbsoluteLayout.LayoutBounds="0.5,0.1,-1,-1"
+                   AbsoluteLayout.LayoutFlags="PositionProportional" />
+
+            <Image x:Name="UpInd" Source="thumb_up.png" IsVisible="False" IsOpaque="True"
+                   AbsoluteLayout.LayoutBounds="0.5,0.9,-1,-1"
+                   AbsoluteLayout.LayoutFlags="PositionProportional" />
+        </AbsoluteLayout>
+    </ContentView.Content>
+</ContentView>

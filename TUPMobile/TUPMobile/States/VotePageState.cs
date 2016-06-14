@@ -6,7 +6,7 @@ namespace TUPMobile.States
 {
     public class VotePageState
     {
-        public List<VoteItem> Items { get; set; }
+        public IList<VoteItem> Items { get; set; }
         public VoteItem CurrentItem { get; set; }
         public VoteItem NextItem { get; set; }
 
