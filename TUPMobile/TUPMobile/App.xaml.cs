@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using FFImageLoading;
+using FFImageLoading.Config;
 using Newtonsoft.Json;
 using Plugin.Connectivity;
 using Redux;
@@ -27,7 +29,7 @@ namespace TUPMobile
             InitializeComponent();
             CurrentApp = this;
             TextResources.Culture = DependencyService.Get<ILocalize>().GetCurrentCultureInfo();
-
+            ImageService.Instance.Initialize(new Configuration { FadeAnimationForCachedImages = false });
 
             Debug.WriteLine("^^^ Constructor");
             // var savedState = !string.IsNullOrEmpty(Settings.State) ? JsonConvert.DeserializeObject<ApplicationState>(Settings.State) : GetInitialState();

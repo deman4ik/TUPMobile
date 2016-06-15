@@ -27,15 +27,25 @@ namespace TUPMobile.Views
                 var items = (IList<VoteItem>) newValue;
                 var count = items.Count;
                 Debug.WriteLine(count);
+                if (count == 0)
+                {
+                    swipeCards.Current.IsVisible = false;
+                    swipeCards.LoadingItems.IsVisible = true;
+                }
+                else
+                {
                 if (count > 0 && !swipeCards.Current.IsVisible)
                 {
                     swipeCards.Current.Source = items[0].Url;
                     swipeCards.Current.IsVisible = true;
-                }
+                        swipeCards.LoadingItems.IsVisible = false;
+                    }
                 if (count > 1 && !swipeCards.Next.IsVisible)
                 {
                     swipeCards.Next.Source = items[1].Url;
                     swipeCards.Next.IsVisible = true;
+                    
+                }
                 }
             });
 
@@ -47,6 +57,7 @@ namespace TUPMobile.Views
 
         private void SetNextCurrent()
         {
+            Current.Position = 0;
             if (FirstItem.IsEnabled)
             {
                 FirstItem.IsEnabled = false;
@@ -58,21 +69,29 @@ namespace TUPMobile.Views
                 SecondItem.IsEnabled = false;
             }
             Container.RaiseChild(Current);
-
+            
             Debug.WriteLine("### SetNextCurrent ###");
             Debug.WriteLine(Source.Count);
             if (Source.Count > 0)
                 Source.RemoveAt(0);
+            else
+            {
+                Current.IsVisible = false;
+                LoadingItems.IsVisible = true;
+            }
             Debug.WriteLine(Source.Count);
             if (Source.Count == 0)
                 Next.IsVisible = false;
             else
+            {
                 Next.Source = Source[0].Url;
+                Next.Scale = 0.9;
+                Next.TranslationX = 0;
+                Next.TranslationY = 0;
+              
+            }
 
-            Next.Scale = 0.9;
-            Next.TranslationX = 0;
-            Next.TranslationY = 0;
-            Next.Position = 0;
+           
         }
 
         private void Container_OnPanning(object sender, PanEventArgs e)
@@ -92,7 +111,7 @@ namespace TUPMobile.Views
                 double step = Current.Height/4;
                 if (Current.Position > step)
                 {
-                    await Current.TranslateTo(0, 600, 1000, Easing.CubicIn);
+                    await Current.TranslateTo(0, 600, 500, Easing.CubicIn);
                     await Next.ScaleTo(1, 500, Easing.SinIn);
                     SetNextCurrent();
                 }
@@ -100,14 +119,15 @@ namespace TUPMobile.Views
                 {
                     if (Current.Position < -step)
                     {
-                        await Task.WhenAll(Current.TranslateTo(0, -600, 1000, Easing.CubicOut));
+                        await Task.WhenAll(Current.TranslateTo(0, -600, 500, Easing.CubicOut));
                         await Next.ScaleTo(1, 500, Easing.SinIn);
                         SetNextCurrent();
                     }
                     else
                     {
-                        await Current.TranslateTo(0, 0, 1000, Easing.BounceOut);
                         Current.Position = 0;
+                        await Current.TranslateTo(0, 0, 1000, Easing.BounceOut);
+                        
                     }
                 }
             }
