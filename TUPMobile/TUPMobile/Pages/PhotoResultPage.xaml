@@ -5,31 +5,36 @@
              x:Class="TUPMobile.Pages.PhotoResultPage"
              xmlns:artina="clr-namespace:UXDivers.Artina.Shared;assembly=UXDivers.Artina.Shared"
              xmlns:templates="clr-namespace:TUPMobile.Templates;assembly=TUPMobile"
+             xmlns:forms="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              Title="Send Photo"
              NavigationPage.HasNavigationBar="False">
-    <!--MAIN CONTEINER GRID-->
+
     <Grid VerticalOptions="Fill">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <!--PRODUCT IMAGE-->
-        <Image
-            Grid.Row="0"
-            HeightRequest="300"
-            Source="{Binding .}"
-            Aspect="AspectFill" />
 
-        <templates:SocialHeaderStyleTemplate Grid.Row="2"
-                                             Text="Moscow, Russia"
-                                             IconText="&#xf124; " />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+
+        <forms:CarouselView Grid.Row="0" Position="{Binding SelectedPhotoFilter, Mode=OneWay}"
+                            ItemsSource="{Binding PhotoFilters, Mode=OneWay}">
+            <forms:CarouselView.ItemTemplate>
+
+                <DataTemplate>
+                    <ff:CachedImage Source="{Binding Image, Mode=OneWay}" Transformations="{Binding Transformations}" />
+                </DataTemplate>
+            </forms:CarouselView.ItemTemplate>
+
+        </forms:CarouselView>
+
+
         <StackLayout
             HorizontalOptions="Fill"
             VerticalOptions="EndAndExpand"
             Padding="20"
-            Grid.Row="3">
+            Grid.Row="1">
 
             <Button
                 x:Name="SendBtn"

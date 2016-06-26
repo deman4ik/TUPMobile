@@ -4,6 +4,8 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using FFImageLoading;
 using FFImageLoading.Config;
+using FFImageLoading.Transformations;
+using FFImageLoading.Work;
 using Newtonsoft.Json;
 using Plugin.Connectivity;
 using Redux;
@@ -29,7 +31,7 @@ namespace TUPMobile
             InitializeComponent();
             CurrentApp = this;
             TextResources.Culture = DependencyService.Get<ILocalize>().GetCurrentCultureInfo();
-            ImageService.Instance.Initialize(new Configuration { FadeAnimationForCachedImages = false });
+            ImageService.Instance.Initialize(new Configuration {FadeAnimationForCachedImages = false});
 
             Debug.WriteLine("^^^ Constructor");
             // var savedState = !string.IsNullOrEmpty(Settings.State) ? JsonConvert.DeserializeObject<ApplicationState>(Settings.State) : GetInitialState();
@@ -37,7 +39,8 @@ namespace TUPMobile
             Store = new Store<ApplicationState>(Reducers.Reducers.ReduceApplication, savedState);
 
             // _NavPage = savedState.CurrentUser.IsAuthenticated ? new NavigationPage(new MainPage()) : new NavigationPage(new LoginPage());
-            MainPage = new RootTabPage();
+            //  MainPage = new RootTabPage();
+            MainPage = new PhotoResultPage();
         }
 
         public static void SaveToken(string token)
@@ -94,53 +97,87 @@ namespace TUPMobile
                 MainPageState = new MainPageState(),
                 VotePageState = new VotePageState
                 {
-                    Items = new List<VoteItem>
+                    Items = new List<QueuePost>
                     {
-                        new VoteItem
+                        new QueuePost
                         {
                             Url = "photo1.jpg",
                             Id = "vi0"
                         },
-                        new VoteItem
+                        new QueuePost
                         {
                             Url = "photo2.jpg",
                             Id = "vi1"
                         },
-                        new VoteItem
+                        new QueuePost
                         {
                             Url = "article_image_2.jpg",
                             Id = "vi2"
                         },
-                        new VoteItem
+                        new QueuePost
                         {
                             Url = "article_image_3.jpg",
                             Id = "vi3"
                         },
-                        new VoteItem
+                        new QueuePost
                         {
                             Url = "article_image_4.jpg",
                             Id = "vi4"
                         },
-                        new VoteItem
+                        new QueuePost
                         {
                             Url = "article_image_5.jpg",
                             Id = "vi5"
                         }
                     },
-                    CurrentItem = new VoteItem
+                    CurrentItem = new QueuePost
                     {
                         Url = "photo1.jpg",
                         Id = "vi0"
                     },
-                    NextItem = new VoteItem
+                    NextItem = new QueuePost
                     {
                         Url = "photo2.jpg",
                         Id = "vi1"
                     }
                 }
-                //TopPosts = new ImmutableArray<Post>(),
-                //UserPosts = new ImmutableArray<Post>(),
-                //VotePosts = new ImmutableArray<Post>()
+                ,
+                PhotoResultPageState = new PhotoResultPageState
+                {
+                    Image = "photo1.jpg",
+                    SelectedPhotoFilter = 0,
+                    PhotoFilters = new List<PhotoFilter>
+                    {
+                        new PhotoFilter
+                        {
+                            Image = "photo1.jpg"
+                        },
+                        new PhotoFilter
+                        {
+                            Image = "photo1.jpg",
+                            Transformations = new List<ITransformation>
+                            {
+                                new ColorSpaceTransformation(FFColorMatrix.BlackAndWhiteColorMatrix)
+                            }
+                        },
+                        new PhotoFilter
+                        {
+                            Image = "photo1.jpg",
+                            Transformations = new List<ITransformation>
+                            {
+                                new ColorSpaceTransformation(FFColorMatrix.PolaroidColorMatrix)
+                            }
+                        },
+                        new PhotoFilter
+                        {
+                            Image = "photo1.jpg",
+                            Transformations = new List<ITransformation>
+                            {
+                                new ColorSpaceTransformation(FFColorMatrix.GrayscaleColorMatrix)
+                            }
+                        }
+                    }
+                }
             };
         }
 

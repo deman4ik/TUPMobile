@@ -47,7 +47,7 @@ namespace TUPMobile.Actions
     public class VoteAction : IAction
     {
         public VoteType Type { get; set; }
-        public VoteItem Item { get; set; }
+        public QueuePost Item { get; set; }
     }
 
     public class MainPageLoading : IAction

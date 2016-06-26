@@ -19,12 +19,12 @@ namespace TUPMobile.Views
         public VotePhotoView Next => FirstItem.IsEnabled ? SecondItem : FirstItem;
 
         public static readonly BindableProperty SourceProperty = BindableProperty.Create("Source",
-            typeof (IList<VoteItem>),
+            typeof (IList<QueuePost>),
             typeof (SwipeCards), null, propertyChanged: (bindable, oldValue, newValue) =>
             {
                 Debug.WriteLine("SourceProperty CHANGED!");
                 SwipeCards swipeCards = (SwipeCards) bindable;
-                var items = (IList<VoteItem>) newValue;
+                var items = (IList<QueuePost>) newValue;
                 var count = items.Count;
                 Debug.WriteLine(count);
                 if (count == 0)
@@ -34,25 +34,24 @@ namespace TUPMobile.Views
                 }
                 else
                 {
-                if (count > 0 && !swipeCards.Current.IsVisible)
-                {
-                    swipeCards.Current.Source = items[0].Url;
-                    swipeCards.Current.IsVisible = true;
+                    if (count > 0 && !swipeCards.Current.IsVisible)
+                    {
+                        swipeCards.Current.Source = items[0].Url;
+                        swipeCards.Current.IsVisible = true;
                         swipeCards.LoadingItems.IsVisible = false;
                     }
-                if (count > 1 && !swipeCards.Next.IsVisible)
-                {
-                    swipeCards.Next.Source = items[1].Url;
-                    swipeCards.Next.IsVisible = true;
-                    
-                }
+                    if (count > 1 && !swipeCards.Next.IsVisible)
+                    {
+                        swipeCards.Next.Source = items[1].Url;
+                        swipeCards.Next.IsVisible = true;
+                    }
                 }
             });
 
-        public IList<VoteItem> Source
+        public IList<QueuePost> Source
         {
             set { SetValue(SourceProperty, value); }
-            get { return (IList<VoteItem>) GetValue(SourceProperty); }
+            get { return (IList<QueuePost>) GetValue(SourceProperty); }
         }
 
         private void SetNextCurrent()
@@ -69,7 +68,7 @@ namespace TUPMobile.Views
                 SecondItem.IsEnabled = false;
             }
             Container.RaiseChild(Current);
-            
+
             Debug.WriteLine("### SetNextCurrent ###");
             Debug.WriteLine(Source.Count);
             if (Source.Count > 0)
@@ -88,10 +87,7 @@ namespace TUPMobile.Views
                 Next.Scale = 0.9;
                 Next.TranslationX = 0;
                 Next.TranslationY = 0;
-              
             }
-
-           
         }
 
         private void Container_OnPanning(object sender, PanEventArgs e)
@@ -127,7 +123,6 @@ namespace TUPMobile.Views
                     {
                         Current.Position = 0;
                         await Current.TranslateTo(0, 0, 1000, Easing.BounceOut);
-                        
                     }
                 }
             }

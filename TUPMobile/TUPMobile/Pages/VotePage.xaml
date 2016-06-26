@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
 
         <views:SwipeCards Grid.Row="0" Source="{Binding Items}" />
-     
+
         <Grid Grid.Row="1"
               ColumnSpacing="30">
             <Grid.ColumnDefinitions>

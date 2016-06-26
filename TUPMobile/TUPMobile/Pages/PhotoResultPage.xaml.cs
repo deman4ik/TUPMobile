@@ -1,26 +1,16 @@
 ﻿using System;
-using Plugin.Media.Abstractions;
+using TUPMobile.States;
 using Xamarin.Forms;
 
 namespace TUPMobile.Pages
 {
     public partial class PhotoResultPage : ContentPage
     {
-        private MediaFile _image;
-
-        public PhotoResultPage(MediaFile image)
+        public PhotoResultPage()
         {
             InitializeComponent();
 
-            // BindingContext = ImageSource.FromStream(() => new MemoryStream(image));
-            BindingContext = ImageSource.FromStream(() =>
-            {
-                var stream = image.GetStream();
-                image.Dispose();
-                return stream;
-            });
-
-            _image = image;
+            App.Store.Subscribe((ApplicationState state) => { BindingContext = state.PhotoResultPageState; });
         }
 
 

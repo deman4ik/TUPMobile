@@ -5,12 +5,10 @@ namespace TUPMobile.States
     public class ApplicationState
     {
         public CurrentUser CurrentUser { get; set; }
-        //public ImmutableArray<Post> VotePosts { get; set; }
-        //public ImmutableArray<Post> UserPosts { get; set; }
-        //public ImmutableArray<Post> TopPosts { get; set; }
         public LoginPageState LoginPageState { get; set; }
         public VotePageState VotePageState { get; set; }
         public MainPageState MainPageState { get; set; }
+        public PhotoResultPageState PhotoResultPageState { get; set; }
 
         public override string ToString()
         {

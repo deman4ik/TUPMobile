@@ -6,9 +6,9 @@ namespace TUPMobile.States
 {
     public class VotePageState
     {
-        public IList<VoteItem> Items { get; set; }
-        public VoteItem CurrentItem { get; set; }
-        public VoteItem NextItem { get; set; }
+        public IList<QueuePost> Items { get; set; }
+        public QueuePost CurrentItem { get; set; }
+        public QueuePost NextItem { get; set; }
 
         public override string ToString()
         {

@@ -46,7 +46,7 @@ namespace TUPMobile.Pages
             Debug.WriteLine("#### Show alert!");
             await DisplayAlert("File Location", file.Path, "OK");
             Debug.WriteLine("#### go to photopage!");
-            await Navigation.PushAsync(new PhotoResultPage(file));
+            await Navigation.PushAsync(new PhotoResultPage());
         }
 
         private async void OnThumbTapped(Object sender, EventArgs e)

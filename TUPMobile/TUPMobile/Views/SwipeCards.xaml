@@ -14,14 +14,15 @@
                                  AbsoluteLayout.LayoutFlags="All" Scale="0.9" />
             <views:VotePhotoView x:Name="FirstItem" IsVisible="False" AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
                                  AbsoluteLayout.LayoutFlags="All" />
-          
-          <StackLayout x:Name="LoadingItems" AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
-                                 AbsoluteLayout.LayoutFlags="All"
-                       IsVisible="False" HorizontalOptions="Fill" VerticalOptions="Fill">
-            <Label HorizontalOptions="Center" VerticalOptions="Center" Text="Loading more awesome photos around the globe..." />
-            <ActivityIndicator IsRunning="True" HorizontalOptions="Center" VerticalOptions="Center"/>
-        
-          </StackLayout>
+
+            <StackLayout x:Name="LoadingItems" AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
+                         AbsoluteLayout.LayoutFlags="All"
+                         IsVisible="False" HorizontalOptions="Fill" VerticalOptions="Fill">
+                <Label HorizontalOptions="Center" VerticalOptions="Center"
+                       Text="Loading more awesome photos around the globe..." />
+                <ActivityIndicator IsRunning="True" HorizontalOptions="Center" VerticalOptions="Center" />
+
+            </StackLayout>
         </mr:AbsoluteLayout>
     </ContentView.Content>
 </ContentView>
