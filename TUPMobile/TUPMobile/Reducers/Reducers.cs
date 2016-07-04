@@ -10,6 +10,7 @@ namespace TUPMobile.Reducers
         {
             ApplicationState newState = new ApplicationState
             {
+                NavigationState = NavigationReducers.ReduceNavigationState(state.NavigationState, action),
                 CurrentUser = CurrentUserReducers.ReduceCurrentUser(state.CurrentUser, action),
                 LoginPageState = LoginPageReducers.ReduceLoginPageState(state.LoginPageState, action),
                 VotePageState = VotePageReducers.ReduceVotePageState(state.VotePageState, action),

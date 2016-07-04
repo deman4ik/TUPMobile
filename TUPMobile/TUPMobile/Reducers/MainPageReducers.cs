@@ -23,6 +23,7 @@ namespace TUPMobile.Reducers
             return state;
         }
 
+
         public static MainPageState MainPageLoading(MainPageState state, MainPageLoading action)
         {
             state.IsLoading = true;

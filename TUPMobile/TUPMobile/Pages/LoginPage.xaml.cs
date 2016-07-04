@@ -17,15 +17,15 @@ namespace TUPMobile.Pages
             App.Store.Subscribe((ApplicationState state) =>
             {
                 Debug.WriteLine("################### LoginPageState CHANGED ##################");
-                if (state.LoginPageState.SuccessLogin)
-                {
-                    Debug.WriteLine("#### GO TO MAINPAGE #####");
-                    //LoginBtn.BackgroundColor = (Color) App.CurrentApp.Resources["OkColor"];
-                    //LoginBtn.Text = TextResources.Success;
-                    Navigation.PushAsync(new MainPage());
-                    Navigation.RemovePage(this);
-                    return;
-                }
+                //if (state.LoginPageState.SuccessLogin)
+                //{
+                //    Debug.WriteLine("#### GO TO MAINPAGE #####");
+                //    //LoginBtn.BackgroundColor = (Color) App.CurrentApp.Resources["OkColor"];
+                //    //LoginBtn.Text = TextResources.Success;
+                //   // Navigation.PushAsync(new TabbedPage());
+                //    //Navigation.RemovePage(this);
+                //    return;
+                //}
 
                 NameOrEmailEntry.Text = state.LoginPageState.NameOrEmail;
                 NameOrEmailLabel.Text = state.LoginPageState.NameOrEmailError;
@@ -49,9 +49,7 @@ namespace TUPMobile.Pages
         private void OnLoginBtnClicked(object sender, EventArgs e)
         {
             Debug.WriteLine("### Login Clicked");
-            App.Store.Dispatch(ActionCreators.Login(NameOrEmailEntry.Text,
-                PasswordEntry.Text
-                ));
+            App.Store.Dispatch(ActionCreators.Login(Navigation, this, NameOrEmailEntry.Text, PasswordEntry.Text));
         }
 
         private async void OnRegClicked(object sender, EventArgs args)
@@ -67,27 +65,6 @@ namespace TUPMobile.Pages
         private async void OnFacebookBtnClicked(object sender, EventArgs args)
         {
             await Navigation.PushAsync(new SocialLoginPage("facebook"));
-        }
-
-
-        private void PasswordEntry_OnCompleted(object sender, EventArgs e)
-        {
-            Debug.WriteLine("### PasswordEntry_OnCompleted");
-            App.Store.Dispatch(new LoginValidationAction
-            {
-                Password = PasswordEntry.Text,
-                ValidatePassword = true
-            });
-        }
-
-        private void NameOrEmailEntry_OnCompleted(object sender, EventArgs e)
-        {
-            Debug.WriteLine("### EmailEntry_OnCompleted");
-            App.Store.Dispatch(new LoginValidationAction
-            {
-                NameOrEmail = NameOrEmailEntry.Text,
-                ValidateName = true
-            });
         }
     }
 }

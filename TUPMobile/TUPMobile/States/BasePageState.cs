@@ -6,11 +6,13 @@ namespace TUPMobile.States
     {
         public BasePageState()
         {
+            IsCurrentPage = false;
             ServerError = string.Empty;
             ShowNotConnected = false;
             IsLoading = false;
         }
 
+        public bool IsCurrentPage { get; set; }
         public string ServerError { get; set; }
         public bool ShowNotConnected { get; set; }
         public bool IsLoading { get; set; }
@@ -18,6 +20,8 @@ namespace TUPMobile.States
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
+            sb.AppendLine("# IsCurrentPage:");
+            sb.AppendLine(IsCurrentPage.ToString());
             sb.AppendLine("# ServerError:");
             sb.AppendLine(ServerError);
             sb.AppendLine("# ShowNotConnected:");

@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using Xamarin.Forms;
 
 namespace TUPMobile.Views
 {
@@ -16,6 +17,30 @@ namespace TUPMobile.Views
                 votePhotoView.ItemImage.Source = (ImageSource) newValue;
             });
 
+        public static readonly BindableProperty ScaleModifProperty = BindableProperty.Create("ScaleModif",
+            typeof (double),
+            typeof (VotePhotoView), (double) 0, propertyChanged: (bindable, oldValue, newValue) =>
+            {
+                VotePhotoView votePhotoView = (VotePhotoView) bindable;
+                if (!votePhotoView.IsEnabled)
+                {
+                    double scale;
+                    scale = 0.8 + Math.Abs((double) newValue);
+
+
+                    if (scale > 1)
+                    {
+                        votePhotoView.Scale = 1;
+                        return;
+                    }
+                    if (scale < 0.8)
+                    {
+                        votePhotoView.Scale = 0.8;
+                        return;
+                    }
+                    votePhotoView.Scale = scale;
+                }
+            });
 
         public static readonly BindableProperty PositionProperty = BindableProperty.Create("Position", typeof (double),
             typeof (VotePhotoView), (double) 0, propertyChanged: (bindable, oldValue, newValue) =>
@@ -70,6 +95,12 @@ namespace TUPMobile.Views
         {
             set { SetValue(PositionProperty, value); }
             get { return (double) GetValue(PositionProperty); }
+        }
+
+        public double ScaleModif
+        {
+            set { SetValue(ScaleModifProperty, value); }
+            get { return (double) GetValue(ScaleModifProperty); }
         }
     }
 }

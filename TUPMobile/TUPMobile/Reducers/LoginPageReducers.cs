@@ -19,16 +19,13 @@ namespace TUPMobile.Reducers
             {
                 return LoginReducer(state, (LoginAction) action);
             }
-            if (action is LoginValidationAction)
-            {
-                return LoginValidationReducer(state, (LoginValidationAction) action);
-            }
             if (action is LoginResultAction)
             {
                 return LoginResultReducer(state, (LoginResultAction) action);
             }
             return state;
         }
+
 
         public static LoginPageState NotConnected(LoginPageState state, NotConnectedAction action)
         {
@@ -38,40 +35,20 @@ namespace TUPMobile.Reducers
 
         public static LoginPageState LoginReducer(LoginPageState state, LoginAction action)
         {
-            return new LoginPageState
+            if (string.IsNullOrWhiteSpace(action.NameOrEmail))
+                state.NameOrEmailError = TextResources.UsernameOrEmailNull;
+            else
             {
-                NameOrEmail = action.NameOrEmail,
-                Password = action.Password,
-                NameOrEmailError = string.Empty,
-                PasswordError = string.Empty,
-                ServerError = string.Empty,
-                ShowNotConnected = false,
-                IsLoggingIn = true
-            };
-        }
-
-
-        public static LoginPageState LoginValidationReducer(LoginPageState state,
-            LoginValidationAction action)
-        {
-            if (action.ValidateName)
-            {
-                if (string.IsNullOrWhiteSpace(action.NameOrEmail))
-                    state.NameOrEmailError = TextResources.UsernameOrEmailNull;
-                else
+                if (action.NameOrEmail.Contains("@"))
                 {
-                    if (action.NameOrEmail.Contains("@"))
-                    {
-                        state.NameOrEmail = CheckHelper.IsEmailValid(action.NameOrEmail)
-                            ? string.Empty
-                            : TextResources.EmailInvalid;
-                    }
-                    //TODO: Else Check username with RegExp
+                    state.NameOrEmailError = CheckHelper.IsEmailValid(action.NameOrEmail)
+                        ? string.Empty
+                        : TextResources.EmailInvalid;
                 }
+                //TODO: Else Check username with RegExp
             }
 
-
-            if (action.ValidatePassword)
+            if (string.IsNullOrEmpty(state.NameOrEmailError))
             {
                 if (string.IsNullOrWhiteSpace(action.Password))
                     state.PasswordError = TextResources.PasswordNull;
@@ -82,10 +59,10 @@ namespace TUPMobile.Reducers
                         : string.Empty;
                 }
             }
-
-
-            state.IsLoginAllowed = string.IsNullOrWhiteSpace(state.NameOrEmailError) &&
-                                   string.IsNullOrWhiteSpace(state.PasswordError);
+            state.ServerError = string.Empty;
+            state.ShowNotConnected = !App.IsConnected;
+            state.IsLoggingIn = string.IsNullOrWhiteSpace(state.NameOrEmailError) &&
+                                string.IsNullOrWhiteSpace(state.PasswordError) && !state.ShowNotConnected;
             state.NameOrEmail = action.NameOrEmail;
             state.Password = action.Password;
             return state;

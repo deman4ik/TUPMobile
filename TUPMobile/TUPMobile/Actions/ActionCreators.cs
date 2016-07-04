@@ -1,13 +1,56 @@
-﻿using tupapi.Shared.DataObjects;
+﻿using System;
+using tupapi.Shared.DataObjects;
+using TUPMobile.Pages;
 using TUPMobile.Services;
 using TUPMobile.States;
 using TUPMobile.Utils;
+using Xamarin.Forms;
 
 namespace TUPMobile.Actions
 {
     public static class ActionCreators
     {
-        public static AsyncActionsCreator<ApplicationState> Login(string nameOrEmail, string password)
+        public static AsyncActionsCreator<ApplicationState> Push(INavigation navigation, Type fromPageType,
+            Type toPageType, Page toPage,
+            bool modal, bool animate = true)
+        {
+            return async (dispatch, getState) =>
+            {
+                dispatch(new NavigateAction
+                {
+                    FromPage = fromPageType,
+                    ToPage = toPageType
+                });
+
+
+                if (modal)
+                    await NavigationService.PushModalAsync(navigation, toPage, animate);
+                else
+                    await NavigationService.PushAsync(navigation, toPage, animate);
+            };
+        }
+
+        public static AsyncActionsCreator<ApplicationState> Pop(INavigation navigation,
+            bool modal, bool animate = true)
+        {
+            return async (dispatch, getState) =>
+            {
+                dispatch(new NavigateAction
+                {
+                    FromPage = null,
+                    ToPage = getState.Invoke().NavigationState.PreviousPage
+                });
+
+
+                if (modal)
+                    await navigation.PopModalAsync(animate);
+                else
+                    await navigation.PopAsync(animate);
+            };
+        }
+
+        public static AsyncActionsCreator<ApplicationState> Login(INavigation navigation, LoginPage page,
+            string nameOrEmail, string password)
         {
             return async (dispatch, getState) =>
             {
@@ -17,7 +60,9 @@ namespace TUPMobile.Actions
                     Password = password
                 });
 
-                if (App.IsConnected)
+                LoginPageState currentState = getState.Invoke().LoginPageState;
+
+                if (currentState.IsLoggingIn)
                 {
                     bool isEmail = nameOrEmail.Contains("@");
                     StandartAuthRequest authRequest = new StandartAuthRequest
@@ -33,10 +78,12 @@ namespace TUPMobile.Actions
                     {
                         LoginResult = loginResult
                     });
-                }
-                else
-                {
-                    dispatch(new NotConnectedAction());
+
+                    CurrentUser currentUser = getState.Invoke().CurrentUser;
+                    if (currentUser.IsAuthenticated)
+                    {
+                        await App.Store.Dispatch(Pop(navigation, true));
+                    }
                 }
             };
         }

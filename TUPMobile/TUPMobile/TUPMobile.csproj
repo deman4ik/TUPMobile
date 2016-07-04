@@ -56,7 +56,6 @@
     </Compile>
     <Compile Include="ExportedColors.cs" />
     <Compile Include="Helpers\AppConstants.cs" />
-    <Compile Include="Helpers\NavigationService.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Localization\ILocalize.cs" />
     <Compile Include="Localization\TextResources.Designer.cs">
@@ -102,11 +101,13 @@
     <Compile Include="Reducers\CurrentUserReducers.cs" />
     <Compile Include="Reducers\LoginPageReducers.cs" />
     <Compile Include="Reducers\MainPageReducers.cs" />
+    <Compile Include="Reducers\NavigationReducers.cs" />
     <Compile Include="Reducers\Reducers.cs" />
     <Compile Include="Reducers\VotePageReducers.cs" />
     <Compile Include="Services\AzureMobileAppClient.cs" />
     <Compile Include="Services\AzureStorageService.cs" />
     <Compile Include="Services\DataService.cs" />
+    <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\ValidationService.cs" />
     <Compile Include="States\ApplicationState.cs" />
     <Compile Include="States\BasePageState.cs" />
@@ -114,6 +115,7 @@
     <Compile Include="States\IPageState.cs" />
     <Compile Include="States\LoginPageState.cs" />
     <Compile Include="States\MainPageState.cs" />
+    <Compile Include="States\NavigationState.cs" />
     <Compile Include="States\PhotoFilter.cs" />
     <Compile Include="States\PhotoResultPageState.cs" />
     <Compile Include="States\VotePageState.cs" />

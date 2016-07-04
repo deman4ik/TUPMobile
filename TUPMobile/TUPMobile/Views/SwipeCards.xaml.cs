@@ -57,6 +57,7 @@ namespace TUPMobile.Views
         private void SetNextCurrent()
         {
             Current.Position = 0;
+            Current.Scale = 1;
             if (FirstItem.IsEnabled)
             {
                 FirstItem.IsEnabled = false;
@@ -84,7 +85,7 @@ namespace TUPMobile.Views
             else
             {
                 Next.Source = Source[0].Url;
-                Next.Scale = 0.9;
+                Next.Scale = 0.8;
                 Next.TranslationX = 0;
                 Next.TranslationY = 0;
             }
@@ -97,6 +98,11 @@ namespace TUPMobile.Views
                 Current.TranslationX += e.DeltaDistance.X;
                 Current.TranslationY += e.DeltaDistance.Y;
                 Current.Position = Current.TranslationY;
+                double step = Current.Height/4;
+
+                double abs = System.Math.Abs(Current.Position);
+                if (abs < step)
+                    Next.ScaleModif = Current.Position/step/5;
             }
         }
 
@@ -108,7 +114,7 @@ namespace TUPMobile.Views
                 if (Current.Position > step)
                 {
                     await Current.TranslateTo(0, 600, 500, Easing.CubicIn);
-                    await Next.ScaleTo(1, 500, Easing.SinIn);
+                    // await Next.ScaleTo(1, 500, Easing.SinIn);
                     SetNextCurrent();
                 }
                 else
@@ -116,13 +122,16 @@ namespace TUPMobile.Views
                     if (Current.Position < -step)
                     {
                         await Task.WhenAll(Current.TranslateTo(0, -600, 500, Easing.CubicOut));
-                        await Next.ScaleTo(1, 500, Easing.SinIn);
+                        // await Next.ScaleTo(1, 500, Easing.SinIn);
                         SetNextCurrent();
                     }
                     else
                     {
                         Current.Position = 0;
                         await Current.TranslateTo(0, 0, 1000, Easing.BounceOut);
+
+                        Next.ScaleModif = 0;
+                        Next.Scale = 0.8;
                     }
                 }
             }

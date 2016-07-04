@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Redux;
 using tupapi.Shared.DataObjects;
 using tupapi.Shared.Enums;
@@ -8,6 +9,12 @@ namespace TUPMobile.Actions
     public class NotConnectedAction : IAction
     {
         public string Error { get; set; }
+    }
+
+    public class NavigateAction : IAction
+    {
+        public Type FromPage { get; set; }
+        public Type ToPage { get; set; }
     }
 
     public class LoginAction : IAction
@@ -21,18 +28,6 @@ namespace TUPMobile.Actions
         }
     }
 
-    public class LoginValidationAction : IAction
-    {
-        public bool ValidateName { get; set; }
-        public bool ValidatePassword { get; set; }
-        public string NameOrEmail { get; set; }
-        public string Password { get; set; }
-
-        public override string ToString()
-        {
-            return "LoginValidationAction";
-        }
-    }
 
     public class LoginResultAction : IAction
     {

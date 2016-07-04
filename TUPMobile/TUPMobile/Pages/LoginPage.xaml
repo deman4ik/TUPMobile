@@ -41,7 +41,7 @@
                 <StackLayout Grid.Row="0" VerticalOptions="StartAndExpand">
                     <!--  -EMAIL FIELD  -->
                     <Entry x:Name="NameOrEmailEntry" Placeholder="{i18n:Translate UsernameOrEmail}"
-                           Style="{DynamicResource ArtinaLoginEntryStyle}" Completed="NameOrEmailEntry_OnCompleted" />
+                           Style="{DynamicResource ArtinaLoginEntryStyle}" />
 
                     <Label x:Name="NameOrEmailLabel" HorizontalOptions="Fill"
                            IsVisible="False"
@@ -55,7 +55,7 @@
                            IsPassword="true"
                            Placeholder="{i18n:Translate Password}"
                            Style="{DynamicResource ArtinaLoginEntryStyle}"
-                           VerticalOptions="StartAndExpand" Completed="PasswordEntry_OnCompleted" />
+                           VerticalOptions="StartAndExpand" />
                     <Label x:Name="PassworLabel" HorizontalOptions="Fill"
                            IsVisible="False"
                            Style="{DynamicResource ValidationEntryErrorStyle}"

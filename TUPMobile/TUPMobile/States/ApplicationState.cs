@@ -4,6 +4,7 @@ namespace TUPMobile.States
 {
     public class ApplicationState
     {
+        public NavigationState NavigationState { get; set; }
         public CurrentUser CurrentUser { get; set; }
         public LoginPageState LoginPageState { get; set; }
         public VotePageState VotePageState { get; set; }

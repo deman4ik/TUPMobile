@@ -39,8 +39,7 @@ namespace TUPMobile
             Store = new Store<ApplicationState>(Reducers.Reducers.ReduceApplication, savedState);
 
             // _NavPage = savedState.CurrentUser.IsAuthenticated ? new NavigationPage(new MainPage()) : new NavigationPage(new LoginPage());
-            //  MainPage = new RootTabPage();
-            MainPage = new PhotoResultPage();
+            MainPage = new RootTabPage();
         }
 
         public static void SaveToken(string token)
@@ -86,14 +85,23 @@ namespace TUPMobile
         {
             return new ApplicationState
             {
+                NavigationState = new NavigationState
+                {
+                    CurrentPage = typeof (RootTabPage)
+                },
                 CurrentUser = new CurrentUser
                 {
+                    IsAuthenticated = false,
                     User = new User
                     {
                         Id = "userID123"
                     }
                 },
-                LoginPageState = new LoginPageState(),
+                LoginPageState = new LoginPageState
+                {
+                    NameOrEmail = "user1",
+                    Password = "user1pwd"
+                },
                 MainPageState = new MainPageState(),
                 VotePageState = new VotePageState
                 {
